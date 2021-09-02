@@ -1,5 +1,5 @@
 ---
-title: "36103 Aviation Proposal"
+title: "Airline Delay Prediction Proposal"
 author: "Logistics Transport Aviation"
 date: "30/08/2021"
 output: html_document
@@ -9,7 +9,11 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## R Markdown
+## Airline Delay Prediction
+
+Aircraft delays have serious economic impacts that represent a logistical headache for airlines, airports, airline crew, and passengers alike. 
+
+Many factors can contribute to aircraft delays. These may include unavoidable reasons such as inclement weather, unforeseen aircraft mechanical breakdowns, or a multitude of passenger related 
 
 This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
 
