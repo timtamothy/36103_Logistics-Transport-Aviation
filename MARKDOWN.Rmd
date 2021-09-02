@@ -11,7 +11,7 @@ toc: yes
 toc_depth: '2' 
 ---
   
-  ```{r setup, include=FALSE}
+```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 install.packages("kableExtra")
 library(kableExtra)
@@ -46,7 +46,7 @@ kbl(text_tbl) %>%
   column_spec(1, bold = T, border_right = T) %>%
   column_spec(2, width = "30em", background = "yellow")
 
-# EDA (Exploratory data analysis)
+# Datasets
 
 For visualisations to be as accurate as you can. Most data analyst would do an EDA set and we can utilise some visualisations that assist with the EDA.
 For this dataset I be using the Tokyo medal count by Berkay Alan 
@@ -74,14 +74,14 @@ missmap(Medal, main = "Missing values vs observed")
 
 We created a graph which allows us to identify if there's any missing data and this is an example of a visualisation even before the visualisation step and shows if anymore data manipulation is required
 
-# Data Visualisation
+# Regression modelling techniques
 
 choosing the right visualisation is critical in explaining your analysis as visualisation is a translation on data and how it’s being portrayed.
 These are determined based on what your goal is. However, most are determined by two categories.
 •	Categorical
 •	Numerical
 
-## Visualisations in R GGplot 2
+## Impact analysis
 
 In all Gplot cases in ggplot2 package. There's a image in which shows all the capabilities in R, however with this being in mind however I will be showing you the most common graphs used to help visualise using the Medal dataset.
 
@@ -96,83 +96,6 @@ knitr::include_graphics("ggplot2.png")
 knitr::include_graphics("ggplot2_1.png")
 ```
 
-## Categorical Visualisation
-
-### Bar Graphs
-
-Bar Graphs shows the relationship between a numeric variable and a categorical variable
-
-```{r bar_graph, message=FALSE, warning=FALSE}
-ggplot(Medal, aes(x = Country, y = Total)) + 
-  geom_bar(fill = "Green", stat="identity") +
-  labs(title = "Country total medal count",
-       x = "Country",
-       y = "Count")
-```
-
-### Tree Graph
-
-Tree maps are used to represent large amounts of data to catagorise items. For this we added treemapify package to enchance ggplot2 and allows us to create tree graphs under the ggplot parameter
-
-```{r tree_graph, message=FALSE, warning=FALSE}
-library(treemapify)
-ggplot(Medal, aes(area = Total, fill = Total, label = Country)) +
-  geom_treemap() +
-  geom_treemap_text() + labs(title = "Country total medal count")
-
-```
-  
-## Numerical Visualisation
-
-### Histogram
-
-Used to count the distribution
-
-```{r Histograph, message=FALSE, warning=FALSE}
-ggplot(Medal, aes(x = Total)) +
-  geom_histogram(color = "black", fill = "gold") + labs(title = "Distribution total medal count")
-```
-
-### Scatter Plot
-
-Uses two numeric values to compare values. Since the dataset is not sufice to compare in scatter plot. I will be using a different dataset for this purpose
-
-```{r US_Crime_Dataset, message=FALSE, warning=FALSE}
-data("USArrests")
-head(USArrests)
-USArrests
-```
-
-For the number analysis, I will be comparing the amount of Murder vs Assault in each US state
-
-```{r Scatter_Plot, message=FALSE, warning=FALSE}
-ggplot(USArrests, aes(x = Assault, y = Murder)) +
-  geom_point() +
-  geom_text(label = rownames(USArrests)) + labs(title = "Comparison of Crimes committed in US States")
-```
-
-## Combination Visualisation
-
-Although some can be individual, with enough manipulation and parameter setting within GGplot you can transform some into a combination of numerical and categorical. Example being Treemaps and Scatterplots. However there's one more example in which shows a combination of both numerical and categorical
-
-### Box plot
-
-Box plots help with a summary of values and show if there's any outliers. However the previous two datasets does not have any that helps with this so I will be loading another dataset to assist in demostration 
-
-```{r Diamonds_Dataset, message=FALSE, warning=FALSE}
-data(diamonds)
-head(diamonds)
-diamonds
-```
-
-```{r Box_plot, message=FALSE, warning=FALSE}
-ggplot(diamonds, aes(x = cut, y = price, color = cut)) +
-  geom_boxplot(outlier.color = "black", outlier.size = 1) +
-  scale_color_brewer(palette = "Blue") +
-  labs(title = "Plot of Quality of the Cut by Price" , 
-       x = "Quality of the Cut", 
-       y = "Price in US$ dollars")
-```
 
 # Conclusion/Summary
 
