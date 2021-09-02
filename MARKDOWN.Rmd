@@ -181,9 +181,13 @@ As you can see, I had to adjust in using different datasets to demonstrate the b
 
 # References
 
+Ball, M. (2010, November). Total Delay Impact Study A Comprehensive Assessment of the Costs and Impacts of Flight Delay in the United States. https://isr.umd.edu/NEXTOR/pubs/TDI_Report_Final_11_03_10.pdf
+
 Berkay, A. (2021, August 13). Tokyo 2020 Olympics Medals Dataset. Retrieved from Kaggle: https://www.kaggle.com/berkayalan/2021-olympics-medals-in-tokyo
 
 Holtz, Y., & Healy, C. (2021, August 13). Data to Viz. Retrieved from Data to Viz: https://www.data-to-viz.com/
+
+Kim, N. Y., & Park, J. W. (2016). A study on the impact of airline service delays on emotional reactions and customer behavior. Journal of Air Transport Management, 57, 19–25. https://doi.org/10.1016/j.jairtraman.2016.07.005
 
 Project, R. (2021, August 13). devtools. Retrieved from R Project: https://www.r-project.org/nosvn/pandoc/devtools.html
 
