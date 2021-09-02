@@ -29,7 +29,7 @@ Thus, understanding the impact of these variables on aircraft on-time performanc
 Herein, we propose an exploratory analysis and prediction model on airline delays utilizing data from the United States in 2019.
 
 <<<<<<< HEAD
-# Stakeholders
+## Stakeholders
 
 Throughout the project, we'll need to manage our external and internal stakeholders in our data science project.
 
@@ -47,7 +47,7 @@ kbl(text_tbl) %>%
   column_spec(1, bold = T, border_right = T) %>%
   column_spec(2, width = "30em", background = "yellow")
 
-# Datasets
+## Datasets
 
 For visualisations to be as accurate as you can. Most data analyst would do an EDA set and we can utilise some visualisations that assist with the EDA.
 For this dataset I be using the Tokyo medal count by Berkay Alan 
@@ -75,7 +75,7 @@ missmap(Medal, main = "Missing values vs observed")
 
 We created a graph which allows us to identify if there's any missing data and this is an example of a visualisation even before the visualisation step and shows if anymore data manipulation is required
 
-# Regression modelling techniques
+## Regression modelling techniques
 
 choosing the right visualisation is critical in explaining your analysis as visualisation is a translation on data and how it’s being portrayed.
 These are determined based on what your goal is. However, most are determined by two categories.
