@@ -19,20 +19,23 @@ Thus, understanding the impact of these variables on aircraft on-time performanc
 
 Herein, we propose an exploratory analysis and prediction model on airline delays utilizing data from the United States in 2019.
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+API call 
+```{r}
+library(httr)
+library(jsonlite)
 
-```{r cars}
-summary(cars)
+icao <- GET(
+  url = 'https://applications.icao.int/dataservices/api/safety-characteristics-list?api_key=8d00ef90-0982-11ec-9d72-8160549d64ab&airports=&states=USA'
+)
+response <- content(icao, 'parsed')
+data <- fromJSON(response)
 ```
 
-## Including Plots
-
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
+Airport code + Airport name 
+```{r}
+data$airportCode
+data$airportName
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
