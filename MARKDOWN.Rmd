@@ -1,12 +1,20 @@
 ---
-title: "Airline Delay Prediction Proposal"
+  title: "Airline Delay Prediction Proposal"
 author: "Logistics Transport Aviation"
+subtitle: "1423543"
 date: "30/08/2021"
-output: html_document
+output:
+  html_document:
+  number_sections: yes
+fig_caption: yes
+toc: yes
+toc_depth: '2' 
 ---
-
-```{r setup, include=FALSE}
+  
+  ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+install.packages("kableExtra")
+library(kableExtra)
 ```
 
 ## Airline Delay Prediction
@@ -19,20 +27,178 @@ Thus, understanding the impact of these variables on aircraft on-time performanc
 
 Herein, we propose an exploratory analysis and prediction model on airline delays utilizing data from the United States in 2019.
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+# Stakeholders
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+Throughout the project, we'll need to manage our external and internal stakeholders in our data science project.
 
-```{r cars}
-summary(cars)
+text_tbl <- data.frame(
+  Items = c("Item 1", "Item 2", "Item 3"),
+  Features = c(
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin vehicula tempor ex. Morbi malesuada sagittis turpis, at venenatis nisl luctus a. ",
+    "In eu urna at magna luctus rhoncus quis in nisl. Fusce in velit varius, posuere risus et, cursus augue. Duis eleifend aliquam ante, a aliquet ex tincidunt in. ", 
+    "Vivamus venenatis egestas eros ut tempus. Vivamus id est nisi. Aliquam molestie erat et sollicitudin venenatis. In ac lacus at velit scelerisque mattis. "
+  )
+)
+
+kbl(text_tbl) %>%
+  kable_paper(full_width = F) %>%
+  column_spec(1, bold = T, border_right = T) %>%
+  column_spec(2, width = "30em", background = "yellow")
+
+# EDA (Exploratory data analysis)
+
+For visualisations to be as accurate as you can. Most data analyst would do an EDA set and we can utilise some visualisations that assist with the EDA.
+For this dataset I be using the Tokyo medal count by Berkay Alan 
+
+```{r load_database, message=FALSE, warning=FALSE}
+Medal = read_csv("TokyoMedals21.csv")
+#Reads CSV file which is located within the file location
 ```
 
-## Including Plots
+We can check to see what it contains and if we need to edit
 
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
+```{r check_database, message=FALSE, warning=FALSE}
+Medal
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+From the Metal calculation, the order from Gold metals has been correct and based on the goals on the person, they may edit the data more to calculate the order or manipulate for the purpose.
+
+For the demonstration of showing graphs, this is enough for us to move on.
+
+However before moving on, we can double check to see if there's any missing data
+
+```{r missing_data_check, message=FALSE, warning=FALSE}
+missmap(Medal, main = "Missing values vs observed")
+```
+
+We created a graph which allows us to identify if there's any missing data and this is an example of a visualisation even before the visualisation step and shows if anymore data manipulation is required
+
+# Data Visualisation
+
+choosing the right visualisation is critical in explaining your analysis as visualisation is a translation on data and how it’s being portrayed.
+These are determined based on what your goal is. However, most are determined by two categories.
+•	Categorical
+•	Numerical
+
+## Visualisations in R GGplot 2
+
+In all Gplot cases in ggplot2 package. There's a image in which shows all the capabilities in R, however with this being in mind however I will be showing you the most common graphs used to help visualise using the Medal dataset.
+
+The most important thing you need to change for the users to understand are the following
+• Colours
+• Parameters
+• Title
+• Dataset you're using
+
+```{r add_picture, echo=FALSE}
+knitr::include_graphics("ggplot2.png")
+knitr::include_graphics("ggplot2_1.png")
+```
+
+## Categorical Visualisation
+
+### Bar Graphs
+
+Bar Graphs shows the relationship between a numeric variable and a categorical variable
+
+```{r bar_graph, message=FALSE, warning=FALSE}
+ggplot(Medal, aes(x = Country, y = Total)) + 
+  geom_bar(fill = "Green", stat="identity") +
+  labs(title = "Country total medal count",
+       x = "Country",
+       y = "Count")
+```
+
+### Tree Graph
+
+Tree maps are used to represent large amounts of data to catagorise items. For this we added treemapify package to enchance ggplot2 and allows us to create tree graphs under the ggplot parameter
+
+```{r tree_graph, message=FALSE, warning=FALSE}
+library(treemapify)
+ggplot(Medal, aes(area = Total, fill = Total, label = Country)) +
+  geom_treemap() +
+  geom_treemap_text() + labs(title = "Country total medal count")
+
+```
+  
+## Numerical Visualisation
+
+### Histogram
+
+Used to count the distribution
+
+```{r Histograph, message=FALSE, warning=FALSE}
+ggplot(Medal, aes(x = Total)) +
+  geom_histogram(color = "black", fill = "gold") + labs(title = "Distribution total medal count")
+```
+
+### Scatter Plot
+
+Uses two numeric values to compare values. Since the dataset is not sufice to compare in scatter plot. I will be using a different dataset for this purpose
+
+```{r US_Crime_Dataset, message=FALSE, warning=FALSE}
+data("USArrests")
+head(USArrests)
+USArrests
+```
+
+For the number analysis, I will be comparing the amount of Murder vs Assault in each US state
+
+```{r Scatter_Plot, message=FALSE, warning=FALSE}
+ggplot(USArrests, aes(x = Assault, y = Murder)) +
+  geom_point() +
+  geom_text(label = rownames(USArrests)) + labs(title = "Comparison of Crimes committed in US States")
+```
+
+## Combination Visualisation
+
+Although some can be individual, with enough manipulation and parameter setting within GGplot you can transform some into a combination of numerical and categorical. Example being Treemaps and Scatterplots. However there's one more example in which shows a combination of both numerical and categorical
+
+### Box plot
+
+Box plots help with a summary of values and show if there's any outliers. However the previous two datasets does not have any that helps with this so I will be loading another dataset to assist in demostration 
+
+```{r Diamonds_Dataset, message=FALSE, warning=FALSE}
+data(diamonds)
+head(diamonds)
+diamonds
+```
+
+```{r Box_plot, message=FALSE, warning=FALSE}
+ggplot(diamonds, aes(x = cut, y = price, color = cut)) +
+  geom_boxplot(outlier.color = "black", outlier.size = 1) +
+  scale_color_brewer(palette = "Blue") +
+  labs(title = "Plot of Quality of the Cut by Price" , 
+       x = "Quality of the Cut", 
+       y = "Price in US$ dollars")
+```
+
+# Conclusion/Summary
+
+In conclusion, there’s a lot of data visualisation involved, and the way people can manipulate data. The most critical objective is making sure you know what you are analysing to produce the most appropriate graphs. 
+As you can see, I had to adjust in using different datasets to demonstrate the basic graphs at full capability with appropriate analysis. If I did the metal dataset for boxplots, the information shown would not be as appropriate and vise versa with diamonds set with just numerical scatter plots.
+
+# References
+
+Berkay, A. (2021, August 13). Tokyo 2020 Olympics Medals Dataset. Retrieved from Kaggle: https://www.kaggle.com/berkayalan/2021-olympics-medals-in-tokyo
+
+Holtz, Y., & Healy, C. (2021, August 13). Data to Viz. Retrieved from Data to Viz: https://www.data-to-viz.com/
+
+Project, R. (2021, August 13). devtools. Retrieved from R Project: https://www.r-project.org/nosvn/pandoc/devtools.html
+
+Studio, R. (2021, August 13). Tidyverse packages. Retrieved from Tidyverse: https://www.tidyverse.org/packages/
+
+# Appendex
+
+```{r add_packages, message=FALSE, warning=FALSE}
+  library(psych)
+  library(devtools)
+
+  library(tidyverse)
+  library(dplyr)
+  library(ggplot2)
+  library(Amelia)
+
+  library(knitr)
+  library(kfigr)
+```
