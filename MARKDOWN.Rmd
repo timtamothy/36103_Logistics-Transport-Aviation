@@ -11,7 +11,9 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Airline Delay Prediction
 
-Aircraft delays have serious economic impacts that represent a logistical headache for airlines, airports, airline crew, and passengers alike. 
+Aircraft delays have serious economic impacts that represent a logistical headache for airlines, airports, airline crew, and passengers alike. In a 2010 study by the National Center of Excellence For Aviation Operations Research, an estimated 31.2 billion US dollars was lost due to direct and indirect costs of airline delays in the United States for 2007. These expenses include maintenance costs for an airplane, extra paid hours for flight, cabin, and ground crew, and the extra use of fuel. In addition, airlines have a dedicated time slots at gates and unexpected delays can cost thousands of dollars by the minute at the busiest of airports.
+
+Airline delays also create complicated scenarios for airline schedulers as a delay for one aircraft may impact the flight schedule for all consecutive flights using that aircraft.
 
 Many factors can contribute to aircraft delays. These may include unavoidable reasons such as inclement weather, unforeseen aircraft mechanical breakdowns, or a multitude of passenger related 
 
