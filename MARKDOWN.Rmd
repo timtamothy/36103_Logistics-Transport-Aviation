@@ -1,5 +1,5 @@
 ---
-  title: "Airline Delay Prediction Proposal"
+title: "Airline Delay Prediction Proposal"
 author: "Logistics Transport Aviation"
 subtitle: "1423543"
 date: "30/08/2021"
