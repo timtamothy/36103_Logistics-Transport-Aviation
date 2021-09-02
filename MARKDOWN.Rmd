@@ -27,6 +27,7 @@ Thus, understanding the impact of these variables on aircraft on-time performanc
 
 Herein, we propose an exploratory analysis and prediction model on airline delays utilizing data from the United States in 2019.
 
+<<<<<<< HEAD
 # Stakeholders
 
 Throughout the project, we'll need to manage our external and internal stakeholders in our data science project.
@@ -202,3 +203,25 @@ Studio, R. (2021, August 13). Tidyverse packages. Retrieved from Tidyverse: http
   library(knitr)
   library(kfigr)
 ```
+=======
+
+API call 
+```{r}
+library(httr)
+library(jsonlite)
+
+icao <- GET(
+  url = 'https://applications.icao.int/dataservices/api/safety-characteristics-list?api_key=8d00ef90-0982-11ec-9d72-8160549d64ab&airports=&states=USA'
+)
+response <- content(icao, 'parsed')
+data <- fromJSON(response)
+```
+
+Airport code + Airport name 
+```{r}
+data$airportCode
+data$airportName
+```
+
+
+>>>>>>> fa0c7d631a8f1169cf6f311fd2d2d43e451ea5fd
