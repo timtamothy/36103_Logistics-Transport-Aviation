@@ -49,31 +49,7 @@ kbl(text_tbl) %>%
 
 ## Datasets
 
-For visualisations to be as accurate as you can. Most data analyst would do an EDA set and we can utilise some visualisations that assist with the EDA.
-For this dataset I be using the Tokyo medal count by Berkay Alan 
-
-```{r load_database, message=FALSE, warning=FALSE}
-Medal = read_csv("TokyoMedals21.csv")
-#Reads CSV file which is located within the file location
-```
-
-We can check to see what it contains and if we need to edit
-
-```{r check_database, message=FALSE, warning=FALSE}
-Medal
-```
-
-From the Metal calculation, the order from Gold metals has been correct and based on the goals on the person, they may edit the data more to calculate the order or manipulate for the purpose.
-
-For the demonstration of showing graphs, this is enough for us to move on.
-
-However before moving on, we can double check to see if there's any missing data
-
-```{r missing_data_check, message=FALSE, warning=FALSE}
-missmap(Medal, main = "Missing values vs observed")
-```
-
-We created a graph which allows us to identify if there's any missing data and this is an example of a visualisation even before the visualisation step and shows if anymore data manipulation is required
+Main dataset is from The United States Department of Transportation, it is a comprehensive dataset with delay time, reasons for delays, airline code, origin and destination airport code. To improve the readibility of the dataset, we included a lookup table that has information on airline codes and airline names. Furthermore, the airport name corresponding to airport codes are retrieved through API, then it is merged to the main dataset. More datasets, such as Skytrax Airline review which records sentiment will be considered and might be used for merging in later stages. 
 
 ## Regression modelling techniques
 
@@ -137,19 +113,47 @@ API call
 ```{r}
 library(httr)
 library(jsonlite)
+library(dplyr)
 
 icao <- GET(
   url = 'https://applications.icao.int/dataservices/api/safety-characteristics-list?api_key=8d00ef90-0982-11ec-9d72-8160549d64ab&airports=&states=USA'
 )
 response <- content(icao, 'parsed')
-data <- fromJSON(response)
-```
+API_data <- fromJSON(response)
 
-Airport code + Airport name 
+#Only pick those columns that are useful later on 
+API_data <- API_data %>% select(airportCode, airportName)
+```
+On time data 
 ```{r}
-data$airportCode
-data$airportName
+ontime_raw <- read.csv("https://raw.githubusercontent.com/charlottetse33/36103_Logistics-Transport-Aviation/main/test%20on%20time%20report.csv")
+```
+Airline DOT_ID correspond to airline name data
+```{r}
+#Seperate loading data to prevent R from crashing
+id_airline <- read.csv("https://raw.githubusercontent.com/charlottetse33/36103_Logistics-Transport-Aviation/main/dot_id_airline.csv")
+
+```
+Add actual airline names to on time dataset 
+```{r}
+colnames(id_airline) <- c("DOT_ID_Reporting_Airline", "Airline")
+  
+ontime_1 <- left_join(ontime_raw, id_airline, by = "DOT_ID_Reporting_Airline")
+
+```
+Add API Airport name 
+```{r}
+ontime_2 <- ontime_1 %>% mutate(Origin_airportCode = paste("K",Origin, sep = ""), Dest_airportCode = paste("K",Dest, sep = ""))
+
+Originjoint <- left_join(ontime_2, API_data, by = c("Origin_airportCode" = "airportCode"))
+names(Originjoint)[names(Originjoint) == "airportName"] <- "Origin_airportName"
+
+ontime_final <- left_join(Originjoint, API_data, by = c("Dest_airportCode" = "airportCode"))
+names(ontime_final)[names(ontime_final) == "airportName"] <- "Dest_airportName"
+
+
+#New column names from merging data: 
+#Airline, Origin_airportName, Dest_airportName
+
 ```
 
-
->>>>>>> fa0c7d631a8f1169cf6f311fd2d2d43e451ea5fd
