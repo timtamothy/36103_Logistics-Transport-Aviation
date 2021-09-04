@@ -95,7 +95,7 @@ Kim, N. Y., & Park, J. W. (2016). A study on the impact of airline service delay
 =======
 
 API call 
-```{r}
+```{r, message=FALSE, warning=FALSE}
 library(httr)
 library(jsonlite)
 library(dplyr)
@@ -110,24 +110,24 @@ API_data <- fromJSON(response)
 API_data <- API_data %>% select(airportCode, airportName)
 ```
 On time data 
-```{r}
+```{r, message=FALSE, warning=FALSE}
 ontime_raw <- read.csv("https://raw.githubusercontent.com/charlottetse33/36103_Logistics-Transport-Aviation/main/test%20on%20time%20report.csv")
 ```
 Airline DOT_ID correspond to airline name data
-```{r}
+```{r, message=FALSE, warning=FALSE}
 #Seperate loading data to prevent R from crashing
 id_airline <- read.csv("https://raw.githubusercontent.com/charlottetse33/36103_Logistics-Transport-Aviation/main/dot_id_airline.csv")
 
 ```
 Add actual airline names to on time dataset 
-```{r}
+```{r, message=FALSE, warning=FALSE}
 colnames(id_airline) <- c("DOT_ID_Reporting_Airline", "Airline")
   
 ontime_1 <- left_join(ontime_raw, id_airline, by = "DOT_ID_Reporting_Airline")
 
 ```
 Add API Airport name 
-```{r}
+```{r, message=FALSE, warning=FALSE}
 ontime_2 <- ontime_1 %>% mutate(Origin_airportCode = paste("K",Origin, sep = ""), Dest_airportCode = paste("K",Dest, sep = ""))
 
 Originjoint <- left_join(ontime_2, API_data, by = c("Origin_airportCode" = "airportCode"))
@@ -135,7 +135,6 @@ names(Originjoint)[names(Originjoint) == "airportName"] <- "Origin_airportName"
 
 ontime_final <- left_join(Originjoint, API_data, by = c("Dest_airportCode" = "airportCode"))
 names(ontime_final)[names(ontime_final) == "airportName"] <- "Dest_airportName"
-
 
 #New column names from merging data: 
 #Airline, Origin_airportName, Dest_airportName
