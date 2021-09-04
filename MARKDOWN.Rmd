@@ -53,7 +53,7 @@ As the airline network contains complex interactions between regulatory, passeng
 
 ## Datasets
 
-Main dataset is from The United States Department of Transportation, it is a comprehensive dataset with delay time, reasons for delays, airline code, origin and destination airport code. To improve the readibility of the dataset, we included a lookup table that has information on airline codes and airline names. Furthermore, the airport name corresponding to airport codes are retrieved through API, then it is merged to the main dataset. More datasets, such as Skytrax Airline review which records sentiment will be considered and might be used for merging in later stages. 
+The main dataset is acquired through The United States Department of Transportation. It is a comprehensive dataset with delay times, airline codes, origin and destination airport codes, dates, flight time, etc. To improve the readability of the dataset, we included a lookup table that has information on airline codes and their airline names. Furthermore, the airport name corresponding to airport codes are retrieved through an API, then merged with the main dataset. More datasets, such as Skytrax Airline review which record passenger sentiment will be considered and might be used for merging in later stages. Other examined datasets included US weather events, airplane crash and fatality records, aircraft employment data, and records for airlines and their aircraft types.
 
 ## Regression modelling techniques
 
@@ -65,12 +65,8 @@ For this model, we assume that there is a linear relationship between airline de
 
 ## Impact analysis
 
-There are few potential issues that may arise in this project.
+There are few potential issues that may arise in this project. Although the use of a web API carries the most up-to-date data, a loss of connection with the API server could make compiling data difficult. Secondly, the data itself contains millions of observations from 2019 through 2021. Computing power and memory storage are potential hurdles for analysis. In fact, one dataset was over 80GB and was unable to be loaded into the analysis program. Other potential issues may arise with merging data where a joining dataset may be missing values. Lastly, the statistical analysis relies on several assumptions specific to multivariate linear regression. Should these assumptions be broken, it may lead to difficulty in model accuracy.
 
-- The data could corrupt while doing the project
-- Inaccurate statistical analysis and cannot improve the analysis
-- Potential to choose the wrong visualizations to display the results
-- Conveying the results to stakeholders and transferring wrong information 
 
 # Conclusion/Summary
 
@@ -80,6 +76,7 @@ There are few potential issues that may arise in this project.
 
 Ball, M. (2010, November). Total Delay Impact Study A Comprehensive Assessment of the Costs and Impacts of Flight Delay in the United States. https://isr.umd.edu/NEXTOR/pubs/TDI_Report_Final_11_03_10.pdf
 
+Kim, N. Y., & Park, J. W. (2016). A study on the impact of airline service delays on emotional reactions and customer behavior. Journal of Air Transport Management, 57, 19–25. https://doi.org/10.1016/j.jairtraman.2016.07.005
 
 # Appendex
 
