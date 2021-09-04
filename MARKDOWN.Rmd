@@ -5,9 +5,10 @@ subtitle: "1423543"
 date: "30/08/2021"
 output:
   html_document:
-  number_sections: yes
-fig_caption: yes
-toc: yes
+  number_sections: true
+fig_caption: true
+toc: true
+toc_float: true
 toc_depth: '2' 
 ---
   
