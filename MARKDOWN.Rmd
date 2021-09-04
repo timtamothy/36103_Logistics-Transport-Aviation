@@ -70,6 +70,7 @@ There are few potential issues that may arise in this project. Although the use 
 
 # Conclusion/Summary
 
+We are proposing an in-depth analysis in airline delays in effort to uncover possible causes for air travel's biggest headaches. This project aims to model delays as a function of weather, airport, and airline operations. This understanding will help airlines and customers save time, money, and most importantly, frustration.
 
 
 # References
