@@ -94,7 +94,7 @@ Kim, N. Y., & Park, J. W. (2016). A study on the impact of airline service delay
 ```
 =======
 
-API call 
+Call web API for Airport Names 
 ```{r, message=FALSE, warning=FALSE}
 library(httr)
 library(jsonlite)
@@ -109,24 +109,24 @@ API_data <- fromJSON(response)
 #Only pick those columns that are useful later on 
 API_data <- API_data %>% select(airportCode, airportName)
 ```
-On time data 
+Airline On-time data 
 ```{r, message=FALSE, warning=FALSE}
 ontime_raw <- read.csv("https://raw.githubusercontent.com/charlottetse33/36103_Logistics-Transport-Aviation/main/test%20on%20time%20report.csv")
 ```
-Airline DOT_ID correspond to airline name data
+Airline DOT_ID corresponding to Airline Names
 ```{r, message=FALSE, warning=FALSE}
 #Seperate loading data to prevent R from crashing
 id_airline <- read.csv("https://raw.githubusercontent.com/charlottetse33/36103_Logistics-Transport-Aviation/main/dot_id_airline.csv")
 
 ```
-Add actual airline names to on time dataset 
+Merge Airline Names with On-time Dataset 
 ```{r, message=FALSE, warning=FALSE}
 colnames(id_airline) <- c("DOT_ID_Reporting_Airline", "Airline")
   
 ontime_1 <- left_join(ontime_raw, id_airline, by = "DOT_ID_Reporting_Airline")
 
 ```
-Add API Airport name 
+Merge API Airport names with On-time Dataset 
 ```{r, message=FALSE, warning=FALSE}
 ontime_2 <- ontime_1 %>% mutate(Origin_airportCode = paste("K",Origin, sep = ""), Dest_airportCode = paste("K",Dest, sep = ""))
 
