@@ -68,7 +68,12 @@ As the causes of flight delays would not always be just one. The causes of delay
 
 ## Impact analysis
 
+There are few potential issues that may arise in this project.
 
+- The data could corrupt while doing the project
+- Inaccurate statistical analysis and cannot improve the analysis
+- Potential to choose the wrong visualizations to display the results
+- Conveying the results to stakeholders and transferring wrong information 
 
 # Conclusion/Summary
 
