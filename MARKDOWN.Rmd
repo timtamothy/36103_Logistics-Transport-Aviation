@@ -58,6 +58,11 @@ These are determined based on what your goal is. However, most are determined by
 •	Categorical
 •	Numerical
 
+One of the regression models we are considering using in this report is the multiple linear regression (MLR) model.
+As the causes of flight delays would not always be just one. The causes of delay could be weather, operating issues, air traffic control, a certain date such as holiday, etc.  There will be more than one independent variable. We will intend to examine how much influence each variable has on the dependent variable.
+
+
+
 ## Impact analysis
 
 In all Gplot cases in ggplot2 package. There's a image in which shows all the capabilities in R, however with this being in mind however I will be showing you the most common graphs used to help visualise using the Medal dataset.
