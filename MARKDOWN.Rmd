@@ -5,11 +5,11 @@ subtitle: "1423543"
 date: "30/08/2021"
 output:
   html_document:
-  number_sections: true
-fig_caption: true
-toc: true
-toc_float: true
-toc_depth: '2' 
+    toc: true
+    toc_float: true
+    toc_depth: 3
+    fig_caption: true
+
 ---
   
 ```{r setup, include=FALSE}
@@ -69,18 +69,18 @@ For this model, we assume that there is a linear relationship between airline de
 There are few potential issues that may arise in this project. Although the use of a web API carries the most up-to-date data, a loss of connection with the API server could make compiling data difficult. Secondly, the data itself contains millions of observations from 2019 through 2021. Computing power and memory storage are potential hurdles for analysis. In fact, one dataset was over 80GB and was unable to be loaded into the analysis program. Other potential issues may arise with merging data where a joining dataset may be missing values. Lastly, the statistical analysis relies on several assumptions specific to multivariate linear regression. Should these assumptions be broken, it may lead to difficulty in model accuracy.
 
 
-# Conclusion/Summary
+## Conclusion/Summary
 
 We are proposing an in-depth analysis in airline delays in effort to uncover possible causes for air travel's biggest headaches. This project aims to model delays as a function of weather, airport, and airline operations. This understanding will help airlines and customers save time, money, and most importantly, frustration.
 
 
-# References
+## References
 
 Ball, M. (2010, November). Total Delay Impact Study A Comprehensive Assessment of the Costs and Impacts of Flight Delay in the United States. https://isr.umd.edu/NEXTOR/pubs/TDI_Report_Final_11_03_10.pdf
 
 Kim, N. Y., & Park, J. W. (2016). A study on the impact of airline service delays on emotional reactions and customer behavior. Journal of Air Transport Management, 57, 19–25. https://doi.org/10.1016/j.jairtraman.2016.07.005
 
-# Appendix
+## Appendix
 
 ```{r add_packages, message=FALSE, warning=FALSE}
   library(psych)
