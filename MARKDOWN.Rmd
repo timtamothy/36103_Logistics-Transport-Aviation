@@ -56,13 +56,8 @@ Main dataset is from The United States Department of Transportation, it is a com
 
 ## Regression modelling techniques
 
-choosing the right visualisation is critical in explaining your analysis as visualisation is a translation on data and how it’s being portrayed.
-These are determined based on what your goal is. However, most are determined by two categories.
-•	Categorical
-•	Numerical
-
-One of the regression models we are considering using in this report is the multiple linear regression (MLR) model.
-As the causes of flight delays would not always be just one. The causes of delay could be weather, operating issues, air traffic control, a certain date such as holiday, etc.  There will be more than one independent variable. We will intend to examine how much influence each variable has on the dependent variable.
+One regression model we are considering using in this report is a multivariate linear regression (MLR) model.
+As flight delays could have a multitude of causes, including multiple reasons per flight, a MLR would be most suitable for this model. Some causes could be weather, operating issues, air traffic, and seasonal variabilities such as holidays. We will intend to examine how much influence each variable has on the dependent variable.
 
 
 
