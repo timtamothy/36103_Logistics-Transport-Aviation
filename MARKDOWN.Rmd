@@ -34,11 +34,12 @@ Throughout the project, we'll need to manage our external and internal stakehold
 
 ```{r stakeholder_analysis, echo=FALSE}
 text_tbl <- data.frame(
-  Stakeholders = c("Airline company executives", "Airline company employees", "Shareholders and investors of Airline companies", ""),
-  Features = c(
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin vehicula tempor ex. Morbi malesuada sagittis turpis, at venenatis nisl luctus a. ",
-    "In eu urna at magna luctus rhoncus quis in nisl. Fusce in velit varius, posuere risus et, cursus augue. Duis eleifend aliquam ante, a aliquet ex tincidunt in. ", 
-    "Vivamus venenatis egestas eros ut tempus. Vivamus id est nisi. Aliquam molestie erat et sollicitudin venenatis. In ac lacus at velit scelerisque mattis. "
+  Stakeholders = c("Airline company executives", "Airline company employees", "Shareholders and investors of Airline companies", "Consumers of airline companies", "Suppliers for Airline companies", "Government"),
+  Description = c(
+    "The main participants in the aviation industry. 
+This project can help them improve their operational planning and execution and any related products and services. ",
+    "Pilots, engineers, and flight attendants ensure that passengers' needs are appropriately met and satisfied.  ", 
+    "Their primary role is to provide capital in the form of share capital. Airlines performance may affect their investing behaviours. ", "Airline company/industry’s primary revenue source. Customers are the most important factor in this industry; without customers, airlines would not exist. ", "Form in which how much the company orders supplies in impacts inventory, e.g Aircraft manufacters, fuel and food/beverage resources. ", "Government and policy makers can impact how the industry will be regulated, such as climate change, tourism, and infrastructure policy.  "
   )
 )
 
