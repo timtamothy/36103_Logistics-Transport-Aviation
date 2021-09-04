@@ -28,13 +28,13 @@ Thus, understanding the impact of these variables on aircraft on-time performanc
 
 Herein, we propose an exploratory analysis and prediction model on airline delays utilizing data from the United States in 2019.
 
-<<<<<<< HEAD
 ## Stakeholders
 
 Throughout the project, we'll need to manage our external and internal stakeholders in our data science project.
 
+```{r stakeholder_analysis, echo=FALSE}
 text_tbl <- data.frame(
-  Items = c("Item 1", "Item 2", "Item 3"),
+  Stakeholders = c("Airline company executives", "Airline company employees", "Shareholders and investors of Airline companies", ""),
   Features = c(
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin vehicula tempor ex. Morbi malesuada sagittis turpis, at venenatis nisl luctus a. ",
     "In eu urna at magna luctus rhoncus quis in nisl. Fusce in velit varius, posuere risus et, cursus augue. Duis eleifend aliquam ante, a aliquet ex tincidunt in. ", 
@@ -45,7 +45,9 @@ text_tbl <- data.frame(
 kbl(text_tbl) %>%
   kable_paper(full_width = F) %>%
   column_spec(1, bold = T, border_right = T) %>%
-  column_spec(2, width = "30em", background = "yellow")
+  column_spec(2, width = "30em")
+```
+
 
 ## Datasets
 
@@ -65,38 +67,16 @@ As the causes of flight delays would not always be just one. The causes of delay
 
 ## Impact analysis
 
-In all Gplot cases in ggplot2 package. There's a image in which shows all the capabilities in R, however with this being in mind however I will be showing you the most common graphs used to help visualise using the Medal dataset.
-
-The most important thing you need to change for the users to understand are the following
-• Colours
-• Parameters
-• Title
-• Dataset you're using
-
-```{r add_picture, echo=FALSE}
-knitr::include_graphics("ggplot2.png")
-knitr::include_graphics("ggplot2_1.png")
-```
 
 
 # Conclusion/Summary
 
-In conclusion, there’s a lot of data visualisation involved, and the way people can manipulate data. The most critical objective is making sure you know what you are analysing to produce the most appropriate graphs. 
-As you can see, I had to adjust in using different datasets to demonstrate the basic graphs at full capability with appropriate analysis. If I did the metal dataset for boxplots, the information shown would not be as appropriate and vise versa with diamonds set with just numerical scatter plots.
+
 
 # References
 
 Ball, M. (2010, November). Total Delay Impact Study A Comprehensive Assessment of the Costs and Impacts of Flight Delay in the United States. https://isr.umd.edu/NEXTOR/pubs/TDI_Report_Final_11_03_10.pdf
 
-Berkay, A. (2021, August 13). Tokyo 2020 Olympics Medals Dataset. Retrieved from Kaggle: https://www.kaggle.com/berkayalan/2021-olympics-medals-in-tokyo
-
-Holtz, Y., & Healy, C. (2021, August 13). Data to Viz. Retrieved from Data to Viz: https://www.data-to-viz.com/
-
-Kim, N. Y., & Park, J. W. (2016). A study on the impact of airline service delays on emotional reactions and customer behavior. Journal of Air Transport Management, 57, 19–25. https://doi.org/10.1016/j.jairtraman.2016.07.005
-
-Project, R. (2021, August 13). devtools. Retrieved from R Project: https://www.r-project.org/nosvn/pandoc/devtools.html
-
-Studio, R. (2021, August 13). Tidyverse packages. Retrieved from Tidyverse: https://www.tidyverse.org/packages/
 
 # Appendex
 
