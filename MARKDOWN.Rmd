@@ -1,7 +1,7 @@
 ---
 title: "Airline Delay Prediction Proposal"
 author: "Logistics Transport Aviation"
-subtitle: "1423543"
+subtitle: "STDS - AT2"
 date: "30/08/2021"
 output:
   html_document:
@@ -92,11 +92,11 @@ Kim, N. Y., & Park, J. W. (2016). A study on the impact of airline service delay
   library(Amelia)
 
   library(knitr)
-##  library(kfigr)
 ```
-=======
 
-Call web API for Airport Names 
+
+To get the latest content, we are using a web API call for Airport Names. The `httr::get` will assist us in fetching the content in the JSON format. API key is being used for authenticating our call with the API provider. Since JSON cannot be directly consumed by regression packages, we deploy `jsonlite::fromJSON` to convert to an R dataframe.
+
 ```{r, message=FALSE, warning=FALSE}
 library(httr)
 library(jsonlite)
