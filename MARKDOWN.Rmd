@@ -54,7 +54,19 @@ As the airline network contains complex interactions between regulatory, passeng
 
 ## Datasets
 
-The main dataset is acquired through The United States Department of Transportation. It is a comprehensive dataset with delay times, airline codes, origin and destination airport codes, dates, flight time, etc. To improve the readability of the dataset, we included a lookup table that has information on airline codes and their airline names. Furthermore, the airport name corresponding to airport codes are retrieved through an API, then merged with the main dataset. More datasets, such as Skytrax Airline review which record passenger sentiment will be considered and might be used for merging in later stages. Other examined datasets included US weather events, airplane crash and fatality records, aircraft employment data, and records for airlines and their aircraft types.
+The main dataset is acquired through The United States Department of Transportation. It is a comprehensive dataset with delay times, airline codes, origin and destination airport codes, dates, flight time, etc. This dataset contains 109 variables classified as:
+
+- 6 Time period
+- 5 Airline variables
+- 9 variables of origin
+- 9 variables of destination
+- 9 departure performance variables
+- 9 arrival performance variables
+- 62 additional variables including information about cancellation, diversions, causes of delay, and summaries.
+
+To improve the readability of the dataset, we included a lookup table that has information on airline codes and their airline names. Furthermore, the airport name corresponding to airport codes are retrieved through an API, then merged with the main dataset. More datasets, such as Skytrax Airline review which record passenger sentiment will be considered and might be used for merging in later stages. Other examined datasets included US weather events, airplane crash and fatality records, aircraft employment data, and records for airlines and their aircraft types.
+
+After reviewing the datasets, we can say that the granularity of the data sources is sufficient to answer our research questions (see above). Our main data set is obtained through a reliable source (US DOT), has a really high usability and contains a great amount of variables from different categories which makes it easier for us to merge with different datasets, explore our research questions deeply and find insights.
 
 ## Regression modelling techniques
 
