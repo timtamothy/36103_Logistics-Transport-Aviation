@@ -92,7 +92,7 @@ Kim, N. Y., & Park, J. W. (2016). A study on the impact of airline service delay
   library(Amelia)
 
   library(knitr)
-  library(kfigr)
+##  library(kfigr)
 ```
 =======
 
