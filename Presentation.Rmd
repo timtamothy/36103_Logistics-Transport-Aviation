@@ -1,0 +1,95 @@
+---
+title: "Presentation"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(kableExtra)
+library(httr)
+library(jsonlite)
+library(dplyr)
+library(psych)
+library(devtools)
+library(tidyverse)
+library(ggplot2)
+library(Amelia)
+library(knitr)
+```
+
+
+```{r, message=FALSE, warning=FALSE}
+icao <- GET(
+  url = 'https://applications.icao.int/dataservices/api/safety-characteristics-list?api_key=8d00ef90-0982-11ec-9d72-8160549d64ab&airports=&states=USA'
+)
+response <- content(icao, 'parsed')
+API_data <- fromJSON(response)
+
+#Only pick those columns that are useful later on 
+API_data <- API_data %>% select(airportCode, airportName)
+```
+
+On time data (might change later)
+
+```{r, message=FALSE, warning=FALSE}
+ontime_raw <- read.csv("C:/Users/tsetc/Downloads/244355517_T_ONTIME_REPORTING.csv")
+```
+
+```{r}
+id_airline <- read.csv("https://raw.githubusercontent.com/timothywallaby/36103_Logistics-Transport-Aviation/main/L_UNIQUE_CARRIERS%20(1).csv")
+colnames(id_airline) <- c("OP_UNIQUE_CARRIER", "Airline")
+  
+ontime_1 <- left_join(ontime_raw, id_airline, by = "OP_UNIQUE_CARRIER")
+
+ontime_2 <- ontime_1 %>% mutate(Origin_airportCode = paste("K",ORIGIN, sep = ""), Dest_airportCode = paste("K",DEST, sep = ""))
+
+Originjoint <- left_join(ontime_2, API_data, by = c("Origin_airportCode" = "airportCode"))
+names(Originjoint)[names(Originjoint) == "airportName"] <- "Origin_AIRPORTNAME"
+
+ontime_3 <- left_join(Originjoint, API_data, by = c("Dest_airportCode" = "airportCode"))
+names(ontime_3)[names(ontime_3) == "airportName"] <- "Dest_AIRPORTNAME"
+```
+
+
+```{r}
+#New column names from merging data: 
+#Airline, Origin_AIRPORTNAME, Dest_AIRPORTNAME
+```
+
+Clean data 
+```{r}
+#If there is CANCELLATION_CODE, remove row 
+# Remove those without ARR_DELAY
+ontime_4 <- ontime_3[ontime_3$CANCELLED == 0,]
+ontime_5 <- ontime_4[!is.na(ontime_4$ARR_DELAY),]
+```
+
+Selecting columns 
+```{r}
+ontime_final <- ontime_4 %>% select(YEAR, QUARTER, MONTH, DAY_OF_MONTH, DAY_OF_WEEK,AIR_TIME,ACTUAL_ELAPSED_TIME,CARRIER_DELAY,WEATHER_DELAY
+,NAS_DELAY,SECURITY_DELAY,LATE_AIRCRAFT_DELAY,FIRST_DEP_TIME,TOTAL_ADD_GTIME,LONGEST_ADD_GTIME, Airline,Origin_AIRPORTNAME, Dest_AIRPORTNAME, DEP_DELAY, ARR_DELAY)
+```
+
+
+
+EDA
+```{r}
+ontime_final %>% group_by(MONTH, DAY_OF_MONTH) %>% summarise (arr_delay = mean(ARR_DELAY, na.rm = TRUE), dep_delay = mean(DEP_DELAY, na.rm = TRUE)) %>% ggplot() + geom_point(aes(x = DAY_OF_MONTH, y = arr_delay, colour = dep_delay))
+#There is relationship bettween arr_delay and dep_delay
+```
+
+Regression 
+
+Need to label encode categorical variables first (or we can consider one-hot encoding)
+```{r}
+#Airline, Origin_AIRPORTNAME, DEST_AIRPORTNAME
+summary(ontime_final)
+```
+
+
+```{r}
+glm = lm(ARR_DELAY ~ QUARTER + MONTH + DAY_OF_MONTH + DAY_OF_WEEK +AIR_TIME + ACTUAL_ELAPSED_TIME + CARRIER_DELAY + WEATHER_DELAY
++ NAS_DELAY,SECURITY_DELAY + LATE_AIRCRAFT_DELAY + FIRST_DEP_TIME + TOTAL_ADD_GTIME + LONGEST_ADD_GTIME +  Airline,Origin_AIRPORTNAME + Dest_AIRPORTNAME + DEP_DELAY, data = ontime_final)
+```
+
