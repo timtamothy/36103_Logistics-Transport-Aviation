@@ -1,0 +1,44 @@
+---
+title: "Presentation"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+## knitr::opts_chunk$set(echo = TRUE)
+## install.packages("kableExtra")
+library(tidyverse)
+library(kableExtra)
+library(httr)
+library(jsonlite)
+library(dplyr)
+library(psych)
+library(devtools)
+library(tidyverse)
+library(ggplot2)
+library(Amelia)
+library(knitr)
+```
+```
+Merge data 
+
+API data
+```{r}
+icao <- GET(
+  url = 'https://applications.icao.int/dataservices/api/safety-characteristics-list?api_key=8d00ef90-0982-11ec-9d72-8160549d64ab&airports=&states=USA'
+)
+response <- content(icao, 'parsed')
+API_data <- fromJSON(response)
+
+#Only pick those columns that are useful later on 
+API_data <- API_data %>% select(airportCode, airportName)
+```
+raw data 
+```{r}
+temp <- tempfile(fileext = ".zip")
+download.file("https://drive.google.com/uc?authuser=0&id=1AiZda_1-2nwrxI8fLD0Y6e5rTg7aocv0&export=download",
+  temp)
+out <- unzip(temp, exdir = tempdir())
+bank <- read.csv(out[14], sep = ";")
+str(bank)
+```
+
