@@ -16,6 +16,8 @@ library(tidyverse)
 library(ggplot2)
 library(Amelia)
 library(knitr)
+library(googledrive)
+library(purrr)
 ```
 
 
@@ -32,9 +34,42 @@ API_data <- API_data %>% select(airportCode, airportName)
 
 On time data (might change later)
 
-```{r, message=FALSE, warning=FALSE}
-ontime_raw <- read.csv("C:/Users/tsetc/Downloads/244355517_T_ONTIME_REPORTING.csv")
+Google drive
+Load the below code and it will connect to your googgle drive
+(Still error)
+```{r}
+#url <- "https://drive.google.com/drive/u/3/folders/1UO8Yn8cZqf-FAQ9Vlgsu7wN5YXY9_3uU"
+
+drive_find(n_max = 30)
+#id <- "1UO8Yn8cZqf-FAQ9Vlgsu7wN5YXY9_3uU"
+#read.csv(sprintf("https://docs.google.com/uc?id=%s&export=download", id))
+
+folder <- drive_get(id = "1UO8Yn8cZqf-FAQ9Vlgsu7wN5YXY9_3uU")
+csv_files <- drive_ls(folder, type = "csv")
+csv_files$id
+#download <- sapply(csv_files$id, function(x) sprintf("https://docs.google.com/uc?id=%s&export=download", x))
+
+example <- drive_get(id = csv_files$id[1])
+
+#trial --> del []
+#csv_files$id[1]
+
+#This code does not work might be because file too large, so can't read
+read_csv(paste("https://drive.google.com/uc?id=", "1pY0KMo7iM3ugcckl-Hpj7GA4JG73KyUq", sep = ""))
+
+#sapply(download[c(1,2)], function(x) read.csv(x))
 ```
+
+Load from own device 
+
+```{r}
+user_specific <- "C:/Users/tsetc/OneDrive/Desktop/dataset for logistics/20"
+
+data <- mapply(function(x,y) read.csv(paste(user_specific,x,"_",y,".csv", sep = "")), 19:21, c('01','02','03','04'))
+
+map_df(data, ~as.data.frame(t(.)))
+```
+
 
 ```{r}
 id_airline <- read.csv("https://raw.githubusercontent.com/timothywallaby/36103_Logistics-Transport-Aviation/main/L_UNIQUE_CARRIERS%20(1).csv")
@@ -67,10 +102,14 @@ ontime_5 <- ontime_4[!is.na(ontime_4$ARR_DELAY),]
 
 Selecting columns 
 ```{r}
-ontime_final <- ontime_4 %>% select(YEAR, QUARTER, MONTH, DAY_OF_MONTH, DAY_OF_WEEK,AIR_TIME,ACTUAL_ELAPSED_TIME,CARRIER_DELAY,WEATHER_DELAY
+ontime_6 <- ontime_5 %>% select(YEAR, QUARTER, MONTH, DAY_OF_MONTH, DAY_OF_WEEK,AIR_TIME,ACTUAL_ELAPSED_TIME,CARRIER_DELAY,WEATHER_DELAY
 ,NAS_DELAY,SECURITY_DELAY,LATE_AIRCRAFT_DELAY,FIRST_DEP_TIME,TOTAL_ADD_GTIME,LONGEST_ADD_GTIME, Airline,Origin_AIRPORTNAME, Dest_AIRPORTNAME, DEP_DELAY, ARR_DELAY)
 ```
 
+Check 
+```{r}
+summary(ontime_6)
+```
 
 
 EDA
@@ -79,17 +118,40 @@ ontime_final %>% group_by(MONTH, DAY_OF_MONTH) %>% summarise (arr_delay = mean(A
 #There is relationship bettween arr_delay and dep_delay
 ```
 
+########################################################################################################
+AFTER Presentation 
+
 Regression 
 
 Need to label encode categorical variables first (or we can consider one-hot encoding)
 ```{r}
 #Airline, Origin_AIRPORTNAME, DEST_AIRPORTNAME
-summary(ontime_final)
+sapply(ontime_6, class)
 ```
 
+```{r}
+#change those "character" into factor then into numeric 
+ontime_6$Airline <- as.numeric(as.factor(ontime_6$Airline))
+ontime_6$Origin_AIRPORTNAME <- as.numeric(as.factor(ontime_6$Airline))
+ontime_6$Dest_AIRPORTNAME <- as.numeric(as.factor(ontime_6$Airline))
+```
 
+```{r}
+sapply(ontime_6, class)
+```
+
+Regression Model 
 ```{r}
 glm = lm(ARR_DELAY ~ QUARTER + MONTH + DAY_OF_MONTH + DAY_OF_WEEK +AIR_TIME + ACTUAL_ELAPSED_TIME + CARRIER_DELAY + WEATHER_DELAY
 + NAS_DELAY,SECURITY_DELAY + LATE_AIRCRAFT_DELAY + FIRST_DEP_TIME + TOTAL_ADD_GTIME + LONGEST_ADD_GTIME +  Airline,Origin_AIRPORTNAME + Dest_AIRPORTNAME + DEP_DELAY, data = ontime_final)
 ```
 
+VIF (to test multicollinearity)
+```{r}
+vif(glm)
+```
+
+Multicollinearity 
+VIF, pearson's correlation test - numerical
+chi-square test - categorical 
+point biserial correlation test - numerical & categorical(need dummy variable) 
