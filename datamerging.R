@@ -12,8 +12,8 @@ files <- list.files(path=here('Dataset', 'Q1'), full.names = TRUE)
 
 
 #this has done a multicore workload of loading all data in the files path
-data <- files %>% 
-  future_lapply(read_csv)
+#data <- files %>% 
+  #future_lapply(read_csv)
 
 
 #Change all first dep time columns to numberic
@@ -24,3 +24,6 @@ output <- files %>%
   })
 
 View(output)
+
+#Make a new CSV of all Q1 collated data
+write.csv(output, here('Dataset', 'Q1', 'q1.csv'))
