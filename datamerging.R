@@ -2,6 +2,7 @@ library(tidyverse)
 library(here)
 library(readr)
 library(future.apply)
+library(dplyr)
 
 
 numCores <- detectCores()
@@ -15,7 +16,11 @@ data <- files %>%
   future_lapply(read_csv)
 
 
-#Append each of the csvs
-dataf <- files %>% 
-  future_lapply(read_csv) %>% 
-  bind_rows
+#Change all first dep time columns to numberic
+output <- files %>% 
+  map_df(~{
+    read_csv(.x) %>% 
+      mutate(FIRST_DEP_TIME = as.numeric(FIRST_DEP_TIME))
+  })
+
+View(output)
