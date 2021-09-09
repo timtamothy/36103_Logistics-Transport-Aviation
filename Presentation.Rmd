@@ -16,6 +16,8 @@ library(tidyverse)
 library(ggplot2)
 library(Amelia)
 library(knitr)
+library(googledrive)
+library(purrr)
 ```
 
 
@@ -32,9 +34,42 @@ API_data <- API_data %>% select(airportCode, airportName)
 
 On time data (might change later)
 
-```{r, message=FALSE, warning=FALSE}
-ontime_raw <- read.csv("C:/Users/tsetc/Downloads/244355517_T_ONTIME_REPORTING.csv")
+Google drive
+Load the below code and it will connect to your googgle drive
+(Still error)
+```{r}
+#url <- "https://drive.google.com/drive/u/3/folders/1UO8Yn8cZqf-FAQ9Vlgsu7wN5YXY9_3uU"
+
+drive_find(n_max = 30)
+#id <- "1UO8Yn8cZqf-FAQ9Vlgsu7wN5YXY9_3uU"
+#read.csv(sprintf("https://docs.google.com/uc?id=%s&export=download", id))
+
+folder <- drive_get(id = "1UO8Yn8cZqf-FAQ9Vlgsu7wN5YXY9_3uU")
+csv_files <- drive_ls(folder, type = "csv")
+csv_files$id
+#download <- sapply(csv_files$id, function(x) sprintf("https://docs.google.com/uc?id=%s&export=download", x))
+
+example <- drive_get(id = csv_files$id[1])
+
+#trial --> del []
+#csv_files$id[1]
+
+#This code does not work might be because file too large, so can't read
+read_csv(paste("https://drive.google.com/uc?id=", "1pY0KMo7iM3ugcckl-Hpj7GA4JG73KyUq", sep = ""))
+
+#sapply(download[c(1,2)], function(x) read.csv(x))
 ```
+
+Load from own device 
+
+```{r}
+user_specific <- "C:/Users/tsetc/OneDrive/Desktop/dataset for logistics/20"
+
+data <- mapply(function(x,y) read.csv(paste(user_specific,x,"_",y,".csv", sep = "")), 19:21, c('01','02','03','04'))
+
+map_df(data, ~as.data.frame(t(.)))
+```
+
 
 ```{r}
 id_airline <- read.csv("https://raw.githubusercontent.com/timothywallaby/36103_Logistics-Transport-Aviation/main/L_UNIQUE_CARRIERS%20(1).csv")
@@ -83,6 +118,9 @@ ontime_final %>% group_by(MONTH, DAY_OF_MONTH) %>% summarise (arr_delay = mean(A
 #There is relationship bettween arr_delay and dep_delay
 ```
 
+########################################################################################################
+AFTER Presentation 
+
 Regression 
 
 Need to label encode categorical variables first (or we can consider one-hot encoding)
@@ -115,5 +153,5 @@ vif(glm)
 
 Multicollinearity 
 VIF, pearson's correlation test - numerical
-chi-square test, maybe MCA - categorical 
+chi-square test - categorical 
 point biserial correlation test - numerical & categorical(need dummy variable) 
