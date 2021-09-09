@@ -67,10 +67,14 @@ ontime_5 <- ontime_4[!is.na(ontime_4$ARR_DELAY),]
 
 Selecting columns 
 ```{r}
-ontime_final <- ontime_4 %>% select(YEAR, QUARTER, MONTH, DAY_OF_MONTH, DAY_OF_WEEK,AIR_TIME,ACTUAL_ELAPSED_TIME,CARRIER_DELAY,WEATHER_DELAY
+ontime_6 <- ontime_5 %>% select(YEAR, QUARTER, MONTH, DAY_OF_MONTH, DAY_OF_WEEK,AIR_TIME,ACTUAL_ELAPSED_TIME,CARRIER_DELAY,WEATHER_DELAY
 ,NAS_DELAY,SECURITY_DELAY,LATE_AIRCRAFT_DELAY,FIRST_DEP_TIME,TOTAL_ADD_GTIME,LONGEST_ADD_GTIME, Airline,Origin_AIRPORTNAME, Dest_AIRPORTNAME, DEP_DELAY, ARR_DELAY)
 ```
 
+Check 
+```{r}
+summary(ontime_6)
+```
 
 
 EDA
@@ -84,12 +88,32 @@ Regression
 Need to label encode categorical variables first (or we can consider one-hot encoding)
 ```{r}
 #Airline, Origin_AIRPORTNAME, DEST_AIRPORTNAME
-summary(ontime_final)
+sapply(ontime_6, class)
 ```
 
+```{r}
+#change those "character" into factor then into numeric 
+ontime_6$Airline <- as.numeric(as.factor(ontime_6$Airline))
+ontime_6$Origin_AIRPORTNAME <- as.numeric(as.factor(ontime_6$Airline))
+ontime_6$Dest_AIRPORTNAME <- as.numeric(as.factor(ontime_6$Airline))
+```
 
+```{r}
+sapply(ontime_6, class)
+```
+
+Regression Model 
 ```{r}
 glm = lm(ARR_DELAY ~ QUARTER + MONTH + DAY_OF_MONTH + DAY_OF_WEEK +AIR_TIME + ACTUAL_ELAPSED_TIME + CARRIER_DELAY + WEATHER_DELAY
 + NAS_DELAY,SECURITY_DELAY + LATE_AIRCRAFT_DELAY + FIRST_DEP_TIME + TOTAL_ADD_GTIME + LONGEST_ADD_GTIME +  Airline,Origin_AIRPORTNAME + Dest_AIRPORTNAME + DEP_DELAY, data = ontime_final)
 ```
 
+VIF (to test multicollinearity)
+```{r}
+vif(glm)
+```
+
+Multicollinearity 
+VIF, pearson's correlation test - numerical
+chi-square test, maybe MCA - categorical 
+point biserial correlation test - numerical & categorical(need dummy variable) 
