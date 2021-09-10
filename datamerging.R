@@ -153,7 +153,7 @@ unique(ontime3$Airline)
 # SkyWest Airlines Inc.
 
 ontime3 %>% 
-  filter(ontime3$ARR_DELAY >= 0 & ontime3$ARR_DELAY <= 100) %>%
+  filter(ontime3$ARR_DELAY >= 0 & ontime3$ARR_DELAY <=100) %>%
   filter(YEAR < 2021) %>% 
   ggplot(aes(x = Airline, y = ARR_DELAY, colour = Airline)) + 
   geom_boxplot(show.legend = FALSE) +
@@ -167,3 +167,5 @@ ontime3 %>%
   geom_boxplot(show.legend = FALSE) +
   labs(title='Arrival Delays in Q1 by Airline in 2021') +
   ylab('Arrival Delay in Minutes')
+
+# Testing commit
