@@ -26,10 +26,25 @@ output <- files %>%
 View(output)
 
 #Make a new CSV of all Q1 collated data
-write.csv(output, here('Dataset', 'Q1', 'q1.csv'))
-+
-  #Charlotte 
-  Jan_2019 <- read_csv("C:/Users/tsetc/OneDrive/Desktop/dataset for logistics/2019_01.csv")
+write_csv(output, here('Dataset', 'Q1', 'q1.csv'))
+
+
+# read in Q1 data
+Q1 <- read_csv(here('Dataset', 'Q1', 'q1.csv'))
+
+# create a list of carriers we would like
+carriers <- c('AA', 'DL', 'UA')
+
+# filter tibble by carriers we would like
+Q1_big_three <- filter(Q1, OP_UNIQUE_CARRIER %in% carriers)
+
+# write tibble containing AA, DL, UA into csv
+write_csv(Q1_big_three, here('Dataset', 'Q1', 'q1_big_three.csv'))
+
+
+
+#Charlotte ---- 
+Jan_2019 <- read_csv("C:/Users/tsetc/OneDrive/Desktop/dataset for logistics/2019_01.csv")
 Feb_2019 <- read_csv("C:/Users/tsetc/OneDrive/Desktop/dataset for logistics/2019_02.csv")
 
 Jan_2019 <- Jan_2019 %>% mutate(FIRST_DEP_TIME = as.numeric(FIRST_DEP_TIME))
