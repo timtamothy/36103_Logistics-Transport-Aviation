@@ -169,3 +169,10 @@ ontime3 %>%
   ylab('Arrival Delay in Minutes')
 
 # Testing commit
+
+ontime3 %>% 
+  filter(ontime3$ARR_DELAY <= 100, ontime3$YEAR == 2021, ontime3$MONTH == 1) %>% 
+  ggplot(aes(x=ARR_DELAY, y=DEP_DELAY, color = Airline)) +
+  geom_point()
+
+# Departure Delays
