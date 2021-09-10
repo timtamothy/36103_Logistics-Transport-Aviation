@@ -3,7 +3,7 @@ library(here)
 library(readr)
 library(future.apply)
 library(dplyr)
-
+library(ggplot2)
 
 numCores <- detectCores()
 
@@ -27,3 +27,107 @@ View(output)
 
 #Make a new CSV of all Q1 collated data
 write.csv(output, here('Dataset', 'Q1', 'q1.csv'))
+
+#Charlotte 
+Jan_2019 <- read_csv("C:/Users/tsetc/OneDrive/Desktop/dataset for logistics/2019_01.csv")
+Feb_2019 <- read_csv("C:/Users/tsetc/OneDrive/Desktop/dataset for logistics/2019_02.csv")
+
+Jan_2019 <- Jan_2019 %>% mutate(FIRST_DEP_TIME = as.numeric(FIRST_DEP_TIME))
+
+ontime <- full_join(Jan_2019, Feb_2019)
+ontime <- ontime[!is.na(ontime$ARR_DELAY),]
+ontime <- ontime %>% mutate_all(~replace(., is.na(.), 0))
+
+########################################################################
+icao <- GET(
+  url = 'https://applications.icao.int/dataservices/api/safety-characteristics-list?api_key=8d00ef90-0982-11ec-9d72-8160549d64ab&airports=&states=USA'
+)
+response <- content(icao, 'parsed')
+API_data <- fromJSON(response)
+
+#Only pick those columns that are useful later on 
+API_data <- API_data %>% select(airportCode, airportName)
+
+id_airline <- read.csv("https://raw.githubusercontent.com/timothywallaby/36103_Logistics-Transport-Aviation/main/L_UNIQUE_CARRIERS%20(1).csv")
+colnames(id_airline) <- c("OP_UNIQUE_CARRIER", "Airline")
+
+ontime <- left_join(ontime, id_airline, by = "OP_UNIQUE_CARRIER")%>% 
+  mutate(Origin_airportCode = paste("K",ORIGIN, sep = ""), 
+         Dest_airportCode = paste("K",DEST, sep = ""))
+
+ontime <- left_join(ontime, API_data, by = c("Origin_airportCode" = "airportCode"))
+names(ontime)[names(ontime) == "airportName"] <- "Origin_AIRPORTNAME"
+
+ontime <- left_join(ontime, API_data, by = c("Dest_airportCode" = "airportCode"))
+names(ontime)[names(ontime) == "airportName"] <- "Dest_AIRPORTNAME"
+
+#Clean data 
+ontime <- ontime[ontime$CANCELLED == 0,]
+
+#EDA 
+
+#On time performance 
+ontime_perc <- ontime %>% mutate(ontime = ifelse(ARR_DELAY >0, "NO", "YES")) %>% 
+  select(ontime, ARR_DELAY)
+  
+#ggplot(ontime_perc, aes(x = "", y = ARR_DELAY, group = ontime)) + 
+  #geom_bar(stat = "identity", width = 1) + 
+  #coord_polar("y", start = 0)
+
+late <- sum(ontime_perc$ontime == "NO")
+total <- length(ontime_perc$ontime)
+
+slices <- c(total - late ,late)
+lbls <- c("On time", "Late")
+color <- c("white","red")
+
+pct <- c(round((total - late)/total * 100,2), round(late/total * 100,2))	
+lbls <- paste(c("On time", "Late"), pct, "%")	
+
+pie(slices, labels = lbls, col = color)
+
+# Note: No buffer were added 
+
+#Contribution of delay to total delay 
+
+#ggplot(data = ontime, aes = CARRIER_DELAY, WEATHER_DELAY
+       #,NAS_DELAY,SECURITY_DELAY,LATE_AIRCRAFT_DELAY) + geom_histogram() 
+
+
+contribution <- ontime %>% mutate(WITHCAUSE_DELAY = CARRIER_DELAY + WEATHER_DELAY 
+                                  + NAS_DELAY,SECURITY_DELAY + LATE_AIRCRAFT_DELAY 
+                                  , OTHER_DELAY = ifelse(ARR_DELAY_NEW > WITHCAUSE_DELAY,
+                                                         ARR_DELAY_NEW - WITHCAUSE_DELAY,
+                                                         0))  %>%
+  select(CARRIER_DELAY, WEATHER_DELAY,NAS_DELAY,SECURITY_DELAY,LATE_AIRCRAFT_DELAY, 
+         ARR_DELAY_NEW, WITHCAUSE_DELAY, OTHER_DELAY)
+
+contribution <- contribution %>% mutate_all(~replace(., is.na(.), 0))
+
+contribution <- contribution %>% select(-c(ARR_DELAY_NEW, WITHCAUSE_DELAY, OTHER_DELAY))
+sum_contribution <- data.frame(value = apply(contribution, 2, sum))
+sum_contribution$key = rownames(sum_contribution)
+
+ggplot(data = sum_contribution, aes(x = reorder(key, -value), y = value, fill = key)) + 
+  geom_bar(colour = "black", stat = "identity") + xlab("Cause of delay")
+
+
+#For illustration 
+sum(na.omit(contribution$CARRIER_DELAY)) + sum(na.omit(contribution$WEATHER_DELAY))+ 
+  sum(na.omit(contribution$NAS_DELAY)) + sum(na.omit(contribution$SECURITY_DELAY)) + 
+  sum(na.omit(contribution$LATE_AIRCRAFT_DELAY)) + sum(na.omit(contribution$OTHER_DELAY))
+
+sum(na.omit(contribution$ARR_DELAY_NEW))
+# some of the flights have delay from those factors, but did not delay in the end 
+
+
+# Competitor Review 
+# Compare big 3 companies across quarters
+unique(ontime$Airline) 
+# American Airlines Inc.
+# Delta Air Lines Inc.
+# United Air Lines Inc. 
+# SkyWest Airlines Inc.
+
+ggplot(data = ontime, aes(x = QUARTER, y = ARR_DELAY, colour = Airline)) + 
+  geom_line()
