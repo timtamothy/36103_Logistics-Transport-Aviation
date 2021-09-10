@@ -26,4 +26,4 @@ output <- files %>%
 View(output)
 
 #Make a new CSV of all Q1 collated data
-write_csv(output, here('Dataset', 'Q1', 'q1.csv'))
+write.csv(output, here('Dataset', 'Q1', 'q1.csv'))
