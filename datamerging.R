@@ -146,11 +146,24 @@ sum(na.omit(contribution$ARR_DELAY_NEW))
 
 # Competitor Review 
 # Compare big 3 companies across quarters
-unique(ontime$Airline) 
+unique(ontime3$Airline) 
 # American Airlines Inc.
 # Delta Air Lines Inc.
 # United Air Lines Inc. 
 # SkyWest Airlines Inc.
 
-ggplot(data = ontime, aes(x = QUARTER, y = ARR_DELAY, colour = Airline)) + 
-  geom_line()
+ontime3 %>% 
+  filter(ontime3$ARR_DELAY >= 0 & ontime3$ARR_DELAY <= 100) %>%
+  filter(YEAR < 2021) %>% 
+  ggplot(aes(x = Airline, y = ARR_DELAY, colour = Airline)) + 
+  geom_boxplot(show.legend = FALSE) +
+  labs(title='Arrival Delays in Q1 by Airline in 2020 and 2019') +
+  ylab('Arrival Delay in Minutes')
+
+ontime3 %>% 
+  filter(ontime3$ARR_DELAY >= 0 & ontime3$ARR_DELAY <= 100) %>%
+  filter(YEAR == 2021) %>% 
+  ggplot(aes(x = Airline, y = ARR_DELAY, colour = Airline)) + 
+  geom_boxplot(show.legend = FALSE) +
+  labs(title='Arrival Delays in Q1 by Airline in 2021') +
+  ylab('Arrival Delay in Minutes')
