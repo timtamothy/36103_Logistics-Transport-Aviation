@@ -3,7 +3,8 @@ library(here)
 library(readr)
 library(future.apply)
 library(dplyr)
-
+library(httr)
+library(jsonlite)
 
 numCores <- detectCores()
 
@@ -53,6 +54,11 @@ ontime <- full_join(Jan_2019, Feb_2019)
 ontime <- ontime[!is.na(ontime$ARR_DELAY),]
 ontime <- ontime %>% mutate_all(~replace(., is.na(.), 0))
 
+#Tims Added
+ontime3 <- Q1_big_three[!is.na(Q1_big_three$ARR_DELAY),]
+ontime3 <- ontime3 %>% mutate_all(~replace(., is.na(.), 0))
+  #was an error with FL_DATE
+
 ########################################################################
 icao <- GET(
   url = 'https://applications.icao.int/dataservices/api/safety-characteristics-list?api_key=8d00ef90-0982-11ec-9d72-8160549d64ab&airports=&states=USA'
@@ -66,23 +72,23 @@ API_data <- API_data %>% select(airportCode, airportName)
 id_airline <- read.csv("https://raw.githubusercontent.com/timothywallaby/36103_Logistics-Transport-Aviation/main/L_UNIQUE_CARRIERS%20(1).csv")
 colnames(id_airline) <- c("OP_UNIQUE_CARRIER", "Airline")
 
-ontime <- left_join(ontime, id_airline, by = "OP_UNIQUE_CARRIER")%>% 
+ontime3 <- left_join(ontime3, id_airline, by = "OP_UNIQUE_CARRIER")%>% 
   mutate(Origin_airportCode = paste("K",ORIGIN, sep = ""), 
          Dest_airportCode = paste("K",DEST, sep = ""))
 
-ontime <- left_join(ontime, API_data, by = c("Origin_airportCode" = "airportCode"))
+ontime3 <- left_join(ontime3, API_data, by = c("Origin_airportCode" = "airportCode"))
 names(ontime)[names(ontime) == "airportName"] <- "Origin_AIRPORTNAME"
 
-ontime <- left_join(ontime, API_data, by = c("Dest_airportCode" = "airportCode"))
+ontime3 <- left_join(ontime3, API_data, by = c("Dest_airportCode" = "airportCode"))
 names(ontime)[names(ontime) == "airportName"] <- "Dest_AIRPORTNAME"
 
 #Clean data 
-ontime <- ontime[ontime$CANCELLED == 0,]
+ontime3 <- ontime3[ontime3$CANCELLED == 0,]
 
 #EDA 
 
 #On time performance 
-ontime_perc <- ontime %>% mutate(ontime = ifelse(ARR_DELAY >0, "NO", "YES")) %>% 
+ontime_perc <- ontime3 %>% mutate(ontime = ifelse(ARR_DELAY >0, "NO", "YES")) %>% 
   select(ontime, ARR_DELAY)
 
 #ggplot(ontime_perc, aes(x = "", y = ARR_DELAY, group = ontime)) + 
@@ -109,7 +115,7 @@ pie(slices, labels = lbls, col = color)
 #,NAS_DELAY,SECURITY_DELAY,LATE_AIRCRAFT_DELAY) + geom_histogram() 
 
 
-contribution <- ontime %>% mutate(WITHCAUSE_DELAY = CARRIER_DELAY + WEATHER_DELAY 
+contribution <- ontime3 %>% mutate(WITHCAUSE_DELAY = CARRIER_DELAY + WEATHER_DELAY 
                                   + NAS_DELAY,SECURITY_DELAY + LATE_AIRCRAFT_DELAY 
                                   , OTHER_DELAY = ifelse(ARR_DELAY_NEW > WITHCAUSE_DELAY,
                                                          ARR_DELAY_NEW - WITHCAUSE_DELAY,
@@ -123,8 +129,10 @@ contribution <- contribution %>% select(-c(ARR_DELAY_NEW, WITHCAUSE_DELAY, OTHER
 sum_contribution <- data.frame(value = apply(contribution, 2, sum))
 sum_contribution$key = rownames(sum_contribution)
 
-ggplot(data = sum_contribution, aes(x = reorder(key, -value), y = value, fill = key)) + 
-  geom_bar(colour = "black", stat = "identity") + xlab("Cause of delay")
+ggplot(data = sum_contribution, aes(x = reorder(key, value), y = value, fill = key)) + 
+  geom_bar(colour = "black", stat = "identity", show.legend = FALSE) + xlab("Causes") + ylab('Total Delays') +
+  labs(title='Total Causes of Delays in Q1 of 2019-2021') +
+  coord_flip()
 
 
 #For illustration 
