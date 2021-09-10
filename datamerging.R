@@ -176,3 +176,19 @@ ontime3 %>%
   geom_point()
 
 # Departure Delays
+
+ontime3 %>% 
+  filter(ontime3$DEP_DELAY >= 0 & ontime3$DEP_DELAY <=100) %>%
+  filter(YEAR < 2021) %>%
+  ggplot(aes(x = Airline, y = DEP_DELAY, colour = Airline)) + 
+  geom_boxplot(show.legend = FALSE) +
+  labs(title='Departure Delays in Q1 by Airline in 2020 and 2019') +
+  ylab('Departure Delay in Minutes')
+
+ontime3 %>% 
+  filter(ontime3$DEP_DELAY >= 0 & ontime3$DEP_DELAY <= 100) %>%
+  filter(YEAR == 2021) %>% 
+  ggplot(aes(x = Airline, y = DEP_DELAY, colour = Airline)) + 
+  geom_boxplot(show.legend = FALSE) +
+  labs(title='Departure Delays in Q1 by Airline in 2021') +
+  ylab('Departure Delay in Minutes')
