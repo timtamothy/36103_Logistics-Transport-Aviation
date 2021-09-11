@@ -189,10 +189,10 @@ ontime3 %>%
   geom_boxplot(alpha = 0.3) +
   #ylim(0, 30) +
   theme_minimal() +
-  labs(title='Departure Delays in Q1 by Airline in 2020 and 2019') +
+  labs(title='Departure Delays in Q1 by Airline from 2019 to 2021') +
   ylab('Departure Delay in Minutes') +
   xlab('Airline') +
-  scale_fill_brewer(palette="Set2")
+  scale_fill_brewer(palette="PRGn")
 
 ontime3 %>% 
   filter(ontime3$DEP_DELAY >= 0 & ontime3$DEP_DELAY <= 60) %>%
