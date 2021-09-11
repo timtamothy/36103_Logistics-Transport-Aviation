@@ -77,10 +77,10 @@ ontime3 <- left_join(ontime3, id_airline, by = "OP_UNIQUE_CARRIER")%>%
          Dest_airportCode = paste("K",DEST, sep = ""))
 
 ontime3 <- left_join(ontime3, API_data, by = c("Origin_airportCode" = "airportCode"))
-names(ontime)[names(ontime) == "airportName"] <- "Origin_AIRPORTNAME"
+names(ontime3)[names(ontime3) == "airportName"] <- "Origin_AIRPORTNAME"
 
 ontime3 <- left_join(ontime3, API_data, by = c("Dest_airportCode" = "airportCode"))
-names(ontime)[names(ontime) == "airportName"] <- "Dest_AIRPORTNAME"
+names(ontime3)[names(ontime3) == "airportName"] <- "Dest_AIRPORTNAME"
 
 #Clean data 
 ontime3 <- ontime3[ontime3$CANCELLED == 0,]
@@ -153,7 +153,7 @@ unique(ontime3$Airline)
 # SkyWest Airlines Inc.
 
 ontime3 %>% 
-  filter(ontime3$ARR_DELAY >= 0 & ontime3$ARR_DELAY <=100) %>%
+  filter(ontime3$ARR_DELAY >= 0 & ontime3$ARR_DELAY <=60) %>%
   filter(YEAR < 2021) %>% 
   ggplot(aes(x = Airline, y = ARR_DELAY, colour = Airline)) + 
   geom_boxplot(show.legend = FALSE) +
@@ -161,7 +161,7 @@ ontime3 %>%
   ylab('Arrival Delay in Minutes')
 
 ontime3 %>% 
-  filter(ontime3$ARR_DELAY >= 0 & ontime3$ARR_DELAY <= 100) %>%
+  filter(ontime3$ARR_DELAY >= 0 & ontime3$ARR_DELAY <= 60) %>%
   filter(YEAR == 2021) %>% 
   ggplot(aes(x = Airline, y = ARR_DELAY, colour = Airline)) + 
   geom_boxplot(show.legend = FALSE) +
@@ -171,14 +171,14 @@ ontime3 %>%
 # Testing commit
 
 ontime3 %>% 
-  filter(ontime3$ARR_DELAY <= 100, ontime3$YEAR == 2021, ontime3$MONTH == 1) %>% 
+  filter(ontime3$ARR_DELAY <= 60, ontime3$YEAR == 2021, ontime3$MONTH == 1) %>% 
   ggplot(aes(x=ARR_DELAY, y=DEP_DELAY, color = Airline)) +
   geom_point()
 
 # Departure Delays
 
 ontime3 %>% 
-  filter(ontime3$DEP_DELAY >= 0 & ontime3$DEP_DELAY <=100) %>%
+  filter(ontime3$DEP_DELAY >= 0 & ontime3$DEP_DELAY <=60) %>%
   filter(YEAR < 2021) %>%
   ggplot(aes(x = Airline, y = DEP_DELAY, colour = Airline)) + 
   geom_boxplot(show.legend = FALSE) +
@@ -186,9 +186,27 @@ ontime3 %>%
   ylab('Departure Delay in Minutes')
 
 ontime3 %>% 
-  filter(ontime3$DEP_DELAY >= 0 & ontime3$DEP_DELAY <= 100) %>%
+  filter(ontime3$DEP_DELAY >= 0 & ontime3$DEP_DELAY <= 60) %>%
   filter(YEAR == 2021) %>% 
   ggplot(aes(x = Airline, y = DEP_DELAY, colour = Airline)) + 
   geom_boxplot(show.legend = FALSE) +
   labs(title='Departure Delays in Q1 by Airline in 2021') +
   ylab('Departure Delay in Minutes')
+
+colnames(ontime3)
+
+year20192020 <- ontime3 %>% 
+  filter(ontime3$DEP_DELAY >= 0 & ontime3$DEP_DELAY <=60) %>% 
+  filter(YEAR < 2021)
+
+year20192020 %>% 
+  group_by(Airline) %>% 
+  summarize(mean = mean(DEP_DELAY), median = median(DEP_DELAY))
+
+year2021 <- ontime3 %>% 
+  filter(ontime3$DEP_DELAY >= 0 & ontime3$DEP_DELAY <=60) %>% 
+  filter(YEAR == 2021)
+
+year2021 %>% 
+  group_by(Airline) %>% 
+  summarize(mean =mean(DEP_DELAY), median = median(DEP_DELAY))
