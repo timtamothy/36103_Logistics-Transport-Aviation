@@ -185,7 +185,7 @@ ontime3$YEAR <- as.factor(ontime3$YEAR)
 ontime3 %>% 
   filter(ontime3$DEP_DELAY >= 0 & ontime3$DEP_DELAY <=60) %>%
   filter(YEAR %in% c('2019', '2020', '2021')) %>%
-  ggplot(aes(x = YEAR, y = DEP_DELAY, fill = Airline)) + 
+  ggplot(aes(x = Airline, y = DEP_DELAY, fill = YEAR)) + 
   geom_boxplot(alpha = 0.3) +
   #ylim(0, 30) +
   theme_minimal() +
@@ -204,11 +204,21 @@ ontime3 %>%
 
 colnames(ontime3)
 
-year20192020 <- ontime3 %>% 
-  filter(ontime3$DEP_DELAY >= 0 & ontime3$DEP_DELAY <=60) %>% 
-  filter(YEAR < 2021)
 
-year20192020 %>% 
+# Summary Statistics for each year
+year2019 <- ontime3 %>% 
+  filter(ontime3$DEP_DELAY >= 0 & ontime3$DEP_DELAY <=60) %>% 
+  filter(YEAR == 2019)
+
+year2019 %>% 
+  group_by(Airline) %>% 
+  summarize(mean = mean(DEP_DELAY), median = median(DEP_DELAY))
+
+year2020 <- ontime3 %>% 
+  filter(ontime3$DEP_DELAY >= 0 & ontime3$DEP_DELAY <=60) %>% 
+  filter(YEAR == 2020)
+
+year2020 %>% 
   group_by(Airline) %>% 
   summarize(mean = mean(DEP_DELAY), median = median(DEP_DELAY))
 
