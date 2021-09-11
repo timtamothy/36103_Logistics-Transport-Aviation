@@ -185,7 +185,7 @@ ontime3$YEAR <- as.factor(ontime3$YEAR)
 ontime3 %>% 
   filter(ontime3$DEP_DELAY >= 0 & ontime3$DEP_DELAY <=60) %>%
   filter(YEAR %in% c('2019', '2020', '2021')) %>%
-  ggplot(aes(x = Airline, y = DEP_DELAY, fill = YEAR)) + 
+  ggplot(aes(x = Airline, y = DEP_DELAY, fill = Airline)) + 
   geom_boxplot(alpha = 0.3) +
   #ylim(0, 30) +
   theme_minimal() +
