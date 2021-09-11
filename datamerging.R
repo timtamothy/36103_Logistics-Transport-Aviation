@@ -55,6 +55,8 @@ ontime <- ontime[!is.na(ontime$ARR_DELAY),]
 ontime <- ontime %>% mutate_all(~replace(., is.na(.), 0))
 
 #Tims Added
+Q1_big_three <- read_csv(here('Dataset', 'Q1', 'q1_big_three.csv'))
+
 ontime3 <- Q1_big_three[!is.na(Q1_big_three$ARR_DELAY),]
 ontime3 <- ontime3 %>% mutate_all(~replace(., is.na(.), 0))
   #was an error with FL_DATE
@@ -176,14 +178,16 @@ ontime3 %>%
   geom_point()
 
 # Departure Delays
+ontime3$YEAR <- as.factor(ontime3$YEAR)
 
 ontime3 %>% 
   filter(ontime3$DEP_DELAY >= 0 & ontime3$DEP_DELAY <=60) %>%
-  filter(YEAR < 2021) %>%
-  ggplot(aes(x = Airline, y = DEP_DELAY, colour = Airline)) + 
+  filter(YEAR %in% c('2019', '2020', '2021')) %>%
+  ggplot(aes(x = YEAR, y = DEP_DELAY, fill = Airline)) + 
   geom_boxplot(show.legend = FALSE) +
   labs(title='Departure Delays in Q1 by Airline in 2020 and 2019') +
-  ylab('Departure Delay in Minutes')
+  ylab('Departure Delay in Minutes') +
+  xlab('1st Quarter of Year')
 
 ontime3 %>% 
   filter(ontime3$DEP_DELAY >= 0 & ontime3$DEP_DELAY <= 60) %>%
