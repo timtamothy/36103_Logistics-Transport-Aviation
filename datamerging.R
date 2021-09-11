@@ -5,6 +5,8 @@ library(future.apply)
 library(dplyr)
 library(httr)
 library(jsonlite)
+library(RColorBrewer)
+library(hrbrthemes)
 
 numCores <- detectCores()
 
@@ -184,10 +186,13 @@ ontime3 %>%
   filter(ontime3$DEP_DELAY >= 0 & ontime3$DEP_DELAY <=60) %>%
   filter(YEAR %in% c('2019', '2020', '2021')) %>%
   ggplot(aes(x = YEAR, y = DEP_DELAY, fill = Airline)) + 
-  geom_boxplot(show.legend = FALSE) +
+  geom_boxplot(alpha = 0.3) +
+  #ylim(0, 30) +
+  theme_minimal() +
   labs(title='Departure Delays in Q1 by Airline in 2020 and 2019') +
   ylab('Departure Delay in Minutes') +
-  xlab('1st Quarter of Year')
+  xlab('1st Quarter of Year') +
+  scale_fill_brewer(palette="Set2")
 
 ontime3 %>% 
   filter(ontime3$DEP_DELAY >= 0 & ontime3$DEP_DELAY <= 60) %>%
