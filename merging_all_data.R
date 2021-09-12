@@ -155,7 +155,9 @@ ontime %>%
   filter(number_flights >= 50000) %>% 
   arrange(-mean_delay)
 
-# View which airports with 5,000 or more flights have the greatest delays for AA
+
+# View which airports with 50,000 or more flights have the greatest delays for AA
+
 ontime %>% 
   group_by(Dest_AIRPORTNAME) %>% 
   select(Airline, DEP_DELAY_NEW, OP_UNIQUE_CARRIER, DEP_DELAY) %>% 
