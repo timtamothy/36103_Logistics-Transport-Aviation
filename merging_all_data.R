@@ -7,6 +7,7 @@ library(dplyr)
 library(httr)
 library(jsonlite)
 library(RColorBrewer)
+library(scales)
 
 #load the file names ----
 files <- list.files(path=here('Dataset', 'All'), full.names = TRUE)
@@ -99,23 +100,24 @@ pie(slices, labels = lbls, col = color)
 
 contribution <- ontime %>% mutate(WITHCAUSE_DELAY = CARRIER_DELAY + WEATHER_DELAY 
                                    + NAS_DELAY,SECURITY_DELAY + LATE_AIRCRAFT_DELAY 
-                                   , OTHER_DELAY = ifelse(ARR_DELAY_NEW > WITHCAUSE_DELAY,
-                                                          ARR_DELAY_NEW - WITHCAUSE_DELAY,
+                                   , OTHER_DELAY = ifelse(DEP_DELAY_NEW > WITHCAUSE_DELAY,
+                                                          DEP_DELAY_NEW - WITHCAUSE_DELAY,
                                                           0))  %>%
   filter(ontime$OP_UNIQUE_CARRIER == 'AA') %>% 
   select(CARRIER_DELAY, WEATHER_DELAY,NAS_DELAY,SECURITY_DELAY,LATE_AIRCRAFT_DELAY, 
-         ARR_DELAY_NEW, WITHCAUSE_DELAY, OTHER_DELAY, Airline)
+         DEP_DELAY_NEW, WITHCAUSE_DELAY, OTHER_DELAY, Airline)
   
 
 contribution <- contribution %>% mutate_all(~replace(., is.na(.), 0))
 
-contribution <- contribution %>% select(-c(ARR_DELAY_NEW, WITHCAUSE_DELAY, OTHER_DELAY))
+contribution <- contribution %>% select(-c(DEP_DELAY_NEW, WITHCAUSE_DELAY, OTHER_DELAY))
 sum_contribution <- data.frame(value = apply(contribution, 2, sum))
 sum_contribution$key = rownames(sum_contribution)
 
 ggplot(data = sum_contribution, aes(x = reorder(key, value), y = value, fill = key)) + 
   geom_bar(colour = "black", stat = "identity", show.legend = FALSE) + xlab("Causes") + ylab('Number of Delays') +
-  labs(title='Total Number of Delays from 2019 to 2021 by Type') +
+  labs(title='Total Minutes of Delay for AA from 2019 to 2021 by Type') +
   theme_minimal() +
   scale_fill_brewer(palette="Set3") +
-  coord_flip()
+  coord_flip() +
+  scale_y_continuous(name='Minutes', labels = comma)
