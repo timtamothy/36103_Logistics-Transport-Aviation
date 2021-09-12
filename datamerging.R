@@ -56,6 +56,8 @@ ontime <- full_join(Jan_2019, Feb_2019)
 ontime <- ontime[!is.na(ontime$ARR_DELAY),]
 ontime <- ontime %>% mutate_all(~replace(., is.na(.), 0))
 
+Q1_big_three <- read_csv("C:/Users/tsetc/Downloads/q1_big_three.csv")
+
 #Tims Added
 Q1_big_three <- read_csv(here('Dataset', 'Q1', 'q1_big_three.csv'))
 
@@ -91,9 +93,15 @@ ontime3 <- ontime3[ontime3$CANCELLED == 0,]
 
 #EDA 
 
-#On time performance 
+#On time performance for all 
 ontime_perc <- ontime3 %>% mutate(ontime = ifelse(ARR_DELAY >0, "NO", "YES")) %>% 
   select(ontime, ARR_DELAY)
+
+#On time performance for AA 
+ontime_perc <- ontime3 %>% mutate(ontime = ifelse(ARR_DELAY >0, "NO", "YES")) %>% 
+  filter(Airline == "American Airlines Inc.") %>%
+  select(ontime, ARR_DELAY)
+
 
 #ggplot(ontime_perc, aes(x = "", y = ARR_DELAY, group = ontime)) + 
 #geom_bar(stat = "identity", width = 1) + 
@@ -112,6 +120,8 @@ lbls <- paste(c("On time", "Late"), pct, "%")
 pie(slices, labels = lbls, col = color)
 
 # Note: No buffer were added 
+
+
 
 #Contribution of delay to total delay 
 
@@ -229,3 +239,13 @@ year2021 <- ontime3 %>%
 year2021 %>% 
   group_by(Airline) %>% 
   summarize(mean =mean(DEP_DELAY), median = median(DEP_DELAY))
+
+# Delay minutes of AA 
+ontime3 %>% filter(Airline == "American Airlines Inc.") %>% 
+  summarise(delay_minutes = sum(DEP_DELAY_NEW))
+
+# Count number of flights delayed of AA 
+ontime3 %>% filter(Airline == "American Airlines Inc.", DEP_DELAY_NEW > 0) %>% 
+  summarise(n = length(DEP_DELAY_NEW))
+
+
