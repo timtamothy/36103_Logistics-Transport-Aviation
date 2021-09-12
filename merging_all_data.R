@@ -121,3 +121,50 @@ ggplot(data = sum_contribution, aes(x = reorder(key, value), y = value, fill = k
   scale_fill_brewer(palette="Set3") +
   coord_flip() +
   scale_y_continuous(name='Minutes', labels = comma)
+
+
+
+# Summary Statistics for each airline
+# Which airline has the least average delay?
+
+# View mean and median of delays above 0
+ontime %>% 
+  group_by(Airline) %>% 
+  select(Airline, DEP_DELAY_NEW, OP_UNIQUE_CARRIER, DEP_DELAY) %>% 
+  summarize(mean_delay = mean(DEP_DELAY_NEW), 
+            median_delay = median(DEP_DELAY_NEW),
+            number_flights = length(OP_UNIQUE_CARRIER)
+  )
+
+# View which months have the greatest delays or which dates
+ontime %>% 
+  group_by(MONTH) %>% 
+  select(Airline, DEP_DELAY_NEW, OP_UNIQUE_CARRIER, DEP_DELAY) %>% 
+  summarize(mean_delay = mean(DEP_DELAY_NEW), 
+            median_delay = median(DEP_DELAY_NEW),
+            number_flights = length(OP_UNIQUE_CARRIER)
+  )
+
+# View which airports with 50,000 or more flights have the greatest delays
+ontime %>% 
+  group_by(Dest_AIRPORTNAME) %>% 
+  select(Airline, DEP_DELAY_NEW, OP_UNIQUE_CARRIER, DEP_DELAY) %>% 
+  summarize(mean_delay = mean(DEP_DELAY_NEW), 
+            median_delay = median(DEP_DELAY_NEW),
+            number_flights = length(OP_UNIQUE_CARRIER)) %>% 
+  filter(number_flights >= 50000) %>% 
+  arrange(-mean_delay)
+
+# View which airports with 5,000 or more flights have the greatest delays for AA
+ontime %>% 
+  group_by(Dest_AIRPORTNAME) %>% 
+  select(Airline, DEP_DELAY_NEW, OP_UNIQUE_CARRIER, DEP_DELAY) %>% 
+  filter(OP_UNIQUE_CARRIER == 'AA') %>% 
+  summarize(mean_delay = mean(DEP_DELAY_NEW), 
+            median_delay = median(DEP_DELAY_NEW),
+            number_flights = length(OP_UNIQUE_CARRIER)) %>% 
+  filter(number_flights >= 5000) %>% 
+  arrange(-mean_delay)
+
+
+colnames(ontime)
