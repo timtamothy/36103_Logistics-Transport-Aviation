@@ -198,24 +198,27 @@ ontime %>%
 
 # Summary Statistics for each year
 year2019 <- ontime %>% 
-  filter(ontime3$DEP_DELAY >= 0 & ontime3$DEP_DELAY <=60) %>% 
-  filter(YEAR == 2019)
+  filter(ontime$DEP_DELAY > 0 & ontime$DEP_DELAY <=60) %>% 
+  filter(YEAR == 2019) %>% 
+  filter(OP_UNIQUE_CARRIER %in% c('AA', 'DL', 'UA'))
 
 year2019 %>% 
   group_by(Airline) %>% 
   summarize(mean = mean(DEP_DELAY), median = median(DEP_DELAY))
 
 year2020 <- ontime %>% 
-  filter(ontime3$DEP_DELAY >= 0 & ontime3$DEP_DELAY <=60) %>% 
-  filter(YEAR == 2020)
+  filter(ontime$DEP_DELAY > 0 & ontime$DEP_DELAY <=60) %>% 
+  filter(YEAR == 2020) %>% 
+  filter(OP_UNIQUE_CARRIER %in% c('AA', 'DL', 'UA'))
 
 year2020 %>% 
   group_by(Airline) %>% 
   summarize(mean = mean(DEP_DELAY), median = median(DEP_DELAY))
 
 year2021 <- ontime %>% 
-  filter(ontime3$DEP_DELAY >= 0 & ontime3$DEP_DELAY <=60) %>% 
-  filter(YEAR == 2021)
+  filter(ontime$DEP_DELAY > 0 & ontime$DEP_DELAY <=60) %>% 
+  filter(YEAR == 2021) %>% 
+  filter(OP_UNIQUE_CARRIER %in% c('AA', 'DL', 'UA'))
 
 year2021 %>% 
   group_by(Airline) %>% 
