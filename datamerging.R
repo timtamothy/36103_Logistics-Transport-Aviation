@@ -241,11 +241,11 @@ year2021 %>%
   summarize(mean =mean(DEP_DELAY), median = median(DEP_DELAY))
 
 # Delay minutes of AA 
-ontime3 %>% filter(Airline == "American Airlines Inc.") %>% 
+ontime3 %>% filter(Airline == "American Airlines Inc.", YEAR == 2021) %>% 
   summarise(delay_minutes = sum(DEP_DELAY_NEW))
 
 # Count number of flights delayed of AA 
-ontime3 %>% filter(Airline == "American Airlines Inc.", DEP_DELAY_NEW > 0) %>% 
-  summarise(n = length(DEP_DELAY_NEW))
+ontime3 %>% filter(Airline == "American Airlines Inc.", DEP_DELAY_NEW > 0, 
+                   YEAR == 2021) %>% summarise(n = length(DEP_DELAY_NEW))
 
 
