@@ -37,7 +37,7 @@ API_data <- fromJSON(response)
 
 #load airline name data
 id_airline <- read.csv("https://raw.githubusercontent.com/timothywallaby/36103_Logistics-Transport-Aviation/main/L_UNIQUE_CARRIERS%20(1).csv")
-
+colnames(id_airline) <- c("OP_UNIQUE_CARRIER", "Airline")
 
 
 
@@ -70,10 +70,11 @@ ontime <- ontime[ontime$CANCELLED == 0,]
 
 
 #Write new csv of merged datasets
-write_csv(output, here('Dataset', 'ontimeallmonths.csv'))
+write_csv(ontime, here('Dataset', 'ontimeallmonths.csv'))
 
 
-
+#LOAD DATA
+ontime <- read_csv(here('Dataset', 'ontimeallmonths.csv'))
 
 
 
@@ -177,6 +178,8 @@ ontime %>%
 
 colnames(ontime)
 
+# Factorise the year
+ontime$YEAR <- as.factor(ontime$YEAR)
 
 # Box Plot for Q1 of 2019, 2020, 2021 of Delays > 0
 
@@ -184,16 +187,17 @@ ontime %>%
   filter(DEP_DELAY > 0 & DEP_DELAY <=60) %>%
   filter(YEAR %in% c('2019', '2020', '2021')) %>%
   filter(OP_UNIQUE_CARRIER %in% c('AA', 'DL', 'UA')) %>% 
-  ggplot(aes(x = Airline, y = DEP_DELAY, fill = Airline)) + 
+  ggplot(aes(x = Airline, y = DEP_DELAY, fill = YEAR)) + 
   geom_boxplot(alpha = 0.3) +
+  theme_minimal() +
   #ylim(0, 30) +
   labs(title='Departure Delays in Q1 by Airline from 2019 to 2021') +
   ylab('Departure Delay in Minutes') +
   xlab('Airline') +
-  scale_fill_brewer(palette="PRGn")
+  scale_fill_brewer(palette="Pastel1")
 
 # Summary Statistics for each year
-year2019 <- ontime3 %>% 
+year2019 <- ontime %>% 
   filter(ontime3$DEP_DELAY >= 0 & ontime3$DEP_DELAY <=60) %>% 
   filter(YEAR == 2019)
 
@@ -201,7 +205,7 @@ year2019 %>%
   group_by(Airline) %>% 
   summarize(mean = mean(DEP_DELAY), median = median(DEP_DELAY))
 
-year2020 <- ontime3 %>% 
+year2020 <- ontime %>% 
   filter(ontime3$DEP_DELAY >= 0 & ontime3$DEP_DELAY <=60) %>% 
   filter(YEAR == 2020)
 
@@ -209,7 +213,7 @@ year2020 %>%
   group_by(Airline) %>% 
   summarize(mean = mean(DEP_DELAY), median = median(DEP_DELAY))
 
-year2021 <- ontime3 %>% 
+year2021 <- ontime %>% 
   filter(ontime3$DEP_DELAY >= 0 & ontime3$DEP_DELAY <=60) %>% 
   filter(YEAR == 2021)
 
