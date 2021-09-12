@@ -129,24 +129,29 @@ ggplot(data = sum_contribution, aes(x = reorder(key, value), y = value, fill = k
 
 # View mean and median of delays above 0
 ontime %>% 
+  filter(DEP_DELAY_NEW > 0) %>% 
   group_by(Airline) %>% 
   select(Airline, DEP_DELAY_NEW, OP_UNIQUE_CARRIER, DEP_DELAY) %>% 
   summarize(mean_delay = mean(DEP_DELAY_NEW), 
             median_delay = median(DEP_DELAY_NEW),
             number_flights = length(OP_UNIQUE_CARRIER)
-  )
+  ) %>% 
+  arrange(mean_delay)
 
 # View which months have the greatest delays or which dates
 ontime %>% 
+  filter(DEP_DELAY_NEW > 0) %>% 
   group_by(MONTH) %>% 
   select(Airline, DEP_DELAY_NEW, OP_UNIQUE_CARRIER, DEP_DELAY) %>% 
   summarize(mean_delay = mean(DEP_DELAY_NEW), 
             median_delay = median(DEP_DELAY_NEW),
             number_flights = length(OP_UNIQUE_CARRIER)
-  )
+  ) %>% 
+  arrange(mean_delay)
 
 # View which airports with 50,000 or more flights have the greatest delays
 ontime %>% 
+  filter(DEP_DELAY_NEW > 0) %>% 
   group_by(Dest_AIRPORTNAME) %>% 
   select(Airline, DEP_DELAY_NEW, OP_UNIQUE_CARRIER, DEP_DELAY) %>% 
   summarize(mean_delay = mean(DEP_DELAY_NEW), 
@@ -159,6 +164,7 @@ ontime %>%
 # View which airports with 50,000 or more flights have the greatest delays for AA
 
 ontime %>% 
+  filter(DEP_DELAY_NEW > 0) %>% 
   group_by(Dest_AIRPORTNAME) %>% 
   select(Airline, DEP_DELAY_NEW, OP_UNIQUE_CARRIER, DEP_DELAY) %>% 
   filter(OP_UNIQUE_CARRIER == 'AA') %>% 
@@ -170,3 +176,44 @@ ontime %>%
 
 
 colnames(ontime)
+
+
+# Box Plot for Q1 of 2019, 2020, 2021 of Delays > 0
+
+ontime %>% 
+  filter(DEP_DELAY > 0 & DEP_DELAY <=60) %>%
+  filter(YEAR %in% c('2019', '2020', '2021')) %>%
+  filter(OP_UNIQUE_CARRIER %in% c('AA', 'DL', 'UA')) %>% 
+  ggplot(aes(x = Airline, y = DEP_DELAY, fill = Airline)) + 
+  geom_boxplot(alpha = 0.3) +
+  #ylim(0, 30) +
+  labs(title='Departure Delays in Q1 by Airline from 2019 to 2021') +
+  ylab('Departure Delay in Minutes') +
+  xlab('Airline') +
+  scale_fill_brewer(palette="PRGn")
+
+# Summary Statistics for each year
+year2019 <- ontime3 %>% 
+  filter(ontime3$DEP_DELAY >= 0 & ontime3$DEP_DELAY <=60) %>% 
+  filter(YEAR == 2019)
+
+year2019 %>% 
+  group_by(Airline) %>% 
+  summarize(mean = mean(DEP_DELAY), median = median(DEP_DELAY))
+
+year2020 <- ontime3 %>% 
+  filter(ontime3$DEP_DELAY >= 0 & ontime3$DEP_DELAY <=60) %>% 
+  filter(YEAR == 2020)
+
+year2020 %>% 
+  group_by(Airline) %>% 
+  summarize(mean = mean(DEP_DELAY), median = median(DEP_DELAY))
+
+year2021 <- ontime3 %>% 
+  filter(ontime3$DEP_DELAY >= 0 & ontime3$DEP_DELAY <=60) %>% 
+  filter(YEAR == 2021)
+
+year2021 %>% 
+  group_by(Airline) %>% 
+  summarize(mean =mean(DEP_DELAY), median = median(DEP_DELAY))
+
