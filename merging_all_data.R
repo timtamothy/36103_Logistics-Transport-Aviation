@@ -94,8 +94,48 @@ lbls <- paste(c("On time", "Late"), pct, "%")
 
 pie(slices, labels = lbls, col = color)
 
+#Stacked bar chart 
+ontime_perc <- ontime %>% mutate(ontime = ifelse(ARR_DELAY >0, "NO", "YES")) %>% 
+  select(ontime, ARR_DELAY, OP_UNIQUE_CARRIER)
+
+ontime_perc$OP_UNIQUE_CARRIER[!ontime_perc$OP_UNIQUE_CARRIER %in% c('AA', 'DL', 'UA')] <- 'Other'
 
 
+ggplot(data = ontime_perc, aes(x = OP_UNIQUE_CARRIER, y = length(ontime), 
+                               fill = ontime)) + 
+  geom_bar(stat = "identity") + 
+  scale_x_discrete(limits = c("AA", "DL", "UA", "Other")) + 
+  labs(title = "Domestic On-time performance 2019-2021", x = "Airline", y = "Count") + 
+  theme(plot.title = element_text(hjust = 0.5))
+  
+#Find ontime percentage for the presentation
+AA_ontime_yes <- sum(ontime_perc$OP_UNIQUE_CARRIER == "AA" & ontime_perc$ontime == "YES")/
+  sum(ontime_perc$OP_UNIQUE_CARRIER == "AA") * 100 
+AA_ontime_no <- 100 - AA_ontime_yes
+
+DL_ontime_yes <- sum(ontime_perc$OP_UNIQUE_CARRIER == "DL" & ontime_perc$ontime == "YES")/
+  sum(ontime_perc$OP_UNIQUE_CARRIER == "DL") * 100 
+DL_ontime_no <- 100 - DL_ontime_yes
+
+UA_ontime_yes <- sum(ontime_perc$OP_UNIQUE_CARRIER == "UA" & ontime_perc$ontime == "YES")/
+  sum(ontime_perc$OP_UNIQUE_CARRIER == "UA") * 100 
+UA_ontime_no <- 100 - UA_ontime_yes
+
+Other_yes <- sum(ontime_perc$OP_UNIQUE_CARRIER == "Other" & ontime_perc$ontime == "YES")/
+  sum(ontime_perc$OP_UNIQUE_CARRIER == "Other") * 100 
+Other_no <- 100- Other_no
+
+AA_ontime_yes
+AA_ontime_no
+
+DL_ontime_yes
+DL_ontime_no
+
+UA_ontime_yes
+UA_ontime_no
+
+Other_yes
+Other_no
 
 # Bar chart for AA across all years
 
