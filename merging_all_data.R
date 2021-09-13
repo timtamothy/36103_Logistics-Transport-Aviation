@@ -76,7 +76,21 @@ write_csv(ontime, here('Dataset', 'ontimeallmonths.csv'))
 #LOAD DATA
 ontime <- read_csv(here('Dataset', 'ontimeallmonths.csv'))
 
+#Merging Data Second time ----
+ontime <- left_join(ontime, id_airline, by = "OP_UNIQUE_CARRIER")%>% 
+  mutate(Origin_airportCode = paste("K",ORIGIN, sep = ""), 
+         Dest_airportCode = paste("K",DEST, sep = ""))
 
+ontime <- left_join(ontime, API_data, by = c("Origin_airportCode" = "airportCode"))
+names(ontime)[names(ontime) == "airportName"] <- "Origin_AIRPORTNAME"
+
+ontime <- left_join(ontime, API_data, by = c("Dest_airportCode" = "airportCode"))
+names(ontime)[names(ontime) == "airportName"] <- "Dest_AIRPORTNAME"
+
+ontime <- ontime[ontime$CANCELLED == 0,]
+
+# Replace null values
+ontime <- ontime %>% mutate_all(~replace(., is.na(.), 0))
 
 #EDA of ALL data points ----
 ontime_perc <- ontime %>% mutate(ontime = ifelse(ARR_DELAY >0, "NO", "YES")) %>% 
@@ -100,13 +114,15 @@ ontime_perc <- ontime %>% mutate(ontime = ifelse(ARR_DELAY >0, "NO", "YES")) %>%
 
 ontime_perc$OP_UNIQUE_CARRIER[!ontime_perc$OP_UNIQUE_CARRIER %in% c('AA', 'DL', 'UA')] <- 'Other'
 
-
-ggplot(data = ontime_perc, aes(x = OP_UNIQUE_CARRIER, y = length(ontime), 
+ontime_perc %>% 
+  na.omit() %>% 
+  ggplot(aes(x = OP_UNIQUE_CARRIER, y = length(ontime), 
                                fill = ontime)) + 
   geom_bar(stat = "identity") + 
   scale_x_discrete(limits = c("AA", "DL", "UA", "Other")) + 
   labs(title = "Domestic On-time performance 2019-2021", x = "Airline", y = "Count") + 
-  theme(plot.title = element_text(hjust = 0.5))
+  theme(plot.title = element_text(hjust = 0.5)) +
+  scale_y_continuous(name='Count', labels = comma)
   
 #Find ontime percentage for the presentation
 AA_ontime_yes <- sum(ontime_perc$OP_UNIQUE_CARRIER == "AA" & ontime_perc$ontime == "YES")/
@@ -123,7 +139,7 @@ UA_ontime_no <- 100 - UA_ontime_yes
 
 Other_yes <- sum(ontime_perc$OP_UNIQUE_CARRIER == "Other" & ontime_perc$ontime == "YES")/
   sum(ontime_perc$OP_UNIQUE_CARRIER == "Other") * 100 
-Other_no <- 100- Other_no
+Other_no <- 100- Other_yes
 
 AA_ontime_yes
 AA_ontime_no
