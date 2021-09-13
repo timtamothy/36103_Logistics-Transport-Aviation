@@ -114,6 +114,7 @@ ontime_perc <- ontime %>% mutate(ontime = ifelse(ARR_DELAY >0, "NO", "YES")) %>%
 
 ontime_perc$OP_UNIQUE_CARRIER[!ontime_perc$OP_UNIQUE_CARRIER %in% c('AA', 'DL', 'UA')] <- 'Other'
 
+
 ontime_perc %>% 
   na.omit() %>% 
   ggplot(aes(x = OP_UNIQUE_CARRIER, y = length(ontime), 
@@ -125,21 +126,23 @@ ontime_perc %>%
   scale_y_continuous(name='Count', labels = comma)
   
 #Find ontime percentage for the presentation
-AA_ontime_yes <- sum(ontime_perc$OP_UNIQUE_CARRIER == "AA" & ontime_perc$ontime == "YES")/
-  sum(ontime_perc$OP_UNIQUE_CARRIER == "AA") * 100 
+AA_ontime_yes <- sum(na.omit(ontime_perc$OP_UNIQUE_CARRIER == "AA") & na.omit(ontime_perc$ontime == "YES"))/
+  sum(na.omit(ontime_perc$OP_UNIQUE_CARRIER == "AA")) * 100 
 AA_ontime_no <- 100 - AA_ontime_yes
 
-DL_ontime_yes <- sum(ontime_perc$OP_UNIQUE_CARRIER == "DL" & ontime_perc$ontime == "YES")/
-  sum(ontime_perc$OP_UNIQUE_CARRIER == "DL") * 100 
+DL_ontime_yes <- sum(na.omit(ontime_perc$OP_UNIQUE_CARRIER == "DL") & na.omit(ontime_perc$ontime == "YES"))/
+  sum(na.omit(ontime_perc$OP_UNIQUE_CARRIER == "DL")) * 100 
 DL_ontime_no <- 100 - DL_ontime_yes
 
-UA_ontime_yes <- sum(ontime_perc$OP_UNIQUE_CARRIER == "UA" & ontime_perc$ontime == "YES")/
-  sum(ontime_perc$OP_UNIQUE_CARRIER == "UA") * 100 
+UA_ontime_yes <- sum(na.omit(ontime_perc$OP_UNIQUE_CARRIER == "UA") & na.omit(ontime_perc$ontime == "YES"))/
+  sum(na.omit(ontime_perc$OP_UNIQUE_CARRIER == "UA")) * 100 
 UA_ontime_no <- 100 - UA_ontime_yes
 
-Other_yes <- sum(ontime_perc$OP_UNIQUE_CARRIER == "Other" & ontime_perc$ontime == "YES")/
-  sum(ontime_perc$OP_UNIQUE_CARRIER == "Other") * 100 
-Other_no <- 100- Other_yes
+
+Other_yes <- sum(na.omit(ontime_perc$OP_UNIQUE_CARRIER == "Other") & na.omit(ontime_perc$ontime == "YES"))/
+  sum(na.omit(ontime_perc$OP_UNIQUE_CARRIER == "Other")) * 100 
+Other_no <- 100- Other_no
+
 
 AA_ontime_yes
 AA_ontime_no
