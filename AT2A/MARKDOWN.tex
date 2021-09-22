@@ -1,0 +1,400 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{ifxetex,ifluatex}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  pdftitle={Airline Delay Prediction Proposal},
+  pdfauthor={Logistics Transport Aviation},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{wrapfig}
+\usepackage{float}
+\usepackage{colortbl}
+\usepackage{pdflscape}
+\usepackage{tabu}
+\usepackage{threeparttable}
+\usepackage{threeparttablex}
+\usepackage[normalem]{ulem}
+\usepackage{makecell}
+\usepackage{xcolor}
+\ifluatex
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+
+\title{Airline Delay Prediction Proposal}
+\usepackage{etoolbox}
+\makeatletter
+\providecommand{\subtitle}[1]{% add subtitle to \maketitle
+  \apptocmd{\@title}{\par {\large #1 \par}}{}{}
+}
+\makeatother
+\subtitle{STDS - AT2}
+\author{Logistics Transport Aviation}
+\date{30/08/2021}
+
+\begin{document}
+\maketitle
+
+{
+\setcounter{tocdepth}{3}
+\tableofcontents
+}
+\hypertarget{airline-delay-prediction}{%
+\subsection{Airline Delay Prediction}\label{airline-delay-prediction}}
+
+Aircraft delays have serious economic impacts that represent a
+logistical headache for airlines, airports, airline crew, and passengers
+alike. In a 2010 study by the National Center of Excellence For Aviation
+Operations Research, an estimated 31.2 billion US dollars was lost due
+to direct and indirect costs of airline delays in the United States for
+2007. These expenses included maintenance costs, extra paid hours for
+flight crew, the extra use of fuel, and airport fees. As an example,
+airlines have dedicated time slots at airport gates and unexpected
+delays exceeding the expected time slot can cost thousands of dollars by
+the minute.
+
+Many factors can contribute to aircraft delays. These may include
+unavoidable reasons such as inclement weather, unforeseen aircraft
+mechanical breakdowns, or a multitude of passenger-related incidents.
+Airline delays then create complicated scenarios for airline schedulers
+as a delay for one aircraft may impact the flight schedule for all
+consecutive flights using that aircraft. Passengers with connecting
+flights may need to be ticketed on other flights, reserve flight crew
+may need to be called if the current flight crew are going to exceed
+their flight hours, and delays may continue to have a snowball effect on
+later flights causing them to also be delayed (Ball, 2010).
+
+Thus, understanding the impact of these variables on aircraft on-time
+performance can help elucidate ways and methods to mitigate these
+airline delays. By doing so, steps can be made to reduce airline costs
+associated with these delays, benefiting the airlines' stakeholders. We
+identify the primary stakeholders to be investors and shareholders for
+the financial performance of the airline. In addition, airline
+passengers are important stakeholders as delays negatively influence
+repurchase intentions and sentiment across word-of-mouth (Kim, 2016).
+
+Herein, we propose an exploratory analysis and prediction model on
+airline delays utilizing data from the United States in 2019.
+
+\hypertarget{stakeholders}{%
+\subsection{Stakeholders}\label{stakeholders}}
+
+\begin{table}
+\centering
+\begin{tabular}[t]{>{}l||>{\raggedright\arraybackslash}p{30em}}
+\hline
+Stakeholders & Description\\
+\hline
+Airline company executives & The main participants in the aviation industry. 
+\textbf{This project can help them improve their operational planning and execution and any related products and services.}\\
+\hline
+\textbf{Airline company employees} & Pilots, engineers, and flight attendants ensure that passengers' needs are appropriately met and satisfied.\\
+\hline
+\textbf{Shareholders and investors of Airline companies} & Their primary role is to provide capital in the form of share capital. Airlines performance may affect their investing behaviours.\\
+\hline
+\textbf{Consumers of airline companies} & Airline company/industry’s primary revenue source. Customers are the most important factor in this industry; without customers, airlines would not exist.\\
+\hline
+\textbf{Suppliers for Airline companies} & Form in which how much the company orders supplies in impacts inventory, e.g Aircraft manufacters, fuel and food/beverage resources.\\
+\hline
+\textbf{Government} & Government and policy makers can impact how the industry will be regulated, such as climate change, tourism, and infrastructure policy.\\
+\hline
+\end{tabular}
+\end{table}
+
+\hypertarget{research-questions}{%
+\subsection{Research Questions}\label{research-questions}}
+
+As the airline network contains complex interactions between regulatory,
+passenger, and airline-specific needs, predicting delays and
+understanding the primary causes is relatably complicated.
+
+Our main question to answer is: \textbf{Which factors are most
+correlated to, and influence greatly, on-time aircraft performance?}.
+
+From here, smaller questions can be asked such as: Are delays impacted
+by weather, date, time of day, route, aircraft type, or economic
+category?
+
+\hypertarget{datasets}{%
+\subsection{Datasets}\label{datasets}}
+
+The main dataset is acquired through The United States Department of
+Transportation. It is a comprehensive dataset with delay times, airline
+codes, origin and destination airport codes, dates, flight time, etc.
+This dataset contains 109 variables classified as:
+
+\begin{itemize}
+\tightlist
+\item
+  6 Time period
+\item
+  5 Airline variables
+\item
+  9 variables of origin
+\item
+  9 variables of destination
+\item
+  9 departure performance variables
+\item
+  9 arrival performance variables
+\item
+  62 additional variables including information about cancellation,
+  diversions, causes of delay, and summaries.
+\end{itemize}
+
+To improve the readability of the dataset, we included a lookup table
+that has information on airline codes and their airline names.
+Furthermore, the airport name corresponding to airport codes are
+retrieved through an API, then merged with the main dataset. More
+datasets, such as Skytrax Airline review which record passenger
+sentiment will be considered and might be used for merging in later
+stages. Other examined datasets included US weather events, airplane
+crash and fatality records, aircraft employment data, and records for
+airlines and their aircraft types.
+
+After reviewing the datasets, we can say that the granularity of the
+data sources is sufficient to answer our research questions (see above).
+Our main data set is obtained through a reliable source (US DOT), has a
+really high usability and contains a great amount of variables from
+different categories which makes it easier for us to merge with
+different datasets, explore our research questions deeply and find
+insights.
+
+\hypertarget{regression-modelling-techniques}{%
+\subsection{Regression modelling
+techniques}\label{regression-modelling-techniques}}
+
+The regression model we are considering using in this report is a
+multivariate linear regression (MLR) model. As flight delays could have
+a multitude of causes, including multiple reasons per flight, a MLR
+would be most suitable for this model. Some causes could be weather,
+operating issues, air traffic, and seasonal variabilities such as
+holidays. We will intend to examine how much influence each variable has
+on the dependent variable.
+
+For this model, we assume that there is a linear relationship between
+airline delay and the various potential causes. We also assume that the
+residuals are normally distributed, and that the independent variables
+do not correlate with each other. We also assume that the variance of
+error terms across all delays are equally distributed.
+
+\hypertarget{impact-analysis}{%
+\subsection{Impact analysis}\label{impact-analysis}}
+
+There are few potential issues that may arise in this project. Although
+the use of a web API carries the most up-to-date data, a loss of
+connection with the API server could make compiling data difficult.
+Secondly, the data itself contains millions of observations from 2019
+through 2021. Computing power and memory storage are potential hurdles
+for analysis. In fact, one dataset was over 80GB and was unable to be
+loaded into the analysis program. Other potential issues may arise with
+merging data where a joining dataset may be missing values. Lastly, the
+statistical analysis relies on several assumptions specific to
+multivariate linear regression. Should these assumptions be broken, it
+may lead to difficulty in model accuracy.
+
+\hypertarget{conclusionsummary}{%
+\subsection{Conclusion/Summary}\label{conclusionsummary}}
+
+We are proposing an in-depth analysis in airline delays in effort to
+uncover possible causes for air travel's biggest headaches. This project
+aims to model delays as a function of weather, airport, and airline
+operations. This understanding will help airlines and customers save
+time, money, and most importantly, frustration.
+
+\hypertarget{references}{%
+\subsection{References}\label{references}}
+
+Ball, M. (2010, November). Total Delay Impact Study A Comprehensive
+Assessment of the Costs and Impacts of Flight Delay in the United
+States.
+\url{https://isr.umd.edu/NEXTOR/pubs/TDI_Report_Final_11_03_10.pdf}
+
+Kim, N. Y., \& Park, J. W. (2016). A study on the impact of airline
+service delays on emotional reactions and customer behavior. Journal of
+Air Transport Management, 57, 19--25.
+\url{https://doi.org/10.1016/j.jairtraman.2016.07.005}
+
+\hypertarget{appendix}{%
+\subsection{Appendix}\label{appendix}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+  \FunctionTok{library}\NormalTok{(psych)}
+  \FunctionTok{library}\NormalTok{(devtools)}
+
+  \FunctionTok{library}\NormalTok{(tidyverse)}
+  \FunctionTok{library}\NormalTok{(dplyr)}
+  \FunctionTok{library}\NormalTok{(ggplot2)}
+  \FunctionTok{library}\NormalTok{(Amelia)}
+
+  \FunctionTok{library}\NormalTok{(knitr)}
+\end{Highlighting}
+\end{Shaded}
+
+To get the latest content, we are using a web API call for Airport
+Names. The \texttt{httr::get} will assist us in fetching the content in
+the JSON format. API key is being used for authenticating our call with
+the API provider. Since JSON cannot be directly consumed by regression
+packages, we deploy \texttt{jsonlite::fromJSON} to convert to an R
+dataframe.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(httr)}
+\FunctionTok{library}\NormalTok{(jsonlite)}
+\FunctionTok{library}\NormalTok{(dplyr)}
+
+\NormalTok{icao }\OtherTok{\textless{}{-}} \FunctionTok{GET}\NormalTok{(}
+  \AttributeTok{url =} \StringTok{\textquotesingle{}https://applications.icao.int/dataservices/api/safety{-}characteristics{-}list?api\_key=8d00ef90{-}0982{-}11ec{-}9d72{-}8160549d64ab\&airports=\&states=USA\textquotesingle{}}
+\NormalTok{)}
+\NormalTok{response }\OtherTok{\textless{}{-}} \FunctionTok{content}\NormalTok{(icao, }\StringTok{\textquotesingle{}parsed\textquotesingle{}}\NormalTok{)}
+\NormalTok{API\_data }\OtherTok{\textless{}{-}} \FunctionTok{fromJSON}\NormalTok{(response)}
+
+\CommentTok{\#Only pick those columns that are useful later on }
+\NormalTok{API\_data }\OtherTok{\textless{}{-}}\NormalTok{ API\_data }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{select}\NormalTok{(airportCode, airportName)}
+\end{Highlighting}
+\end{Shaded}
+
+Airline On-time data
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ontime\_raw }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"https://raw.githubusercontent.com/charlottetse33/36103\_Logistics{-}Transport{-}Aviation/main/test\%20on\%20time\%20report.csv"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Airline DOT\_ID corresponding to Airline Names
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#Seperate loading data to prevent R from crashing}
+\NormalTok{id\_airline }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"https://raw.githubusercontent.com/charlottetse33/36103\_Logistics{-}Transport{-}Aviation/main/dot\_id\_airline.csv"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Merge Airline Names with On-time Dataset
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{colnames}\NormalTok{(id\_airline) }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"DOT\_ID\_Reporting\_Airline"}\NormalTok{, }\StringTok{"Airline"}\NormalTok{)}
+  
+\NormalTok{ontime\_1 }\OtherTok{\textless{}{-}} \FunctionTok{left\_join}\NormalTok{(ontime\_raw, id\_airline, }\AttributeTok{by =} \StringTok{"DOT\_ID\_Reporting\_Airline"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Merge API Airport names with On-time Dataset
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ontime\_2 }\OtherTok{\textless{}{-}}\NormalTok{ ontime\_1 }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{mutate}\NormalTok{(}\AttributeTok{Origin\_airportCode =} \FunctionTok{paste}\NormalTok{(}\StringTok{"K"}\NormalTok{,Origin, }\AttributeTok{sep =} \StringTok{""}\NormalTok{), }\AttributeTok{Dest\_airportCode =} \FunctionTok{paste}\NormalTok{(}\StringTok{"K"}\NormalTok{,Dest, }\AttributeTok{sep =} \StringTok{""}\NormalTok{))}
+
+\NormalTok{Originjoint }\OtherTok{\textless{}{-}} \FunctionTok{left\_join}\NormalTok{(ontime\_2, API\_data, }\AttributeTok{by =} \FunctionTok{c}\NormalTok{(}\StringTok{"Origin\_airportCode"} \OtherTok{=} \StringTok{"airportCode"}\NormalTok{))}
+\FunctionTok{names}\NormalTok{(Originjoint)[}\FunctionTok{names}\NormalTok{(Originjoint) }\SpecialCharTok{==} \StringTok{"airportName"}\NormalTok{] }\OtherTok{\textless{}{-}} \StringTok{"Origin\_airportName"}
+
+\NormalTok{ontime\_final }\OtherTok{\textless{}{-}} \FunctionTok{left\_join}\NormalTok{(Originjoint, API\_data, }\AttributeTok{by =} \FunctionTok{c}\NormalTok{(}\StringTok{"Dest\_airportCode"} \OtherTok{=} \StringTok{"airportCode"}\NormalTok{))}
+\FunctionTok{names}\NormalTok{(ontime\_final)[}\FunctionTok{names}\NormalTok{(ontime\_final) }\SpecialCharTok{==} \StringTok{"airportName"}\NormalTok{] }\OtherTok{\textless{}{-}} \StringTok{"Dest\_airportName"}
+
+\CommentTok{\#New column names from merging data: }
+\CommentTok{\#Airline, Origin\_airportName, Dest\_airportName}
+\end{Highlighting}
+\end{Shaded}
+
+
+\end{document}
