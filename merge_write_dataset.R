@@ -47,28 +47,6 @@ write_feather(ontime, here('all_ontime.feather'))
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 # Test loading of feather data and using it
 all_ontime <- read_feather(here('all_ontime.feather'))
 
