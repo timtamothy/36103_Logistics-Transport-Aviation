@@ -16,3 +16,5 @@ library(DataExplorer)
 allmonths <- read_feather(here('all_ontime.feather'))
 
 
+# Create first mlm ----
+mlm1 <- lm(dep_delay ~ op_carrier, data=allmonths)
