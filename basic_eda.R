@@ -14,7 +14,7 @@ library(Hmisc)
 library(janitor)
 
 # Load Data ----
-allmonths <- read_feather(here('all_ontime.feather'))
+allmonths <- read_feather(here('clean_allairlines_allmonths.feather'))
 
 basic_eda <- function(data)
 {

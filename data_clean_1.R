@@ -53,3 +53,4 @@ col_status_cleaner <- status(clean_months)
 
 # Save new dataset
 
+write_feather(clean_months, here('clean_allairlines_allmonths.feather'))
