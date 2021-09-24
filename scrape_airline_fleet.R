@@ -52,6 +52,20 @@ JBU_fleet <- JBU[[1]]
 write_feather(JBU_fleet, here('JBU_fleet.feather'))
 
 https://www.planemapper.com/airlines/DAL
+
+# Explicit URL
+dalurl <- 'https://www.planemapper.com/airlines/DAL'
+
+DAL <- dalurl %>% 
+  read_html() %>% 
+  html_nodes(xpath='//*[@id="aircrafts"]') %>% 
+  html_table()
+
+DAL_fleet <- DAL[[1]]
+
+# Write AA_fleet to feather
+write_feather(DAL_fleet, here('DAL_fleet.feather'))
+
 https://www.planemapper.com/airlines/ASA
 https://www.planemapper.com/airlines/HAL
 https://www.planemapper.com/airlines/AAY
