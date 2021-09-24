@@ -74,4 +74,17 @@ https://www.planemapper.com/airlines/NKS
 https://www.planemapper.com/airlines/SKW
 https://www.planemapper.com/airlines/USA
 https://www.planemapper.com/airlines/UAL
+
+ualurl <- 'https://www.planemapper.com/airlines/UAL'
+
+UAL <- ualurl %>% 
+  read_html() %>% 
+  html_nodes(xpath='//*[@id="aircrafts"]') %>% 
+  html_table()
+
+UAL_fleet <- UAL[[1]]
+
+# Write AA_fleet to feather
+write_feather(UAL_fleet, here('UAL_fleet.feather'))
+
 https://www.planemapper.com/airlines/QXE
