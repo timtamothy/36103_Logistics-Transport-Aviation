@@ -1,7 +1,7 @@
 ---
-title: "Airline Delay Prediction Report"
+title: "Airline Delay Prediction Report for American Airlines"
 author: "Logistics Transport Aviation"
-date: "30/08/2021"
+date: "03/10/2021"
 output:
   word_document:
     toc: yes
@@ -28,11 +28,47 @@ library(kableExtra)
 
 Aircraft delays have serious economic impacts that represent a logistical headache for airlines, airports, airline crew, and passengers alike. In a 2010 study by the National Center of Excellence For Aviation Operations Research, an estimated 31.2 billion US dollars was lost due to direct and indirect costs of airline delays in the United States for 2007. These expenses included maintenance costs, extra paid hours for flight crew, the extra use of fuel, and airport fees. As an example, airlines have dedicated time slots at airport gates and unexpected delays exceeding the expected time slot can cost thousands of dollars by the minute.
 
+Similar to other big US airlines such as Delta and United, American Airlines is presenting loses in the amount of billions of dollars per year since COVID impacted the world. 
+
+(Include financial figures)
+
 Many factors can contribute to aircraft delays. These may include unavoidable reasons such as inclement weather, unforeseen aircraft mechanical breakdowns, or a multitude of passenger-related incidents. Airline delays then create complicated scenarios for airline schedulers as a delay for one aircraft may impact the flight schedule for all consecutive flights using that aircraft. Passengers with connecting flights may need to be ticketed on other flights, reserve flight crew may need to be called if the current flight crew are going to exceed their flight hours, and delays may continue to have a snowball effect on later flights causing them to also be delayed (Ball, 2010).
 
 Thus, understanding the impact of these variables on aircraft on-time performance can help elucidate ways and methods to mitigate these airline delays. By doing so, steps can be made to reduce airline costs associated with these delays, benefiting the airlines' stakeholders. We identify the primary stakeholders to be investors and shareholders for the financial performance of the airline. In addition, airline passengers are important stakeholders as delays negatively influence repurchase intentions and sentiment across word-of-mouth (Kim, 2016).
 
-Herein, we propose an exploratory analysis and prediction model on airline delays utilizing data from the United States in 2019.
+Herein, we propose an exploratory analysis and prediction model on airline delays utilizing data from the United States in 2019. For our analysis we are going to compare American Airlines to Delta and United Airlines, based on the fact that these 3 US airlines are market leaders in terms of Brand value, Market value and Domestic Market Share. We also took into consideration that these 3 airlines cater to the same segment of customers, that is the reason why big low-cost airlines such as Southwest were not considered for this analysis. 
+
+## Problem at hand
+
+During the last couple of years around 30% of the domestic flights in the United States have presented some sort of delay, this shows us the big opportunity we have in front of us. Specially if we take into consideration that every minute of delay costs airlines around $74 dollars, and that just during 2020 American Airlines domestic flights reported over 4 million minutes in delays just in domestic flights, meaning an approximate $300 million dollars were lost for this reason. 
+
+(Include stack bar Domestic on time performance 3 airlines)
+
+## Research Questions and EDA
+
+## What are the main causes for Airline delays?
+
+When looking at the main causes of delays for American Airlines flights between 2019 and 2021 we can see that the main reason corresponds to a Late arriving aircraft, meaning that a previous flight with same aircraft arrived late, causing the present flight to depart late.  This is followed closely by the second reason, an Air carrier delay, in this case a delay or cancellation can be attributed to circumstances within the airline's control such as maintenance or crew problems, aircraft cleaning, baggage loading, fueling, among others. National Aviation system delays, Weather and security issues have a lower impact on the total amount of delays. If we go back to the first reason, which can be explained by the following four, we can assume that most of those delays were caused due to circumstance within the airline’s control as well. Meaning most of the delays can be attributed to the airlines operations and therefore we have a great opportunity to reduce costs and improve our results. 
+
+(Include graph reasons/delays in minutes)
+
+## How is American Airlines on time performance compare to our two main competitors?
+
+We found that all three airlines have improved their on-time performance considerably from 2019 to 2021. It is particularly interesting to us to see how United Airlines has improved their average delay time by almost 23% in just 2 years and how Delta has kept an steady leadership on Airtime performance. This once again shows us the great opportunity we have in our hands to not only improve our On-time performance, reduce costs and improve passengers’ satisfaction, but also to keep up with our main competitors and possibly beat them by learning from their good practices and most importantly taking a proactive approach to improve our current situation. 
+
+(Include boxplot competitor performance)
+
+
+## Linear Regression Model, Features and Limitations
+
+## Limitations
+
+
+
+
+
+
+
 
 Good features for the Introduction include:
 • Summary of the study and data, as well as any relevant substantive context, background, or
