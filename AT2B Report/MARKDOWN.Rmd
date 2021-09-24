@@ -1,5 +1,5 @@
 ---
-title: "Airline Delay Prediction Proposal"
+title: "Airline Delay Prediction Report"
 author: "Logistics Transport Aviation"
 date: "30/08/2021"
 output:
@@ -24,7 +24,7 @@ library(tidyverse)
 library(kableExtra)
 ```
 
-## Airline Delay Prediction
+## Introduction
 
 Aircraft delays have serious economic impacts that represent a logistical headache for airlines, airports, airline crew, and passengers alike. In a 2010 study by the National Center of Excellence For Aviation Operations Research, an estimated 31.2 billion US dollars was lost due to direct and indirect costs of airline delays in the United States for 2007. These expenses included maintenance costs, extra paid hours for flight crew, the extra use of fuel, and airport fees. As an example, airlines have dedicated time slots at airport gates and unexpected delays exceeding the expected time slot can cost thousands of dollars by the minute.
 
@@ -34,8 +34,16 @@ Thus, understanding the impact of these variables on aircraft on-time performanc
 
 Herein, we propose an exploratory analysis and prediction model on airline delays utilizing data from the United States in 2019.
 
+Good features for the Introduction include:
+• Summary of the study and data, as well as any relevant substantive context, background, or
+framing issues.
+• The “big questions” answered by your data analyses, and summaries of your conclusions about
+these questions.
+• Brief outline of remainder of paper.
+The above is a pretty good order to present this material in as well.
 
-## Stakeholders
+
+## Body
 
 ```{r stakeholder_analysis, echo=FALSE}
 text_tbl <- data.frame(
@@ -54,8 +62,52 @@ kbl(text_tbl) %>%
   column_spec(2, width = "30em")
 ```
 
+The body can be organized in several ways. Here are two that often work well:
+• Traditional. Divide the body up into several sections at the same level as the Introduction, with
+names like:
+– Data
+– Methods
+– Analysis
+– Results
+This format is very familiar to those who have written psych research papers. It often works
+well for a data analysis paper as well, though one problem with it is that the Methods section
+often sounds like a bit of a stretch: In a psych research paper the Methods section describes
+what you did to get your data. In a data analysis paper, you should describe the analyses that
+you performed. Without the results as well, this can be pretty sterile sounding, so I often merge
+these “methods” pieces into the “Analysis” section when I write.
+• Question-oriented. In this format there is a single Body section, usually called “Analysis”,
+and then there is a subsection for each question raised in the introduction, usually taken in the
+same order as in the introduction (general to specific, decreasing order of importance, etc.).
+Within each subsection, statistical method, analyses, and conclusion would be described (for
+each question). For example:
+2. Analysis
+2.1 Success Rate
+Methods
+Analysis
+Conclusions
+2.2 Time to Relapse
+Methods
+Analysis
+Conclusions
+3
+2.3 Effect of Gender
+Methods
+Analysis
+Conclusions
+2.4 Hospital Effects
+Methods
+Analysis
+Conclusions
+Etc. . .
+Other organizational formats are possible too. Whatever the format, it is useful to provide one or two
+well-chosen tables or graphs per question in the body of the report, for two reasons: First, graphical
+and tabular displays can convey your points more efficiently than words; and second, your “skimming”
+audiences will be more likely to have their eye caught by an interesting graph or table than by running
+text. However, too much graphical/tabular material will break up the flow of the text and become
+distracting; so extras should be moved to the Appendix.
 
-## Research Questions
+
+## Conclusion
 
 As the airline network contains complex interactions between regulatory, passenger, and airline-specific needs, predicting delays and understanding the primary causes is relatably complicated. 
 
@@ -63,39 +115,8 @@ Our main question to answer is: **Which factors are most correlated to, and infl
 
 From here, smaller questions can be asked such as: Are delays impacted by weather, date, time of day, route, aircraft type, or economic category?
 
-
-## Datasets
-
-The main dataset is acquired through The United States Department of Transportation. It is a comprehensive dataset with delay times, airline codes, origin and destination airport codes, dates, flight time, etc. This dataset contains 109 variables classified as:
-
-- 6 Time period
-- 5 Airline variables
-- 9 variables of origin
-- 9 variables of destination
-- 9 departure performance variables
-- 9 arrival performance variables
-- 62 additional variables including information about cancellation, diversions, causes of delay, and summaries.
-
-To improve the readability of the dataset, we included a lookup table that has information on airline codes and their airline names. Furthermore, the airport name corresponding to airport codes are retrieved through an API, then merged with the main dataset. More datasets, such as Skytrax Airline review which record passenger sentiment will be considered and might be used for merging in later stages. Other examined datasets included US weather events, airplane crash and fatality records, aircraft employment data, and records for airlines and their aircraft types.
-
-After reviewing the datasets, we can say that the granularity of the data sources is sufficient to answer our research questions (see above). Our main data set is obtained through a reliable source (US DOT), has a really high usability and contains a great amount of variables from different categories which makes it easier for us to merge with different datasets, explore our research questions deeply and find insights.
-
-
-## Regression modelling techniques
-
-The regression model we are considering using in this report is a multivariate linear regression (MLR) model. As flight delays could have a multitude of causes, including multiple reasons per flight, a MLR would be most suitable for this model. Some causes could be weather, operating issues, air traffic, and seasonal variabilities such as holidays. We will intend to examine how much influence each variable has on the dependent variable.
-
-For this model, we assume that there is a linear relationship between airline delay and the various potential causes. We also assume that the residuals are normally distributed, and that the independent variables do not correlate with each other. We also assume that the variance of error terms across all delays are equally distributed.
-
-
-## Impact analysis
-
-There are few potential issues that may arise in this project. Although the use of a web API carries the most up-to-date data, a loss of connection with the API server could make compiling data difficult. Secondly, the data itself contains millions of observations from 2019 through 2021. Computing power and memory storage are potential hurdles for analysis. In fact, one dataset was over 80GB and was unable to be loaded into the analysis program. Other potential issues may arise with merging data where a joining dataset may be missing values. Lastly, the statistical analysis relies on several assumptions specific to multivariate linear regression. Should these assumptions be broken, it may lead to difficulty in model accuracy.
-
-
-## Conclusion/Summary
-
-We are proposing an in-depth analysis in airline delays in effort to uncover possible causes for air travel's biggest headaches. This project aims to model delays as a function of weather, airport, and airline operations. This understanding will help airlines and customers save time, money, and most importantly, frustration.
+The conclusion should reprise the questions and conclusions of the introduction, perhaps augmented by some additional observations or details gleaned from the analysis
+section. New questions, future work, etc., can also be raised here.
 
 
 ## References
@@ -168,3 +189,15 @@ names(ontime_final)[names(ontime_final) == "airportName"] <- "Dest_airportName"
 
 ```
 
+One or more appendices are the place to out details and ancillary materials.
+These might include such items as
+• Technical descriptions of (unusual) statistical procedures
+• Detailed tables or computer output
+• Figures that were not central to the arguments presented in the body of the report
+• Computer code used to obtain results.
+In all cases, and especially in the case of computer code, it is a good idea to add some text sentences
+as comments or annotations, to make it easier for the uninitiated reader to follow what you are doing.
+It is often difficult to find the right balance between what to put in the appendix and what to put in
+the body of the paper. Generally you should put just enough in the body to make the point, and refer
+the reader to specific sections or page numbers in the appendix for additional graphs, tables and other
+details.
