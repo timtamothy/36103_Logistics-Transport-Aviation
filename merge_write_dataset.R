@@ -12,9 +12,9 @@ library(feather)
 # Load Files ----
 allmonths <- fread(here('Dataset', 'All', 'allmonths.csv'))
 
-#icao <- GET(url = 'https://applications.icao.int/dataservices/api/safety-characteristics-list?api_key=ec846ee6-18a5-4c62-9425-f8f66264a1ca&airports=&states=USA', format='JSON')
-#response <- content(icao, 'parsed')
-#API_data <- fromJSON(response)
+icao <- GET(url = 'https://applications.icao.int/dataservices/api/safety-characteristics-list?api_key=ec846ee6-18a5-4c62-9425-f8f66264a1ca&airports=&states=USA', format='JSON')
+response <- content(icao, 'parsed')
+API_data <- fromJSON(response)
 
 id_airline <- read.csv("https://raw.githubusercontent.com/timothywallaby/36103_Logistics-Transport-Aviation/main/L_UNIQUE_CARRIERS%20(1).csv")
 colnames(id_airline) <- c("OP_UNIQUE_CARRIER", "Airline")
@@ -28,18 +28,23 @@ ontime <- left_join(allmonths, id_airline, by = "OP_UNIQUE_CARRIER")%>%
   mutate(Origin_airportCode = paste("K",ORIGIN, sep = ""), 
          Dest_airportCode = paste("K",DEST, sep = ""))
 
-ontime <- left_join(ontime, API_data, by = c("Origin_airportCode" = "airportCode"))
-names(ontime)[names(ontime) == "airportName"] <- "Origin_AIRPORTNAME"
+allmonths <- left_join(allmonths, API_data, by = c("Origin_airportCode" = "airportCode"))
+names(allmonths)[names(allmonths) == "airport_name"] <- "Origin_AIRPORTNAME"
 
-ontime <- left_join(ontime, API_data, by = c("Dest_airportCode" = "airportCode"))
-names(ontime)[names(ontime) == "airportName"] <- "Dest_AIRPORTNAME"
+allmonths <- left_join(allmonths, API_data, by = c("Dest_airportCode" = "airportCode"))
+names(allmonths)[names(allmonths) == "airport_name"] <- "Dest_AIRPORTNAME"
 
 ontime <- ontime[ontime$CANCELLED == 0,]
 
 ontime$YEAR <- as.factor(ontime$YEAR)
 
+# Select only AA, DL, UA
+allmonths <- allmonths %>% 
+  filter(Airline == c('American Airlines', 'Delta Airlines', 'United Airlines'))
+
+
 # Write data to feather file
-write_feather(ontime, here('all_ontime.feather'))
+write_feather(allmonths, here('all_ontime.feather'))
 
 
 
