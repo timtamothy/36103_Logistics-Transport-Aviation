@@ -34,9 +34,23 @@ SWA_fleet <- SWA[[1]]
 View(SWA_fleet)
 
 # Write AA_fleet to feather
-write_feather(AA_fleet, here('SWA_fleet.feather'))
+write_feather(SWA_fleet, here('SWA_fleet.feather'))
 
 https://www.planemapper.com/airlines/JBU
+
+# Explicit URL
+jbuurl <- 'https://www.planemapper.com/airlines/JBU'
+
+JBU <- jbuurl %>% 
+  read_html() %>% 
+  html_nodes(xpath='//*[@id="aircrafts"]') %>% 
+  html_table()
+
+JBU_fleet <- JBU[[1]]
+
+# Write AA_fleet to feather
+write_feather(JBU_fleet, here('JBU_fleet.feather'))
+
 https://www.planemapper.com/airlines/DAL
 https://www.planemapper.com/airlines/ASA
 https://www.planemapper.com/airlines/HAL
