@@ -53,8 +53,6 @@ allmonths <- allmonths %>% mutate_all(~replace(., is.na(.), 0))
 colnames(id_airline) <- c("OP_UNIQUE_CARRIER", "Airline")
 
 
-
-
 #Merging Data ----
 ontime <- left_join(allmonths, id_airline, by = "OP_UNIQUE_CARRIER")%>% 
   mutate(Origin_airportCode = paste("K",ORIGIN, sep = ""), 
@@ -290,3 +288,29 @@ ontime %>% filter(Airline == "American Airlines Inc.", YEAR == 2020) %>%
 # Count number of flights delayed of AA in 2020
 ontime %>% filter(Airline == "American Airlines Inc.", DEP_DELAY_NEW > 0, 
                    YEAR == 2020) %>% summarise(n = length(DEP_DELAY_NEW))
+
+# To check whether map visuslization for delays by state 
+allmonths <- read_feather(here('clean_allairlines_allmonths.feather'))
+
+#names(allmonths) <- toupper(names(allmonths))
+ontime <- allmonths
+
+ontime_trial <- allmonths %>% mutate(ontime = ifelse(DEP_DELAY >0, "NO", "YES")) %>% 
+  select(ontime, DEP_DELAY, ORIGIN_STATE_ABR) %>% group_by(ORIGIN_STATE_ABR)
+  add_tally() 
+
+map_test <- allmonths %>% mutate(ontime = ifelse(DEP_DELAY >0, "NO", "YES")) %>% 
+  select(ontime, DEP_DELAY, ORIGIN_STATE_ABR) %>% count(ontime, ORIGIN_STATE_ABR)
+
+map_test <- data.frame(map_test)
+
+map_test2 <- allmonths %>% mutate(ontime = ifelse(DEP_DELAY >0, "NO", "YES")) %>% 
+  select(ontime, DEP_DELAY, ORIGIN_STATE_ABR) %>% count(ORIGIN_STATE_ABR) %>% 
+  mutate(ontime = "Total")
+
+map_test2 <- data.frame(map_test2)
+
+map_test_total <- rbind(map_test, map_test2)
+
+map_test_total[map_test_total$ontime == "NO",3]/map_test_total[map_test_total$ontime == "Total",3]
+

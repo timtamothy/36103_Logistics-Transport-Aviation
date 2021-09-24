@@ -27,3 +27,12 @@ basic_eda <- function(data)
 }
 
 basic_eda(allmonths)
+
+# Check NA values 
+
+# Check distribution -- justtify normalization in feature engineering 
+
+
+# Map visualization based on states 
+# route stat (need to merge)
+
