@@ -27,9 +27,10 @@ clean_join <- clean_names(testjoin)
 
 # Separate the age/year columns into two columns
 separate <- clean_join %>% 
-  separate(age_built, c('age', 'year'))
+  separate(age_built, c('age', 'model_year'))
 
 status(separate)
 
 # Save a feather file
 
+write_feather(separate, here('clean_3airline_fleet.feather'))
