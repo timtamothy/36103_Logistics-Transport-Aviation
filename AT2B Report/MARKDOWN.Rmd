@@ -174,6 +174,7 @@ Kim, N. Y., & Park, J. W. (2016). A study on the impact of airline service delay
   library(Amelia)
 
   library(knitr)
+  
 ```
 
 
@@ -193,25 +194,127 @@ API_data <- fromJSON(response)
 #Only pick those columns that are useful later on 
 API_data <- API_data %>% select(airportCode, airportName)
 ```
+
+Scrapping AIrfleet data from web 
+```{r, eval = FALSE}
+# Explicit URL
+url <- 'https://www.planemapper.com/airlines/AAL'
+
+AA <- url %>% 
+  read_html() %>% 
+  html_nodes(xpath='//*[@id="aircrafts"]') %>% 
+  html_table()
+
+AA_fleet <- AA[[1]]
+
+View(AA_fleet)
+
+# Write AA_fleet to feather
+write_feather(AA_fleet, here('AA_fleet.feather'))
+
+# Explicit URL
+swaurl <- 'https://www.planemapper.com/airlines/SWA'
+
+SWA <- swaurl %>% 
+  read_html() %>% 
+  html_nodes(xpath='//*[@id="aircrafts"]') %>% 
+  html_table()
+
+SWA_fleet <- SWA[[1]]
+
+View(SWA_fleet)
+
+# Write AA_fleet to feather
+write_feather(SWA_fleet, here('SWA_fleet.feather'))
+
+# Explicit URL
+jbuurl <- 'https://www.planemapper.com/airlines/JBU'
+
+JBU <- jbuurl %>% 
+  read_html() %>% 
+  html_nodes(xpath='//*[@id="aircrafts"]') %>% 
+  html_table()
+
+JBU_fleet <- JBU[[1]]
+
+# Write AA_fleet to feather
+write_feather(JBU_fleet, here('JBU_fleet.feather'))
+
+# Explicit URL
+dalurl <- 'https://www.planemapper.com/airlines/DAL'
+
+DAL <- dalurl %>% 
+  read_html() %>% 
+  html_nodes(xpath='//*[@id="aircrafts"]') %>% 
+  html_table()
+
+DAL_fleet <- DAL[[1]]
+
+# Write AA_fleet to feather
+write_feather(DAL_fleet, here('DAL_fleet.feather'))
+
+ualurl <- 'https://www.planemapper.com/airlines/UAL'
+
+UAL <- ualurl %>% 
+  read_html() %>% 
+  html_nodes(xpath='//*[@id="aircrafts"]') %>% 
+  html_table()
+
+UAL_fleet <- UAL[[1]]
+
+# Write AA_fleet to feather
+write_feather(UAL_fleet, here('UAL_fleet.feather'))
+```
+
+Merging Airfleet data into our dataset
+
+```{r, eval = FALSE}
+# Load Files ----
+maindf <- read_feather(here('clean_3airlines.feather'))
+
+delta <- read_feather(here('DAL_fleet.feather'))
+
+american <- read_feather(here('AA_fleet.feather'))
+
+united <- read_feather(here('UAL_fleet.feather'))
+
+# Join Files ----
+
+allrows <- bind_rows(delta, american, united)
+
+testjoin <- left_join(maindf, allrows, by = c('tail_num' = 'Tail'))
+
+col_status <- status(testjoin)
+
+# Clean column names ----
+clean_join <- clean_names(testjoin)
+
+# Separate the age/year columns into two columns
+separate <- clean_join %>% 
+  separate(age_built, c('age', 'year'))
+
+status(separate)
+```
+
 Airline On-time data 
-```{r, message=FALSE, warning=FALSE}
+```{r, eval = FALSE}
 ontime_raw <- read.csv("https://raw.githubusercontent.com/charlottetse33/36103_Logistics-Transport-Aviation/main/test%20on%20time%20report.csv")
 ```
 Airline DOT_ID corresponding to Airline Names
-```{r, message=FALSE, warning=FALSE}
+```{r, eval = FALSE}
 #Seperate loading data to prevent R from crashing
 id_airline <- read.csv("https://raw.githubusercontent.com/charlottetse33/36103_Logistics-Transport-Aviation/main/dot_id_airline.csv")
 
 ```
 Merge Airline Names with On-time Dataset 
-```{r, message=FALSE, warning=FALSE}
+```{r, eval = FALSE}
 colnames(id_airline) <- c("DOT_ID_Reporting_Airline", "Airline")
   
 ontime_1 <- left_join(ontime_raw, id_airline, by = "DOT_ID_Reporting_Airline")
 
 ```
 Merge API Airport names with On-time Dataset 
-```{r, message=FALSE, warning=FALSE}
+```{r, eval = FALSE}
 ontime_2 <- ontime_1 %>% mutate(Origin_airportCode = paste("K",Origin, sep = ""), Dest_airportCode = paste("K",Dest, sep = ""))
 
 Originjoint <- left_join(ontime_2, API_data, by = c("Origin_airportCode" = "airportCode"))
@@ -224,6 +327,31 @@ names(ontime_final)[names(ontime_final) == "airportName"] <- "Dest_airportName"
 #Airline, Origin_airportName, Dest_airportName
 
 ```
+Adding employee data into ontime dataset
+```{r, eval = FALSE}
+allmonths <- read_feather("C:/Users/tsetc/Downloads/clean_3airline_fleet (1).feather")
+#This dataset includes airline, origin_airportname, dest_airportname 
+
+names(allmonths) <- toupper(names(allmonths))
+
+# read employee dataset 
+employee_data <- read_csv("https://raw.githubusercontent.com/timothywallaby/36103_Logistics-Transport-Aviation/main/Employment%20dataset%202019-2021.csv")
+
+# concentenate variables for employee dataset 
+employee_data$combine <- paste(employee_data$YEAR, employee_data$MONTH, employee_data$CARRIER_NAME, sep = "_")
+employee_data <- employee_data %>% select(combine, EMPFULL, EMPPART, EMPTOTAL, EMPFTE)
+
+# concentenate variables for big dataset
+allmonths$combine <- paste(allmonths$YEAR, allmonths$MONTH, allmonths$AIRLINE, sep = "_")
+
+# Combine 2 dataset 
+allmonths <- left_join(allmonths, employee_data, by = 'combine')
+
+allmonths <- allmonths %>% select(-combine)
+
+write_feather(allmonths, "C:/Users/tsetc/Downloads/clean_3airline_fleet_employ.feather")
+```
+
 
 One or more appendices are the place to out details and ancillary materials.
 These might include such items as
