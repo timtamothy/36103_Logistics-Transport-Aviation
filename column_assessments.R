@@ -124,6 +124,8 @@ allmonth_plot %>%
   geom_point(shape = '.', col = 'white')
   # Check correlation to Air Time
 
+cor(allmonth_plot)
+
 allmonth_plot %>% 
   filter(air_time > 0) %>% 
   sample_n(50000) %>% 
@@ -150,7 +152,7 @@ allmonth_plot %>%
 summary(allmonth_plot$age)
 # median is 20 years of age anyway, no wonder we see most observations there.
 
-allmonths %>% 
+allmonth_plot %>% 
   filter(dep_delay > 95) %>% 
   sample_n(50000) %>% 
   ggplot(aes(y=dep_delay, x=age)) +
@@ -159,14 +161,14 @@ allmonths %>%
   geom_point(shape = '.', col = 'white')
 #even among outliers, not much else to say
 
-allmonths %>% 
+allmonth_plot %>% 
   sample_n(50000) %>% 
   ggplot(aes(y=dep_delay, x=taxi_out)) +
   geom_hex() +       
   scale_fill_viridis_c() +
   geom_point(shape = '.', col = 'white')
 
-allmonths %>% 
+allmonth_plot %>% 
   sample_n(50000) %>% 
   ggplot(aes(y=dep_delay, x=taxi_in)) +
   geom_hex() +       
@@ -175,14 +177,14 @@ allmonths %>%
  #doesn't seem as though taxi in and out have much effect on delays
   #perhaps longer taxi is because they were early?
 
-allmonths %>% 
+allmonth_plot %>% 
   sample_n(50000) %>% 
   ggplot(aes(y=dep_delay, x=carrier_delay)) +
   geom_hex() +       
   scale_fill_viridis_c() +
   geom_point(shape = '.', col = 'white')
 
-allmonths %>% 
+allmonth_plot %>% 
   sample_n(50000) %>% 
   ggplot(aes(y=dep_delay, x=dep_time)) +
   scale_fill_viridis_c() +
