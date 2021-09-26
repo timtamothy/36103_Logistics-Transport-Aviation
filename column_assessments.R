@@ -45,7 +45,7 @@ allmonths2 <- subset(allmonths2, allmonths2$ARR_DELAY_NEW > (Q1 - 1.5*IQR) &
 plot_num(allmonths2)
 
 # Charlotte code
-num_col <- select_if(allmonths, is.numeric, is.na=FALSE)
+num_col <- select_if(allmonths, is.numeric)
 
 num_col <- num_col %>% drop_na()
 
@@ -72,3 +72,7 @@ min_max_norm <- function(x){
 num_col_norm <- as.data.frame(future_lapply(num_col, min_max_norm))
 
 plot_num(num_col_norm)
+
+status(num_col_norm)
+status(num_col)
+status(allmonths)
