@@ -45,12 +45,20 @@ allmonths2 <- subset(allmonths2, allmonths2$ARR_DELAY_NEW > (Q1 - 1.5*IQR) &
 plot_num(allmonths2)
 
 # Charlotte code
-num_col <- select_if(allmonths, is.numeric)
-num_col <- num_col %>%
+num_col <- select_if(allmonths, is.numeric, is.na=FALSE)
+
+num_col <- num_col %>% drop_na()
 
 #i in seq_along(num_col)
 
-for (i in 1:8) {
+num_col <- num_col %>% 
+  select('dep_delay', 'dep_delay_new', 'taxi_out', 'taxi_in',
+         'arr_delay', 'arr_delay_new', 'air_time', 'distance',
+         'age', 'carrier_delay', 'weather_delay', 'nas_delay',
+         'security_delay', 'late_aircraft_delay', 'total_add_gtime',
+         'empfull', 'emppart', 'emptotal', 'empfte')
+
+for (i in 1:9) {
   if (max(num_col[,i]) > (mean(unlist(num_col[,i])) + 4* sd(unlist(num_col[,i])))) {
     num_col <- num_col %>% arrange(num_col[,i])
     num_col <- num_col[round(nrow(num_col) *0.01, digits = 0):round(nrow(num_col)* (1-0.01) , digits = 0),]
