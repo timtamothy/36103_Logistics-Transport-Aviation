@@ -98,36 +98,24 @@ allmonth_plot <- na.omit(allmonths)
 allmonth_plot <- allmonth_plot %>% 
   filter(dep_delay <= 95)
 
-# Year Data
 allmonth_plot %>% 
   sample_n(50000) %>% 
   ggplot(aes(x=dep_delay, y=year)) +
   geom_point(alpha=0.3)
 
-# Month Column
 allmonth_plot %>% 
   sample_n(50000) %>% 
   ggplot(aes(x=dep_delay, y=month)) +
   geom_boxplot(alpha=0.2) +
   geom_point(alpha=0.3)
 
-# Air-Time Column
 allmonth_plot %>% 
   sample_n(50000) %>% 
   ggplot(aes(y=dep_delay, x=air_time)) +
   geom_hex() +       
   scale_fill_viridis_c() +
   geom_point(shape = '.', col = 'white')
-  #need to remove air_time that is 0
 
-# Distance Column
-allmonth_plot %>% 
-  sample_n(50000) %>% 
-  ggplot(aes(y=dep_delay, x=distance)) +
-  geom_hex() +       
-  scale_fill_viridis_c() +
-  geom_point(shape = '.', col = 'white')
-  # Check correlation to Air Time
 
 
 
