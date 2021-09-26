@@ -131,11 +131,33 @@ allmonth_plot %>%
   geom_point(alpha = 0.3)
 
 
+allmonth_plot %>% 
+  filter(dep_delay > 0) %>% 
+  sample_n(50000) %>% 
+  ggplot(aes(y=dep_delay, x=age)) +
+  geom_hex() +       
+  scale_fill_viridis_c() +
+  geom_point(shape = '.', col = 'white')
 
+allmonth_plot %>% 
+  filter(dep_delay < 0) %>% 
+  sample_n(50000) %>% 
+  ggplot(aes(y=dep_delay, x=age)) +
+  geom_hex() +       
+  scale_fill_viridis_c() +
+  geom_point(shape = '.', col = 'white')
 
+summary(allmonth_plot$age)
+# median is 20 years of age anyway, no wonder we see most observations there.
 
-
-
+allmonths %>% 
+  filter(dep_delay > 95) %>% 
+  sample_n(50000) %>% 
+  ggplot(aes(y=dep_delay, x=age)) +
+  geom_hex() +       
+  scale_fill_viridis_c() +
+  geom_point(shape = '.', col = 'white')
+#even among outliers, not much else to say
 
 
 
