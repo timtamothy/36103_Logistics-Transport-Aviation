@@ -159,6 +159,37 @@ allmonths %>%
   geom_point(shape = '.', col = 'white')
 #even among outliers, not much else to say
 
+allmonths %>% 
+  sample_n(50000) %>% 
+  ggplot(aes(y=dep_delay, x=taxi_out)) +
+  geom_hex() +       
+  scale_fill_viridis_c() +
+  geom_point(shape = '.', col = 'white')
+
+allmonths %>% 
+  sample_n(50000) %>% 
+  ggplot(aes(y=dep_delay, x=taxi_in)) +
+  geom_hex() +       
+  scale_fill_viridis_c() +
+  geom_point(shape = '.', col = 'white')
+ #doesn't seem as though taxi in and out have much effect on delays
+  #perhaps longer taxi is because they were early?
+
+allmonths %>% 
+  sample_n(50000) %>% 
+  ggplot(aes(y=dep_delay, x=carrier_delay)) +
+  geom_hex() +       
+  scale_fill_viridis_c() +
+  geom_point(shape = '.', col = 'white')
+
+allmonths %>% 
+  sample_n(50000) %>% 
+  ggplot(aes(y=dep_delay, x=dep_time)) +
+  scale_fill_viridis_c() +
+  geom_point(alpha = 0.3)
+  #view when start of day is
+  #delays tend to increase later in the day
+
 
 
 
