@@ -116,9 +116,19 @@ allmonth_plot %>%
   scale_fill_viridis_c() +
   geom_point(shape = '.', col = 'white')
 
+allmonth_plot %>% 
+  sample_n(50000) %>% 
+  ggplot(aes(y=dep_delay, x=distance)) +
+  geom_hex() +       
+  scale_fill_viridis_c() +
+  geom_point(shape = '.', col = 'white')
+  # Check correlation to Air Time
 
-
-
+allmonth_plot %>% 
+  filter(air_time > 0) %>% 
+  sample_n(50000) %>% 
+  ggplot(aes(y=air_time, x=distance)) +
+  geom_point(alpha = 0.3)
 
 
 
