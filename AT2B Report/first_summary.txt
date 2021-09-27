@@ -8,6 +8,11 @@ Residuals:
 
 Coefficients: (57 not defined because of singularities)
                                 Estimate
+Adding value to report?
+
+If not - appendix
+Grammar of tables - export tables in R
+
 (Intercept)                    8.337e+03
 year                          -4.136e+00
 month                         -2.106e-01

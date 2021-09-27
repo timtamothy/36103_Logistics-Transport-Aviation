@@ -19,10 +19,10 @@ write_csv(summary_all, here('column_summary_statistics.csv'))
 
 # Categorical overall
 freq(allmonths, path_out = here('Column EDA', '.'))
-
+freq(allmonths)
 # Numerical Overall
 plot_num(allmonths, path_out = here('Column EDA', '.'))
-
+plot_num
 
 Q1 <- quantile(allmonths$DEP_DELAY, .25)
 Q3 <- quantile(allmonths$DEP_DELAY, .75)
@@ -152,7 +152,7 @@ allmonth_plot %>%
 summary(allmonth_plot$age)
 # median is 20 years of age anyway, no wonder we see most observations there.
 
-allmonth %>% 
+allmonths %>% 
   filter(dep_delay > 95) %>% 
   sample_n(50000) %>% 
   ggplot(aes(y=dep_delay, x=age)) +
@@ -187,6 +187,7 @@ allmonth_plot %>%
 allmonth_plot %>% 
   sample_n(50000) %>%
   filter(dep_delay > 0) %>% 
+  filter(dep_delay < 500) %>% 
   ggplot(aes(y=dep_delay, x=dep_time)) +
   scale_fill_viridis_c() +
   geom_point(alpha = 0.3)
@@ -207,9 +208,6 @@ allmonth_plot %>%
   scale_fill_viridis_c() +
   geom_point(alpha = 0.3)
 # manufacturer and model type need to be cleaned
-
-
-
 
 
 

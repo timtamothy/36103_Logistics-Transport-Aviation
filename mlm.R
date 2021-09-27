@@ -13,8 +13,19 @@ library(Hmisc)
 library(DataExplorer)
 
 # Load Data ----
-allmonths <- read_feather(here('all_ontime.feather'))
+allmonths <- fread(here('dummy.csv'))
+
+# Select airports
+airports <- fread(here('top50.csv'))
+airport_list <- colnames(airports)
+
 
 
 # Create first mlm ----
-mlm1 <- lm(dep_delay ~ op_carrier, data=allmonths)
+mlm1 <- lm(dep_delay ~ ., data=dat_transformed)
+
+first_ml <- summary(mlm1)
+
+sink('first_summary.txt')
+first_ml
+sink()
