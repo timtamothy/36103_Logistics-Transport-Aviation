@@ -1,0 +1,907 @@
+
+Call:
+lm(formula = dep_delay ~ ., data = dat_transformed)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-83.155  -8.034  -4.136   0.921 104.310 
+
+Coefficients: (57 not defined because of singularities)
+                                Estimate
+(Intercept)                    8.337e+03
+year                          -4.136e+00
+month                         -2.106e-01
+day_of_week                    1.078e-01
+fl_date                        5.878e-04
+origin_state_abr.CA           -2.688e-03
+origin_state_abr.CT           -1.594e+00
+origin_state_abr.FL           -8.061e-01
+origin_state_abr.GA            5.473e-01
+origin_state_abr.IL            2.021e+00
+origin_state_abr.IN           -8.658e-01
+origin_state_abr.KY            9.403e-01
+origin_state_abr.LA           -5.109e-02
+origin_state_abr.MA           -6.522e-01
+origin_state_abr.MD           -7.311e-01
+origin_state_abr.MI           -9.075e-01
+origin_state_abr.MN           -5.517e-01
+origin_state_abr.MO           -8.204e-01
+origin_state_abr.NC            8.569e-02
+origin_state_abr.NJ            1.913e+00
+origin_state_abr.NV           -8.432e-01
+origin_state_abr.NY           -1.191e+00
+origin_state_abr.OH           -1.070e+00
+origin_state_abr.OR           -3.117e-01
+origin_state_abr.PA           -1.546e+00
+origin_state_abr.SC           -1.718e+00
+origin_state_abr.TN           -6.651e-01
+origin_state_abr.TX           -1.210e+00
+origin_state_abr.UT           -6.512e-01
+origin_state_abr.VA           -9.474e-01
+origin_state_abr.WA           -6.853e-01
+origin_state_abr.WI           -2.149e+00
+dest_state_abr.CA             -9.335e-01
+dest_state_abr.CT             -4.140e-01
+dest_state_abr.FL              2.697e-01
+dest_state_abr.GA              2.336e-01
+dest_state_abr.IL              1.545e+00
+dest_state_abr.IN             -7.429e-01
+dest_state_abr.KY             -1.130e+00
+dest_state_abr.LA             -2.599e-01
+dest_state_abr.MA              1.056e+00
+dest_state_abr.MD             -7.679e-02
+dest_state_abr.MI             -1.611e-01
+dest_state_abr.MN              2.860e-01
+dest_state_abr.MO             -3.897e-01
+dest_state_abr.NC             -2.928e-01
+dest_state_abr.NJ              3.227e+00
+dest_state_abr.NV              3.257e-01
+dest_state_abr.NY              2.091e+00
+dest_state_abr.OH             -3.469e-01
+dest_state_abr.OR              2.478e-01
+dest_state_abr.PA             -9.631e-01
+dest_state_abr.SC             -1.033e+00
+dest_state_abr.TN             -3.262e-01
+dest_state_abr.TX             -3.021e-01
+dest_state_abr.UT              1.236e-01
+dest_state_abr.VA             -3.489e-01
+dest_state_abr.WA              3.487e-01
+dest_state_abr.WI             -7.503e-01
+dep_time                       5.683e-03
+air_time                       3.065e-03
+airline.Delta.Air.Lines.Inc.  -5.876e-01
+airline.United.Air.Lines.Inc. -2.382e+00
+taxi_out                       1.424e-01
+taxi_in                       -9.912e-03
+origin_airport_code.KAUS       1.284e-01
+origin_airport_code.KBDL              NA
+origin_airport_code.KBOS              NA
+origin_airport_code.KBWI              NA
+origin_airport_code.KCHS              NA
+origin_airport_code.KCLE       1.880e-02
+origin_airport_code.KCLT       3.250e-01
+origin_airport_code.KCMH              NA
+origin_airport_code.KCVG              NA
+origin_airport_code.KDCA      -1.557e+00
+origin_airport_code.KDFW       4.515e+00
+origin_airport_code.KDTW              NA
+origin_airport_code.KEWR              NA
+origin_airport_code.KFLL       2.128e-02
+origin_airport_code.KIAD              NA
+origin_airport_code.KIAH       2.406e+00
+origin_airport_code.KIND              NA
+origin_airport_code.KJAX      -5.152e-01
+origin_airport_code.KJFK      -7.456e-01
+origin_airport_code.KLAS              NA
+origin_airport_code.KLAX       6.277e-01
+origin_airport_code.KLGA              NA
+origin_airport_code.KMCI      -6.359e-01
+origin_airport_code.KMCO      -3.177e-01
+origin_airport_code.KMEM              NA
+origin_airport_code.KMIA       9.491e-01
+origin_airport_code.KMKE              NA
+origin_airport_code.KMSP              NA
+origin_airport_code.KMSY              NA
+origin_airport_code.KORD              NA
+origin_airport_code.KPBI      -4.017e-02
+origin_airport_code.KPDX              NA
+origin_airport_code.KPHL      -5.565e-01
+origin_airport_code.KPHX              NA
+origin_airport_code.KPIT              NA
+origin_airport_code.KRDU              NA
+origin_airport_code.KRSW      -7.913e-01
+origin_airport_code.KSAN      -1.793e+00
+origin_airport_code.KSAT              NA
+origin_airport_code.KSEA              NA
+origin_airport_code.KSFO       6.390e-01
+origin_airport_code.KSJC      -1.316e+00
+origin_airport_code.KSLC              NA
+origin_airport_code.KSMF       2.095e-01
+origin_airport_code.KSNA              NA
+origin_airport_code.KSTL              NA
+origin_airport_code.KTPA              NA
+dest_airport_code.KAUS         1.548e-01
+dest_airport_code.KBDL                NA
+dest_airport_code.KBOS                NA
+dest_airport_code.KBWI                NA
+dest_airport_code.KCHS                NA
+dest_airport_code.KCLE        -6.975e-01
+dest_airport_code.KCLT         5.011e-01
+dest_airport_code.KCMH                NA
+dest_airport_code.KCVG                NA
+dest_airport_code.KDCA         1.063e-01
+dest_airport_code.KDFW         2.002e+00
+dest_airport_code.KDTW                NA
+dest_airport_code.KEWR                NA
+dest_airport_code.KFLL         6.794e-01
+dest_airport_code.KIAD                NA
+dest_airport_code.KIAH         1.208e+00
+dest_airport_code.KIND                NA
+dest_airport_code.KJAX        -7.856e-01
+dest_airport_code.KJFK        -1.628e+00
+dest_airport_code.KLAS                NA
+dest_airport_code.KLAX         1.271e+00
+dest_airport_code.KLGA                NA
+dest_airport_code.KMCI        -1.484e-01
+dest_airport_code.KMCO         1.340e-01
+dest_airport_code.KMEM                NA
+dest_airport_code.KMIA         8.938e-01
+dest_airport_code.KMKE                NA
+dest_airport_code.KMSP                NA
+dest_airport_code.KMSY                NA
+dest_airport_code.KORD                NA
+dest_airport_code.KPBI         1.805e-01
+dest_airport_code.KPDX                NA
+dest_airport_code.KPHL         7.611e-01
+dest_airport_code.KPHX                NA
+dest_airport_code.KPIT                NA
+dest_airport_code.KRDU                NA
+dest_airport_code.KRSW        -2.967e-01
+dest_airport_code.KSAN         6.840e-01
+dest_airport_code.KSAT                NA
+dest_airport_code.KSEA                NA
+dest_airport_code.KSFO         2.944e+00
+dest_airport_code.KSJC         8.037e-01
+dest_airport_code.KSLC                NA
+dest_airport_code.KSMF         1.344e+00
+dest_airport_code.KSNA                NA
+dest_airport_code.KSTL                NA
+dest_airport_code.KTPA                NA
+manufacturer.boeing           -3.256e+00
+manufacturer.embraer          -2.994e+00
+manufacturer.mcdonnell        -1.507e+00
+model.737                      1.022e+00
+model.757                      1.815e+00
+model.767                      3.231e+00
+model.777                      4.343e+00
+model.787                      2.517e+00
+model.A319                    -2.687e+00
+model.A320                    -1.795e+00
+model.A321                    -1.216e+00
+model.A330                            NA
+model.DC.9                     1.959e-01
+model.ERJ                             NA
+model.MD.80                   -1.865e+00
+model.MD90                            NA
+age                            4.955e-02
+emptotal                      -1.583e-05
+                              Std. Error
+(Intercept)                    8.480e+02
+year                           4.304e-01
+month                          3.598e-02
+day_of_week                    5.152e-03
+fl_date                        1.176e-03
+origin_state_abr.CA            1.336e-01
+origin_state_abr.CT            1.490e-01
+origin_state_abr.FL            9.683e-02
+origin_state_abr.GA            7.610e-02
+origin_state_abr.IL            7.077e-02
+origin_state_abr.IN            1.480e-01
+origin_state_abr.KY            1.514e-01
+origin_state_abr.LA            1.164e-01
+origin_state_abr.MA            8.782e-02
+origin_state_abr.MD            1.277e-01
+origin_state_abr.MI            8.978e-02
+origin_state_abr.MN            8.669e-02
+origin_state_abr.MO            1.356e-01
+origin_state_abr.NC            1.118e-01
+origin_state_abr.NJ            8.734e-02
+origin_state_abr.NV            9.285e-02
+origin_state_abr.NY            9.399e-02
+origin_state_abr.OH            1.739e-01
+origin_state_abr.OR            1.263e-01
+origin_state_abr.PA            1.483e-01
+origin_state_abr.SC            1.731e-01
+origin_state_abr.TN            1.589e-01
+origin_state_abr.TX            1.281e-01
+origin_state_abr.UT            9.321e-02
+origin_state_abr.VA            1.060e-01
+origin_state_abr.WA            9.227e-02
+origin_state_abr.WI            1.790e-01
+dest_state_abr.CA              1.329e-01
+dest_state_abr.CT              1.492e-01
+dest_state_abr.FL              9.735e-02
+dest_state_abr.GA              7.684e-02
+dest_state_abr.IL              7.151e-02
+dest_state_abr.IN              1.482e-01
+dest_state_abr.KY              1.517e-01
+dest_state_abr.LA              1.165e-01
+dest_state_abr.MA              8.790e-02
+dest_state_abr.MD              1.281e-01
+dest_state_abr.MI              9.004e-02
+dest_state_abr.MN              8.709e-02
+dest_state_abr.MO              1.360e-01
+dest_state_abr.NC              1.121e-01
+dest_state_abr.NJ              8.715e-02
+dest_state_abr.NV              9.286e-02
+dest_state_abr.NY              9.398e-02
+dest_state_abr.OH              1.729e-01
+dest_state_abr.OR              1.261e-01
+dest_state_abr.PA              1.485e-01
+dest_state_abr.SC              1.732e-01
+dest_state_abr.TN              1.589e-01
+dest_state_abr.TX              1.283e-01
+dest_state_abr.UT              9.307e-02
+dest_state_abr.VA              1.060e-01
+dest_state_abr.WA              9.253e-02
+dest_state_abr.WI              1.789e-01
+dep_time                       2.127e-05
+air_time                       1.750e-04
+airline.Delta.Air.Lines.Inc.   5.723e-02
+airline.United.Air.Lines.Inc.  5.389e-02
+taxi_out                       1.170e-03
+taxi_in                        1.858e-03
+origin_airport_code.KAUS       1.457e-01
+origin_airport_code.KBDL              NA
+origin_airport_code.KBOS              NA
+origin_airport_code.KBWI              NA
+origin_airport_code.KCHS              NA
+origin_airport_code.KCLE       2.040e-01
+origin_airport_code.KCLT       1.069e-01
+origin_airport_code.KCMH              NA
+origin_airport_code.KCVG              NA
+origin_airport_code.KDCA       1.175e-01
+origin_airport_code.KDFW       1.223e-01
+origin_airport_code.KDTW              NA
+origin_airport_code.KEWR              NA
+origin_airport_code.KFLL       1.146e-01
+origin_airport_code.KIAD              NA
+origin_airport_code.KIAH       1.303e-01
+origin_airport_code.KIND              NA
+origin_airport_code.KJAX       1.508e-01
+origin_airport_code.KJFK       9.957e-02
+origin_airport_code.KLAS              NA
+origin_airport_code.KLAX       1.296e-01
+origin_airport_code.KLGA              NA
+origin_airport_code.KMCI       1.723e-01
+origin_airport_code.KMCO       9.848e-02
+origin_airport_code.KMEM              NA
+origin_airport_code.KMIA       9.633e-02
+origin_airport_code.KMKE              NA
+origin_airport_code.KMSP              NA
+origin_airport_code.KMSY              NA
+origin_airport_code.KORD              NA
+origin_airport_code.KPBI       1.410e-01
+origin_airport_code.KPDX              NA
+origin_airport_code.KPHL       1.505e-01
+origin_airport_code.KPHX              NA
+origin_airport_code.KPIT              NA
+origin_airport_code.KRDU              NA
+origin_airport_code.KRSW       1.310e-01
+origin_airport_code.KSAN       1.487e-01
+origin_airport_code.KSAT              NA
+origin_airport_code.KSEA              NA
+origin_airport_code.KSFO       1.331e-01
+origin_airport_code.KSJC       2.037e-01
+origin_airport_code.KSLC              NA
+origin_airport_code.KSMF       1.879e-01
+origin_airport_code.KSNA              NA
+origin_airport_code.KSTL              NA
+origin_airport_code.KTPA              NA
+dest_airport_code.KAUS         1.456e-01
+dest_airport_code.KBDL                NA
+dest_airport_code.KBOS                NA
+dest_airport_code.KBWI                NA
+dest_airport_code.KCHS                NA
+dest_airport_code.KCLE         2.030e-01
+dest_airport_code.KCLT         1.069e-01
+dest_airport_code.KCMH                NA
+dest_airport_code.KCVG                NA
+dest_airport_code.KDCA         1.175e-01
+dest_airport_code.KDFW         1.228e-01
+dest_airport_code.KDTW                NA
+dest_airport_code.KEWR                NA
+dest_airport_code.KFLL         1.143e-01
+dest_airport_code.KIAD                NA
+dest_airport_code.KIAH         1.301e-01
+dest_airport_code.KIND                NA
+dest_airport_code.KJAX         1.507e-01
+dest_airport_code.KJFK         9.993e-02
+dest_airport_code.KLAS                NA
+dest_airport_code.KLAX         1.289e-01
+dest_airport_code.KLGA                NA
+dest_airport_code.KMCI         1.722e-01
+dest_airport_code.KMCO         9.845e-02
+dest_airport_code.KMEM                NA
+dest_airport_code.KMIA         9.612e-02
+dest_airport_code.KMKE                NA
+dest_airport_code.KMSP                NA
+dest_airport_code.KMSY                NA
+dest_airport_code.KORD                NA
+dest_airport_code.KPBI         1.405e-01
+dest_airport_code.KPDX                NA
+dest_airport_code.KPHL         1.502e-01
+dest_airport_code.KPHX                NA
+dest_airport_code.KPIT                NA
+dest_airport_code.KRDU                NA
+dest_airport_code.KRSW         1.307e-01
+dest_airport_code.KSAN         1.480e-01
+dest_airport_code.KSAT                NA
+dest_airport_code.KSEA                NA
+dest_airport_code.KSFO         1.325e-01
+dest_airport_code.KSJC         2.031e-01
+dest_airport_code.KSLC                NA
+dest_airport_code.KSMF         1.875e-01
+dest_airport_code.KSNA                NA
+dest_airport_code.KSTL                NA
+dest_airport_code.KTPA                NA
+manufacturer.boeing            2.065e-01
+manufacturer.embraer           4.115e-01
+manufacturer.mcdonnell         2.189e-01
+model.737                      5.797e-02
+model.757                      6.462e-02
+model.767                      1.088e-01
+model.777                      1.324e-01
+model.787                      1.804e-01
+model.A319                     2.023e-01
+model.A320                     2.034e-01
+model.A321                     2.003e-01
+model.A330                            NA
+model.DC.9                     2.737e-01
+model.ERJ                             NA
+model.MD.80                    1.037e-01
+model.MD90                            NA
+age                            2.038e-03
+emptotal                       1.584e-06
+                              t value
+(Intercept)                     9.832
+year                           -9.610
+month                          -5.853
+day_of_week                    20.922
+fl_date                         0.500
+origin_state_abr.CA            -0.020
+origin_state_abr.CT           -10.699
+origin_state_abr.FL            -8.325
+origin_state_abr.GA             7.191
+origin_state_abr.IL            28.553
+origin_state_abr.IN            -5.851
+origin_state_abr.KY             6.209
+origin_state_abr.LA            -0.439
+origin_state_abr.MA            -7.427
+origin_state_abr.MD            -5.725
+origin_state_abr.MI           -10.108
+origin_state_abr.MN            -6.364
+origin_state_abr.MO            -6.052
+origin_state_abr.NC             0.767
+origin_state_abr.NJ            21.903
+origin_state_abr.NV            -9.081
+origin_state_abr.NY           -12.668
+origin_state_abr.OH            -6.153
+origin_state_abr.OR            -2.469
+origin_state_abr.PA           -10.424
+origin_state_abr.SC            -9.926
+origin_state_abr.TN            -4.185
+origin_state_abr.TX            -9.445
+origin_state_abr.UT            -6.986
+origin_state_abr.VA            -8.934
+origin_state_abr.WA            -7.427
+origin_state_abr.WI           -12.007
+dest_state_abr.CA              -7.026
+dest_state_abr.CT              -2.774
+dest_state_abr.FL               2.771
+dest_state_abr.GA               3.040
+dest_state_abr.IL              21.600
+dest_state_abr.IN              -5.014
+dest_state_abr.KY              -7.450
+dest_state_abr.LA              -2.230
+dest_state_abr.MA              12.011
+dest_state_abr.MD              -0.600
+dest_state_abr.MI              -1.789
+dest_state_abr.MN               3.284
+dest_state_abr.MO              -2.866
+dest_state_abr.NC              -2.611
+dest_state_abr.NJ              37.034
+dest_state_abr.NV               3.507
+dest_state_abr.NY              22.253
+dest_state_abr.OH              -2.006
+dest_state_abr.OR               1.966
+dest_state_abr.PA              -6.486
+dest_state_abr.SC              -5.964
+dest_state_abr.TN              -2.052
+dest_state_abr.TX              -2.354
+dest_state_abr.UT               1.328
+dest_state_abr.VA              -3.292
+dest_state_abr.WA               3.768
+dest_state_abr.WI              -4.193
+dep_time                      267.237
+air_time                       17.512
+airline.Delta.Air.Lines.Inc.  -10.266
+airline.United.Air.Lines.Inc. -44.207
+taxi_out                      121.797
+taxi_in                        -5.334
+origin_airport_code.KAUS        0.881
+origin_airport_code.KBDL           NA
+origin_airport_code.KBOS           NA
+origin_airport_code.KBWI           NA
+origin_airport_code.KCHS           NA
+origin_airport_code.KCLE        0.092
+origin_airport_code.KCLT        3.040
+origin_airport_code.KCMH           NA
+origin_airport_code.KCVG           NA
+origin_airport_code.KDCA      -13.249
+origin_airport_code.KDFW       36.902
+origin_airport_code.KDTW           NA
+origin_airport_code.KEWR           NA
+origin_airport_code.KFLL        0.186
+origin_airport_code.KIAD           NA
+origin_airport_code.KIAH       18.472
+origin_airport_code.KIND           NA
+origin_airport_code.KJAX       -3.416
+origin_airport_code.KJFK       -7.488
+origin_airport_code.KLAS           NA
+origin_airport_code.KLAX        4.844
+origin_airport_code.KLGA           NA
+origin_airport_code.KMCI       -3.690
+origin_airport_code.KMCO       -3.226
+origin_airport_code.KMEM           NA
+origin_airport_code.KMIA        9.853
+origin_airport_code.KMKE           NA
+origin_airport_code.KMSP           NA
+origin_airport_code.KMSY           NA
+origin_airport_code.KORD           NA
+origin_airport_code.KPBI       -0.285
+origin_airport_code.KPDX           NA
+origin_airport_code.KPHL       -3.697
+origin_airport_code.KPHX           NA
+origin_airport_code.KPIT           NA
+origin_airport_code.KRDU           NA
+origin_airport_code.KRSW       -6.042
+origin_airport_code.KSAN      -12.064
+origin_airport_code.KSAT           NA
+origin_airport_code.KSEA           NA
+origin_airport_code.KSFO        4.799
+origin_airport_code.KSJC       -6.460
+origin_airport_code.KSLC           NA
+origin_airport_code.KSMF        1.115
+origin_airport_code.KSNA           NA
+origin_airport_code.KSTL           NA
+origin_airport_code.KTPA           NA
+dest_airport_code.KAUS          1.063
+dest_airport_code.KBDL             NA
+dest_airport_code.KBOS             NA
+dest_airport_code.KBWI             NA
+dest_airport_code.KCHS             NA
+dest_airport_code.KCLE         -3.436
+dest_airport_code.KCLT          4.689
+dest_airport_code.KCMH             NA
+dest_airport_code.KCVG             NA
+dest_airport_code.KDCA          0.905
+dest_airport_code.KDFW         16.305
+dest_airport_code.KDTW             NA
+dest_airport_code.KEWR             NA
+dest_airport_code.KFLL          5.944
+dest_airport_code.KIAD             NA
+dest_airport_code.KIAH          9.288
+dest_airport_code.KIND             NA
+dest_airport_code.KJAX         -5.214
+dest_airport_code.KJFK        -16.287
+dest_airport_code.KLAS             NA
+dest_airport_code.KLAX          9.861
+dest_airport_code.KLGA             NA
+dest_airport_code.KMCI         -0.862
+dest_airport_code.KMCO          1.362
+dest_airport_code.KMEM             NA
+dest_airport_code.KMIA          9.298
+dest_airport_code.KMKE             NA
+dest_airport_code.KMSP             NA
+dest_airport_code.KMSY             NA
+dest_airport_code.KORD             NA
+dest_airport_code.KPBI          1.285
+dest_airport_code.KPDX             NA
+dest_airport_code.KPHL          5.066
+dest_airport_code.KPHX             NA
+dest_airport_code.KPIT             NA
+dest_airport_code.KRDU             NA
+dest_airport_code.KRSW         -2.270
+dest_airport_code.KSAN          4.622
+dest_airport_code.KSAT             NA
+dest_airport_code.KSEA             NA
+dest_airport_code.KSFO         22.227
+dest_airport_code.KSJC          3.957
+dest_airport_code.KSLC             NA
+dest_airport_code.KSMF          7.170
+dest_airport_code.KSNA             NA
+dest_airport_code.KSTL             NA
+dest_airport_code.KTPA             NA
+manufacturer.boeing           -15.764
+manufacturer.embraer           -7.276
+manufacturer.mcdonnell         -6.887
+model.737                      17.638
+model.757                      28.083
+model.767                      29.703
+model.777                      32.814
+model.787                      13.954
+model.A319                    -13.285
+model.A320                     -8.824
+model.A321                     -6.071
+model.A330                         NA
+model.DC.9                      0.716
+model.ERJ                          NA
+model.MD.80                   -17.993
+model.MD90                         NA
+age                            24.313
+emptotal                       -9.993
+                              Pr(>|t|)
+(Intercept)                    < 2e-16
+year                           < 2e-16
+month                         4.83e-09
+day_of_week                    < 2e-16
+fl_date                       0.617282
+origin_state_abr.CA           0.983944
+origin_state_abr.CT            < 2e-16
+origin_state_abr.FL            < 2e-16
+origin_state_abr.GA           6.42e-13
+origin_state_abr.IL            < 2e-16
+origin_state_abr.IN           4.89e-09
+origin_state_abr.KY           5.33e-10
+origin_state_abr.LA           0.660619
+origin_state_abr.MA           1.11e-13
+origin_state_abr.MD           1.03e-08
+origin_state_abr.MI            < 2e-16
+origin_state_abr.MN           1.97e-10
+origin_state_abr.MO           1.43e-09
+origin_state_abr.NC           0.443367
+origin_state_abr.NJ            < 2e-16
+origin_state_abr.NV            < 2e-16
+origin_state_abr.NY            < 2e-16
+origin_state_abr.OH           7.62e-10
+origin_state_abr.OR           0.013564
+origin_state_abr.PA            < 2e-16
+origin_state_abr.SC            < 2e-16
+origin_state_abr.TN           2.85e-05
+origin_state_abr.TX            < 2e-16
+origin_state_abr.UT           2.83e-12
+origin_state_abr.VA            < 2e-16
+origin_state_abr.WA           1.11e-13
+origin_state_abr.WI            < 2e-16
+dest_state_abr.CA             2.12e-12
+dest_state_abr.CT             0.005535
+dest_state_abr.FL             0.005590
+dest_state_abr.GA             0.002362
+dest_state_abr.IL              < 2e-16
+dest_state_abr.IN             5.33e-07
+dest_state_abr.KY             9.36e-14
+dest_state_abr.LA             0.025721
+dest_state_abr.MA              < 2e-16
+dest_state_abr.MD             0.548836
+dest_state_abr.MI             0.073652
+dest_state_abr.MN             0.001025
+dest_state_abr.MO             0.004163
+dest_state_abr.NC             0.009019
+dest_state_abr.NJ              < 2e-16
+dest_state_abr.NV             0.000453
+dest_state_abr.NY              < 2e-16
+dest_state_abr.OH             0.044831
+dest_state_abr.OR             0.049351
+dest_state_abr.PA             8.82e-11
+dest_state_abr.SC             2.46e-09
+dest_state_abr.TN             0.040135
+dest_state_abr.TX             0.018549
+dest_state_abr.UT             0.184115
+dest_state_abr.VA             0.000993
+dest_state_abr.WA             0.000165
+dest_state_abr.WI             2.75e-05
+dep_time                       < 2e-16
+air_time                       < 2e-16
+airline.Delta.Air.Lines.Inc.   < 2e-16
+airline.United.Air.Lines.Inc.  < 2e-16
+taxi_out                       < 2e-16
+taxi_in                       9.63e-08
+origin_airport_code.KAUS      0.378064
+origin_airport_code.KBDL            NA
+origin_airport_code.KBOS            NA
+origin_airport_code.KBWI            NA
+origin_airport_code.KCHS            NA
+origin_airport_code.KCLE      0.926575
+origin_airport_code.KCLT      0.002364
+origin_airport_code.KCMH            NA
+origin_airport_code.KCVG            NA
+origin_airport_code.KDCA       < 2e-16
+origin_airport_code.KDFW       < 2e-16
+origin_airport_code.KDTW            NA
+origin_airport_code.KEWR            NA
+origin_airport_code.KFLL      0.852716
+origin_airport_code.KIAD            NA
+origin_airport_code.KIAH       < 2e-16
+origin_airport_code.KIND            NA
+origin_airport_code.KJAX      0.000636
+origin_airport_code.KJFK      6.97e-14
+origin_airport_code.KLAS            NA
+origin_airport_code.KLAX      1.27e-06
+origin_airport_code.KLGA            NA
+origin_airport_code.KMCI      0.000224
+origin_airport_code.KMCO      0.001257
+origin_airport_code.KMEM            NA
+origin_airport_code.KMIA       < 2e-16
+origin_airport_code.KMKE            NA
+origin_airport_code.KMSP            NA
+origin_airport_code.KMSY            NA
+origin_airport_code.KORD            NA
+origin_airport_code.KPBI      0.775641
+origin_airport_code.KPDX            NA
+origin_airport_code.KPHL      0.000218
+origin_airport_code.KPHX            NA
+origin_airport_code.KPIT            NA
+origin_airport_code.KRDU            NA
+origin_airport_code.KRSW      1.52e-09
+origin_airport_code.KSAN       < 2e-16
+origin_airport_code.KSAT            NA
+origin_airport_code.KSEA            NA
+origin_airport_code.KSFO      1.59e-06
+origin_airport_code.KSJC      1.05e-10
+origin_airport_code.KSLC            NA
+origin_airport_code.KSMF      0.264864
+origin_airport_code.KSNA            NA
+origin_airport_code.KSTL            NA
+origin_airport_code.KTPA            NA
+dest_airport_code.KAUS        0.287677
+dest_airport_code.KBDL              NA
+dest_airport_code.KBOS              NA
+dest_airport_code.KBWI              NA
+dest_airport_code.KCHS              NA
+dest_airport_code.KCLE        0.000590
+dest_airport_code.KCLT        2.75e-06
+dest_airport_code.KCMH              NA
+dest_airport_code.KCVG              NA
+dest_airport_code.KDCA        0.365581
+dest_airport_code.KDFW         < 2e-16
+dest_airport_code.KDTW              NA
+dest_airport_code.KEWR              NA
+dest_airport_code.KFLL        2.78e-09
+dest_airport_code.KIAD              NA
+dest_airport_code.KIAH         < 2e-16
+dest_airport_code.KIND              NA
+dest_airport_code.KJAX        1.85e-07
+dest_airport_code.KJFK         < 2e-16
+dest_airport_code.KLAS              NA
+dest_airport_code.KLAX         < 2e-16
+dest_airport_code.KLGA              NA
+dest_airport_code.KMCI        0.388813
+dest_airport_code.KMCO        0.173321
+dest_airport_code.KMEM              NA
+dest_airport_code.KMIA         < 2e-16
+dest_airport_code.KMKE              NA
+dest_airport_code.KMSP              NA
+dest_airport_code.KMSY              NA
+dest_airport_code.KORD              NA
+dest_airport_code.KPBI        0.198802
+dest_airport_code.KPDX              NA
+dest_airport_code.KPHL        4.06e-07
+dest_airport_code.KPHX              NA
+dest_airport_code.KPIT              NA
+dest_airport_code.KRDU              NA
+dest_airport_code.KRSW        0.023189
+dest_airport_code.KSAN        3.80e-06
+dest_airport_code.KSAT              NA
+dest_airport_code.KSEA              NA
+dest_airport_code.KSFO         < 2e-16
+dest_airport_code.KSJC        7.59e-05
+dest_airport_code.KSLC              NA
+dest_airport_code.KSMF        7.51e-13
+dest_airport_code.KSNA              NA
+dest_airport_code.KSTL              NA
+dest_airport_code.KTPA              NA
+manufacturer.boeing            < 2e-16
+manufacturer.embraer          3.44e-13
+manufacturer.mcdonnell        5.70e-12
+model.737                      < 2e-16
+model.757                      < 2e-16
+model.767                      < 2e-16
+model.777                      < 2e-16
+model.787                      < 2e-16
+model.A319                     < 2e-16
+model.A320                     < 2e-16
+model.A321                    1.27e-09
+model.A330                          NA
+model.DC.9                    0.474081
+model.ERJ                           NA
+model.MD.80                    < 2e-16
+model.MD90                          NA
+age                            < 2e-16
+emptotal                       < 2e-16
+                                 
+(Intercept)                   ***
+year                          ***
+month                         ***
+day_of_week                   ***
+fl_date                          
+origin_state_abr.CA              
+origin_state_abr.CT           ***
+origin_state_abr.FL           ***
+origin_state_abr.GA           ***
+origin_state_abr.IL           ***
+origin_state_abr.IN           ***
+origin_state_abr.KY           ***
+origin_state_abr.LA              
+origin_state_abr.MA           ***
+origin_state_abr.MD           ***
+origin_state_abr.MI           ***
+origin_state_abr.MN           ***
+origin_state_abr.MO           ***
+origin_state_abr.NC              
+origin_state_abr.NJ           ***
+origin_state_abr.NV           ***
+origin_state_abr.NY           ***
+origin_state_abr.OH           ***
+origin_state_abr.OR           *  
+origin_state_abr.PA           ***
+origin_state_abr.SC           ***
+origin_state_abr.TN           ***
+origin_state_abr.TX           ***
+origin_state_abr.UT           ***
+origin_state_abr.VA           ***
+origin_state_abr.WA           ***
+origin_state_abr.WI           ***
+dest_state_abr.CA             ***
+dest_state_abr.CT             ** 
+dest_state_abr.FL             ** 
+dest_state_abr.GA             ** 
+dest_state_abr.IL             ***
+dest_state_abr.IN             ***
+dest_state_abr.KY             ***
+dest_state_abr.LA             *  
+dest_state_abr.MA             ***
+dest_state_abr.MD                
+dest_state_abr.MI             .  
+dest_state_abr.MN             ** 
+dest_state_abr.MO             ** 
+dest_state_abr.NC             ** 
+dest_state_abr.NJ             ***
+dest_state_abr.NV             ***
+dest_state_abr.NY             ***
+dest_state_abr.OH             *  
+dest_state_abr.OR             *  
+dest_state_abr.PA             ***
+dest_state_abr.SC             ***
+dest_state_abr.TN             *  
+dest_state_abr.TX             *  
+dest_state_abr.UT                
+dest_state_abr.VA             ***
+dest_state_abr.WA             ***
+dest_state_abr.WI             ***
+dep_time                      ***
+air_time                      ***
+airline.Delta.Air.Lines.Inc.  ***
+airline.United.Air.Lines.Inc. ***
+taxi_out                      ***
+taxi_in                       ***
+origin_airport_code.KAUS         
+origin_airport_code.KBDL         
+origin_airport_code.KBOS         
+origin_airport_code.KBWI         
+origin_airport_code.KCHS         
+origin_airport_code.KCLE         
+origin_airport_code.KCLT      ** 
+origin_airport_code.KCMH         
+origin_airport_code.KCVG         
+origin_airport_code.KDCA      ***
+origin_airport_code.KDFW      ***
+origin_airport_code.KDTW         
+origin_airport_code.KEWR         
+origin_airport_code.KFLL         
+origin_airport_code.KIAD         
+origin_airport_code.KIAH      ***
+origin_airport_code.KIND         
+origin_airport_code.KJAX      ***
+origin_airport_code.KJFK      ***
+origin_airport_code.KLAS         
+origin_airport_code.KLAX      ***
+origin_airport_code.KLGA         
+origin_airport_code.KMCI      ***
+origin_airport_code.KMCO      ** 
+origin_airport_code.KMEM         
+origin_airport_code.KMIA      ***
+origin_airport_code.KMKE         
+origin_airport_code.KMSP         
+origin_airport_code.KMSY         
+origin_airport_code.KORD         
+origin_airport_code.KPBI         
+origin_airport_code.KPDX         
+origin_airport_code.KPHL      ***
+origin_airport_code.KPHX         
+origin_airport_code.KPIT         
+origin_airport_code.KRDU         
+origin_airport_code.KRSW      ***
+origin_airport_code.KSAN      ***
+origin_airport_code.KSAT         
+origin_airport_code.KSEA         
+origin_airport_code.KSFO      ***
+origin_airport_code.KSJC      ***
+origin_airport_code.KSLC         
+origin_airport_code.KSMF         
+origin_airport_code.KSNA         
+origin_airport_code.KSTL         
+origin_airport_code.KTPA         
+dest_airport_code.KAUS           
+dest_airport_code.KBDL           
+dest_airport_code.KBOS           
+dest_airport_code.KBWI           
+dest_airport_code.KCHS           
+dest_airport_code.KCLE        ***
+dest_airport_code.KCLT        ***
+dest_airport_code.KCMH           
+dest_airport_code.KCVG           
+dest_airport_code.KDCA           
+dest_airport_code.KDFW        ***
+dest_airport_code.KDTW           
+dest_airport_code.KEWR           
+dest_airport_code.KFLL        ***
+dest_airport_code.KIAD           
+dest_airport_code.KIAH        ***
+dest_airport_code.KIND           
+dest_airport_code.KJAX        ***
+dest_airport_code.KJFK        ***
+dest_airport_code.KLAS           
+dest_airport_code.KLAX        ***
+dest_airport_code.KLGA           
+dest_airport_code.KMCI           
+dest_airport_code.KMCO           
+dest_airport_code.KMEM           
+dest_airport_code.KMIA        ***
+dest_airport_code.KMKE           
+dest_airport_code.KMSP           
+dest_airport_code.KMSY           
+dest_airport_code.KORD           
+dest_airport_code.KPBI           
+dest_airport_code.KPDX           
+dest_airport_code.KPHL        ***
+dest_airport_code.KPHX           
+dest_airport_code.KPIT           
+dest_airport_code.KRDU           
+dest_airport_code.KRSW        *  
+dest_airport_code.KSAN        ***
+dest_airport_code.KSAT           
+dest_airport_code.KSEA           
+dest_airport_code.KSFO        ***
+dest_airport_code.KSJC        ***
+dest_airport_code.KSLC           
+dest_airport_code.KSMF        ***
+dest_airport_code.KSNA           
+dest_airport_code.KSTL           
+dest_airport_code.KTPA           
+manufacturer.boeing           ***
+manufacturer.embraer          ***
+manufacturer.mcdonnell        ***
+model.737                     ***
+model.757                     ***
+model.767                     ***
+model.777                     ***
+model.787                     ***
+model.A319                    ***
+model.A320                    ***
+model.A321                    ***
+model.A330                       
+model.DC.9                       
+model.ERJ                        
+model.MD.80                   ***
+model.MD90                       
+age                           ***
+emptotal                      ***
+---
+Signif. codes:    0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’
+  0.1 ‘ ’ 1
+
+Residual standard error: 15.83 on 2370419 degrees of freedom
+Multiple R-squared:  0.0718,	Adjusted R-squared:  0.07175 
+F-statistic:  1541 on 119 and 2370419 DF,  p-value: < 2.2e-16
+
