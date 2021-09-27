@@ -124,7 +124,7 @@ allmonth_plot %>%
   geom_point(shape = '.', col = 'white')
   # Check correlation to Air Time
 
-cor(allmonth_plot)
+cor(allmonth_plot$air_time, allmonth_plot$distance) #0.9742272 correlation
 
 allmonth_plot %>% 
   filter(air_time > 0) %>% 
@@ -152,7 +152,7 @@ allmonth_plot %>%
 summary(allmonth_plot$age)
 # median is 20 years of age anyway, no wonder we see most observations there.
 
-allmonth_plot %>% 
+allmonth %>% 
   filter(dep_delay > 95) %>% 
   sample_n(50000) %>% 
   ggplot(aes(y=dep_delay, x=age)) +
@@ -185,7 +185,8 @@ allmonth_plot %>%
   geom_point(shape = '.', col = 'white')
 
 allmonth_plot %>% 
-  sample_n(50000) %>% 
+  sample_n(50000) %>%
+  filter(dep_delay > 0) %>% 
   ggplot(aes(y=dep_delay, x=dep_time)) +
   scale_fill_viridis_c() +
   geom_point(alpha = 0.3)
