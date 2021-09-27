@@ -898,8 +898,8 @@ model.MD90
 age                           ***
 emptotal                      ***
 ---
-Signif. codes:    0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’
-  0.1 ‘ ’ 1
+Signif. codes:    0 Â‘***Â’ 0.001 Â‘**Â’ 0.01 Â‘*Â’ 0.05 Â‘.Â’
+  0.1 Â‘ Â’ 1
 
 Residual standard error: 15.83 on 2370419 degrees of freedom
 Multiple R-squared:  0.0718,	Adjusted R-squared:  0.07175 
