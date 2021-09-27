@@ -193,8 +193,20 @@ allmonth_plot %>%
   #view when start of day is
   #delays tend to increase later in the day
 
+allmonth_plot %>% 
+  sample_n(50000) %>% 
+  filter(dep_delay > 0) %>% 
+  ggplot(aes(y=dep_delay, x=manufacturer)) +
+  scale_fill_viridis_c() +
+  geom_point(alpha = 0.3)
 
-
+allmonth_plot %>% 
+  sample_n(50000) %>% 
+  filter(dep_delay > 0) %>% 
+  ggplot(aes(y=dep_delay, x=model)) +
+  scale_fill_viridis_c() +
+  geom_point(alpha = 0.3)
+# manufacturer and model type need to be cleaned
 
 
 
