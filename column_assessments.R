@@ -22,14 +22,14 @@ freq(allmonths, path_out = here('Column EDA', '.'))
 
 # Numerical Overall
 plot_num(allmonths, path_out = here('Column EDA', '.'))
-     
+
 
 Q1 <- quantile(allmonths$DEP_DELAY, .25)
 Q3 <- quantile(allmonths$DEP_DELAY, .75)
 IQR <- IQR(allmonths$DEP_DELAY)
 
 allmonths2 <- subset(allmonths, allmonths$DEP_DELAY > (Q1 - 1.5*IQR) & 
-                      allmonths$DEP_DELAY< (Q3 + 1.5*IQR))
+                       allmonths$DEP_DELAY< (Q3 + 1.5*IQR))
 
 Q1 <- quantile(allmonths$ARR_DELAY, .25)
 Q3 <- quantile(allmonths$ARR_DELAY, .75)
@@ -122,7 +122,7 @@ allmonth_plot %>%
   geom_hex() +       
   scale_fill_viridis_c() +
   geom_point(shape = '.', col = 'white')
-  # Check correlation to Air Time
+# Check correlation to Air Time
 
 cor(allmonth_plot$air_time, allmonth_plot$distance) #0.9742272 correlation
 
@@ -192,7 +192,6 @@ allmonth_plot %>%
   geom_point(alpha = 0.3)
   #view when start of day is
   #delays tend to increase later in the day
-
 
 
 
