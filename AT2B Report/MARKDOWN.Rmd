@@ -24,7 +24,7 @@ library(tidyverse)
 library(kableExtra)
 ```
 
-## Introduction
+# Introduction
 
 Aircraft delays have serious economic impacts that represent a logistical headache for airlines, airports, airline crew, and passengers alike. In a 2010 study by the National Center of Excellence For Aviation Operations Research, an estimated 31.2 billion US dollars was lost due to direct and indirect costs of airline delays in the United States for 2007. These expenses included maintenance costs, extra paid hours for flight crew, the extra use of fuel, and airport fees. As an example, airlines have dedicated time slots at airport gates and unexpected delays exceeding the expected time slot can cost thousands of dollars by the minute.
 
@@ -38,13 +38,7 @@ Thus, understanding the impact of these variables on aircraft on-time performanc
 
 Herein, we propose an exploratory analysis and prediction model on airline delays utilizing data from the United States in 2019. For our analysis we are going to compare American Airlines to Delta and United Airlines, based on the fact that these 3 US airlines are market leaders in terms of Brand value, Market value and Domestic Market Share. We also took into consideration that these 3 airlines cater to the same segment of customers, that is the reason why big low-cost airlines such as Southwest were not considered for this analysis. 
 
-## Problem at hand
-
-During the last couple of years around 30% of the domestic flights in the United States have presented some sort of delay, this shows us the big opportunity we have in front of us. Specially if we take into consideration that every minute of delay costs airlines around $74 dollars, and that just during 2020 American Airlines domestic flights reported over 4 million minutes in delays just in domestic flights, meaning an approximate $300 million dollars were lost for this reason. 
-
-(Include stack bar Domestic on time performance 3 airlines)
-
-## Research Questions and EDA
+# Research Question
 
 ## What are the main causes for Airline delays?
 
@@ -58,90 +52,80 @@ We found that all three airlines have improved their on-time performance conside
 
 (Include boxplot competitor performance)
 
+# Problem Statement
 
-## Linear Regression Model, Features and Limitations
+During the last couple of years around 30% of the domestic flights in the United States have presented some sort of delay, this shows us the big opportunity we have in front of us. Specially if we take into consideration that every minute of delay costs airlines around $74 dollars, and that just during 2020 American Airlines domestic flights reported over 4 million minutes in delays just in domestic flights, meaning an approximate $300 million dollars were lost for this reason. 
 
-## Limitations
+(Include stack bar Domestic on time performance 3 airlines)
+
+# Exploratory Data Analysis (EDA)
+
+## Simple Exploratory Data Analysis 
+
+### Metrics on data types
+
+### Analysis on categorical variables
+
+### Analysis on numerical variables
+
+## Advanced EDA
+
+### Sumarry Statistics
+
+### Summarry Stat plots
+
+(Inclusion of distribution of variables)
+
+### Correlation Matrix
+
+### Nominal, ordinal and biserial tests
+
+#### Nominal
+
+#### Ordinal
+
+#### Biseral
+
+### Further cleaning
+
+# Modeling
+
+## Mutivariate Linear Model
+
+With Justification, & assumptions 
+
+Removal of collinearity (add interaction variable)  
+
+## MV ln. model summary 
+
+Describe coefficients & p-values 
+
+X squared 
+
+## MV VIF and Boruta algorithm 
+
+Explanation of variance 
+
+Which variables to choose  
+
+## Modified mlm 
+
+Mlm summary 
+
+Variance plots (4) 
+
+Variance descriptions 
+
+## Results
+
+## Analysis
 
 
+# Limitations
 
+## Dataset limitations
 
-
-
-
-
-Good features for the Introduction include:
-• Summary of the study and data, as well as any relevant substantive context, background, or
-framing issues.
-• The “big questions” answered by your data analyses, and summaries of your conclusions about
-these questions.
-• Brief outline of remainder of paper.
-The above is a pretty good order to present this material in as well.
-
-
-## Body
-
-```{r stakeholder_analysis, echo=FALSE}
-text_tbl <- data.frame(
-  Stakeholders = c("Airline company executives", "Airline company employees", "Shareholders and investors of Airline companies", "Consumers of airline companies", "Suppliers for Airline companies", "Government"),
-  Description = c(
-    "The main participants in the aviation industry. 
-This project can help them improve their operational planning and execution and any related products and services. ",
-    "Pilots, engineers, and flight attendants ensure that passengers' needs are appropriately met and satisfied.  ", 
-    "Their primary role is to provide capital in the form of share capital. Airlines performance may affect their investing behaviours. ", "Airline company/industry’s primary revenue source. Customers are the most important factor in this industry; without customers, airlines would not exist. ", "Form in which how much the company orders supplies in impacts inventory, e.g Aircraft manufacters, fuel and food/beverage resources. ", "Government and policy makers can impact how the industry will be regulated, such as climate change, tourism, and infrastructure policy.  "
-  )
-)
-
-kbl(text_tbl) %>%
-  kable_paper(full_width = F) %>%
-  column_spec(1, bold = T, border_right = T) %>%
-  column_spec(2, width = "30em")
-```
-
-The body can be organized in several ways. Here are two that often work well:
-• Traditional. Divide the body up into several sections at the same level as the Introduction, with
-names like:
-– Data
-– Methods
-– Analysis
-– Results
-This format is very familiar to those who have written psych research papers. It often works
-well for a data analysis paper as well, though one problem with it is that the Methods section
-often sounds like a bit of a stretch: In a psych research paper the Methods section describes
-what you did to get your data. In a data analysis paper, you should describe the analyses that
-you performed. Without the results as well, this can be pretty sterile sounding, so I often merge
-these “methods” pieces into the “Analysis” section when I write.
-• Question-oriented. In this format there is a single Body section, usually called “Analysis”,
-and then there is a subsection for each question raised in the introduction, usually taken in the
-same order as in the introduction (general to specific, decreasing order of importance, etc.).
-Within each subsection, statistical method, analyses, and conclusion would be described (for
-each question). For example:
-2. Analysis
-2.1 Success Rate
-Methods
-Analysis
-Conclusions
-2.2 Time to Relapse
-Methods
-Analysis
-Conclusions
-3
-2.3 Effect of Gender
-Methods
-Analysis
-Conclusions
-2.4 Hospital Effects
-Methods
-Analysis
-Conclusions
-Etc. . .
-Other organizational formats are possible too. Whatever the format, it is useful to provide one or two
-well-chosen tables or graphs per question in the body of the report, for two reasons: First, graphical
-and tabular displays can convey your points more efficiently than words; and second, your “skimming”
-audiences will be more likely to have their eye caught by an interesting graph or table than by running
-text. However, too much graphical/tabular material will break up the flow of the text and become
-distracting; so extras should be moved to the Appendix.
-
+## Model limitations
 
 ## Conclusion
 
