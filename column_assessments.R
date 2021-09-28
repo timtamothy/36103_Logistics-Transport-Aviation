@@ -7,9 +7,10 @@ library(Hmisc)
 library(janitor)
 library(feather)
 library(future.apply)
+library(data.table)
 
 # Load data ----
-allmonths <- read_feather(here('clean_3airline_fleet_employ_2.feather'))
+allmonths <- fread(here('num_transform.csv'))
 
 # Overall status
 status(allmonths)
@@ -22,8 +23,10 @@ freq(allmonths, path_out = here('Column EDA', '.'))
 freq(allmonths)
 # Numerical Overall
 plot_num(allmonths, path_out = here('Column EDA', '.'))
-plot_num
+plot_num(allmonths)
 
+
+# Not for EDA ---------------------------------------------------------------
 Q1 <- quantile(allmonths$DEP_DELAY, .25)
 Q3 <- quantile(allmonths$DEP_DELAY, .75)
 IQR <- IQR(allmonths$DEP_DELAY)
@@ -80,7 +83,7 @@ status(num_col_norm)
 status(num_col)
 status(allmonths)
 
-# Individual Column Assessment
+# Individual Column Assessment ---------------------------------------------
 names(allmonths)
 
 # Determine Outlier range for *delays only 1 min and greater*
@@ -203,7 +206,7 @@ allmonth_plot %>%
 
 allmonth_plot %>% 
   sample_n(50000) %>% 
-  filter(dep_delay > 0) %>% 
+  #filter(dep_delay > 0) %>% 
   ggplot(aes(y=dep_delay, x=model)) +
   scale_fill_viridis_c() +
   geom_point(alpha = 0.3)
