@@ -58,27 +58,33 @@ small <- num_transform %>% sample_n(10000)
 
 #remove origin_state_abr, dest_state_abr, manufacturer
 
-#Tim - run from here
-
+#Tim - from here 
 num_transform <- fread(here('num_transform.csv'))
 reg_2 <- num_transform %>% dplyr:: select(-c('origin_state_abr', 'dest_state_abr', 'manufacturer'))
 
 #change to dummy variables 
-dmy <- dummyVars(" ~ . ", data=hot_filtered, fullRank = T)
-dat_transformed <- data.frame(predict(dmy, newdata = hot_filtered))
+dmy <- dummyVars(" ~ . ", data=reg_2, fullRank = T)
+dat_transformed <- data.frame(predict(dmy, newdata = reg_2))
 
 #write file 
 fwrite(dat_transformed, here('reg_2.csv'))
 
-#Tim- till here 
+#Tim till here 
 
-#Replace NA values with 0 (due to dummy variables)
-allmonths[is.na(allmonths)] = 0
+allmonths <- fread(here('reg_2.csv'))
 
-cat_col <- allmonths[,12:177]
-cat_col <- cat_col %>% sample_n(10000)
+#chi-square independence test, dep_delay against other variables 
+library(broom)
+CHIS <- lapply(allmonths[,-1], function(x) chisq.test(allmonths[,1], x))
+chi_result <- do.call(rbind, lapply(CHIS,tidy))
 
+sink('chi_result.txt')
+chi_result
+sink()
 
-CHIS <- lapply(cat_col[,-1], function(x) chisq.test(cat_col[,1], x))
-do.call(rbind, future_lapply(CHIS, tidy))
+#correlation test (including everything)
+corr_result_all <- round(cor(allmonths), digits = 2)
 
+sink('corr_result_all.txt')
+corr_result_all
+sink()
