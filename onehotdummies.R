@@ -15,6 +15,7 @@ library(future.apply)
 library(httr)
 library(jsonlite)
 library(caret)
+library(future)
 plan(multisession)
 # Load data
 hot <- read_feather(here('mlm_dataset_3.feather'))
@@ -73,13 +74,17 @@ cat_col$id <- seq.int(nrow(hot_filtered))
 
 test <- left_join(num_col_norm, cat_col, by = 'id')
 
-hot_filtered %>% select(-c('id', 'arr_delay'))
+library(dplyr)
+hot_filtered <- hot_filtered %>% dplyr::select(-c('id', 'arr_delay'))
+
+
 
 #write a csv for test - before dummy variable but after transform 
 fwrite(hot_filtered, here('num_transform.csv'))
 
 
 # make dummies
+hot_filtered <- fread(here 'num_transform.csv')
 colnames(hot_filtered)
 
 dmy <- dummyVars(" ~ . ", data=hot_filtered, fullRank = T)
