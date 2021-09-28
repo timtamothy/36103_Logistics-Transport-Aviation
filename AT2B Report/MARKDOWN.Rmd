@@ -327,6 +327,39 @@ names(ontime_final)[names(ontime_final) == "airportName"] <- "Dest_airportName"
 #Airline, Origin_airportName, Dest_airportName
 
 ```
+Adding fleet data into ontime dataset 
+```{r, eval = FALSE}
+maindf <- read_feather(here('clean_3airlines.feather'))
+
+delta <- read_feather(here('DAL_fleet.feather'))
+
+american <- read_feather(here('AA_fleet.feather'))
+
+united <- read_feather(here('UAL_fleet.feather'))
+
+# Join Files ----
+
+allrows <- bind_rows(delta, american, united)
+
+testjoin <- left_join(maindf, allrows, by = c('tail_num' = 'Tail'))
+
+col_status <- status(testjoin)
+
+# Clean column names ----
+clean_join <- clean_names(testjoin)
+
+# Separate the age/year columns into two columns
+separate <- clean_join %>% 
+  separate(age_built, c('age', 'model_year'))
+
+status(separate)
+
+# Save a feather file
+
+write_feather(separate, here('clean_3airline_fleet.feather'))
+
+```
+
 Adding employee data into ontime dataset
 ```{r, eval = FALSE}
 allmonths <- read_feather("C:/Users/tsetc/Downloads/clean_3airline_fleet (1).feather")
@@ -351,6 +384,8 @@ allmonths <- allmonths %>% select(-combine)
 
 write_feather(allmonths, "C:/Users/tsetc/Downloads/clean_3airline_fleet_employ.feather")
 ```
+Clean data 
+
 
 
 One or more appendices are the place to out details and ancillary materials.
