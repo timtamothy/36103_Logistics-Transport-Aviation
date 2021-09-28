@@ -73,12 +73,13 @@ cat_col$id <- seq.int(nrow(hot_filtered))
 
 test <- left_join(num_col_norm, cat_col, by = 'id')
 
-hot_filtered <- test %>% select(-id)
+hot_filtered %>% select(-c('id', 'arr_delay'))
+
+#write a csv for test - before dummy variable but after transform 
+fwrite(hot_filtered, here('num_transform.csv'))
+
 
 # make dummies
-hot_filtered <- hot_filtered %>% 
-  select(-arr_delay)
-
 colnames(hot_filtered)
 
 dmy <- dummyVars(" ~ . ", data=hot_filtered, fullRank = T)
