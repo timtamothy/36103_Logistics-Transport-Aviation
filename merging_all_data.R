@@ -8,6 +8,8 @@ library(httr)
 library(jsonlite)
 library(RColorBrewer)
 library(scales)
+library(future)
+library(data.table)
 
 #load the file names ----
 files <- list.files(path=here('Dataset', 'All'), full.names = TRUE)
@@ -26,7 +28,7 @@ write_csv(output, here('Dataset', 'All', 'allmonths.csv'))
 
 
 #load data ----
-allmonths <- read_csv(here('Dataset', 'All', 'allmonths.csv'))
+allmonths <- fread(here('Dataset', 'All', 'allmonths.csv'))
 
 #load API data
 icao <- GET(

@@ -12,6 +12,9 @@ library(funModeling)
 library(Hmisc)
 library(DataExplorer)
 library(MASS)
+library(data.table)
+library(regclass)
+library(Boruta)
 
 # Load Data ----
 allmonths <- fread(here('dummy.csv'))
@@ -73,14 +76,91 @@ fwrite(dat_transformed, here('reg_2.csv'))
 
 allmonths <- fread(here('reg_2.csv'))
 
+#remove destination airport 
+names(allmonths)
+allmonths <- allmonths[,-c(59:105)]
+
+
+#daily flight at a certain airport, linear trend (time series data)
+str(allmonths$dep_time)
+#departure time is integer 
+
+#specific ariport - LAX
+allmonths <-  allmonths %>% filter(origin_airport_codeKLAX == 1)
+
+#remove origin airport
+allmonths <- allmonths[,-c(13:58)]
+
+names(allmonths)
+#remove time x variables 
+reg_fit1 <- allmonths[,-c(5:7, 12)]
+
+# make sure no negative values dep_delay for dataset 
+reg_fit1 <- reg_fit1 %>% mutate(dep_delay_new = ifelse(dep_delay >0, dep_delay, 0)) %>% dplyr::select(-dep_delay)
+
+#factor analysis 
+
+#fit mlm1 model 
+mlm1 <- lm(dep_delay_new ~ ., data=reg_fit1)
+
+summary(mlm1)
+#VIF 
+1/VIF(mlm1)
+#VIF cannot run because there is perfect multicollinearity 
+
+alias(lm(dep_delay ~ ., data=reg_fit1))
+
+#remove airline
+
+reg_fit2 <- reg_fit1[,-c(5:6, 9:21)]
+
+
+#fit mlm2 model 
+mlm2 <- lm(dep_delay_new ~ ., data=reg_fit2)
+summary(mlm2)
+#VIF
+1/VIF(mlm2)
+#no multicollinearity
+
+
+#resiudals
+plan(multisession)
+#plot(mlm1)
+plot(mlm2)
+
+
+#variable transformation on y
+reg_fit3 <- reg_fit2
+reg_fit3$dep_delay_new <- sqrt(reg_fit3$dep_delay_new)
+
+#fit mlm3 model 
+mlm3 <- lm(dep_delay_new ~ ., data=reg_fit3)
+
+summary(mlm3)
+plot(mlm3)
+
+#even after sqrt transformation, variable transformation on x as well
+reg_fit4 <- reg_fit2
+
+reg_fit4 <- data.frame(sapply(reg_fit4, sqrt))
+
+
+#fit mlm4 model
+mlm4 <- lm(dep_delay_new ~ ., data = reg_fit4)
+summary(mlm4)
+
+plan(multisession)
+plot(mlm4)
+
+
+#Variable selection 
+Boruta(dep_delay ~ ., data=reg_fit, doTrace = 2)
+
 #chi-square independence test, dep_delay against other variables 
 library(broom)
 CHIS <- lapply(allmonths[,-1], function(x) chisq.test(allmonths[,1], x))
 chi_result <- do.call(rbind, lapply(CHIS,tidy))
 
-sink('chi_result.txt')
-chi_result
-sink()
 
 #correlation test (including everything)
 corr_result_all <- round(cor(allmonths), digits = 2)
