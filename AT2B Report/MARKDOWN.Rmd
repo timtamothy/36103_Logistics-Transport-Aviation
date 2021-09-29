@@ -82,19 +82,45 @@ During the last couple of years around 30% of the domestic flights in the United
 
 #### Nominal
 
-#### Ordinal
+#### Chi-square independence test 
+explain chi-square independence test 
+https://www.statisticssolutions.com/free-resources/directory-of-statistical-analyses/chi-square/
 
-#### Biseral
+Conducted individual chi-square test, such as 
+- origin airport code and origin state abr, p-value < 2.2e-16, meaning ... 
+(look up how to interpret it)
+- manufacturer and airline , p-value < 2.2e-16, meaning ... 
+
+change 
+
+#### Point Biseral
+Point biserial correlation test is for when one variable is numerical, another is dichotomous. One of the assumptions for this test is the normality of the numerical variable. In our case, none of our numerical variables are normal. We also considered doing ANOVA test to get a better sense of how categorical and numerical variables are associated but it also has the assumotion 
+
+ANOVA assumes that the data is normally distributed. The ANOVA also assumes homogeneity of variance, which means that the variance among the groups should be approximately equal. ANOVA also assumes that the observations are independent of each other.
+(https://www.statisticssolutions.com/free-resources/directory-of-statistical-analyses/anova/#:~:text=ANOVA%20assumes%20that%20the%20data,are%20independent%20of%20each%20other.)
 
 ### Further cleaning
 
+#### Outliers 
+tried isolation Forrest to detect outliers and eliminate them but the file is too large and the computer couldn’t run. (Limitation) 
+
+also tried to remove outliers based on quatile
+
+End up doing data trimming on both ends of the distributions of numerical variables
+
+
 # Modeling
+
+## Dummy variables
+we use dummy variables on categorical variables to discover some of the 
 
 ## Mutivariate Linear Model
 
 With Justification, & assumptions 
 
 Removal of collinearity (add interaction variable)  
+
+We attempted the first regression model by fitting in all the data, but there were approximately 300 variables which makes it difficult for us to interpret anything and most intercepts and coefficients aren't statistically significant. The R squared is very low, close to 0, even though the p-value of R-squared is smaller than 0.05. (explain R-squared)
 
 ## MV ln. model summary 
 
@@ -126,6 +152,16 @@ Variance descriptions
 ## Dataset limitations
 
 ## Model limitations
+In our analysis, we rely more on correlation test and EDA to verify the insights we get from linear regression as our confidence in the linear regression model is low. 
+
+Our data is of time series nature, if a flight delays at 8:30 am for example, it will affect other flights delay departure time as well. There is autocorrelation between different observations, which results in the linear regression residuals not being independent. 
+ -> insert residual plot
+Furthermore, the response variable is skewed which violates the normality assumption. Even if we sqrt transform it, it still has heavy tails.
+-> insert qq residual plot
+
+To model time series data, linear regression is not appropriate and should not be considered if we want to do predictive analysis. Time series analysis with models such as ARIMA would be advised. However, linear regression is not completly useless, it still gives a rough idea of the relationship between variables although the result of it should be taken with caution. 
+
+Even in time series analysis which can be conducted in later stages, when modeling intervention models, a regression model is needed. For example, the time series before the interventions was modeled by the seasonal ARIMA (1,0,0) x (0,1,0)12, a regression model is needed to describe the relationship before and after the intervention. 
 
 ## Conclusion
 
