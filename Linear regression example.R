@@ -42,32 +42,38 @@ data_chi_w <- table(mlm_final$manufacturer, mlm_final$airline)
 
 chisq.test(data_chi_w)
 
+# Correlation test notes 
+# cor function only works among numerical values, 
+# numerical variable + dichotomous variable (categorical variable after dummy) - called point biseral correlation test fyi
 
+# Numerical data transformation 
+data <- xyz#change this to your data name 
+trimming <- FALSE #change this to true if you want to trim data 
 
-#Trim data + min-max transformation 
-mlm_CA_sub2$id <- seq.int(nrow(mlm_CA_sub2))
+check_num <- sapply(data, is.numeric)
 
-num_col <- select_if(mlm_CA_sub2, is.numeric)
-
-num_col <- num_col %>% drop_na()
-
-#Optional for trim data 
-for (i in 1:9) {
-  if (max(num_col[,i]) > (mean(unlist(num_col[,i])) + 4* sd(unlist(num_col[,i])))) {
-    num_col <- num_col %>% arrange(num_col[,i])
-    num_col <- num_col[round(nrow(num_col) *0.01, digits = 0):round(nrow(num_col)* (1-0.01) , digits = 0),]
+if (TRUE %in% check_num){
+  data$id <- seq.int(nrow(data))
+  num_col <- select_if_(data, is.numeric) %>% drop_na_()
+  
+  if (trimming = TRUE){
+    #This trims everything (need to change the condition if you only want to trim a subset of columns)
+    for (i in (seq_along(data)-1)) {
+      if (max(num_col[,i]) > (mean(unlist(num_col[,i])) + 4* sd(unlist(num_col[,i])))) {
+        num_col <- num_col %>% arrange(num_col[,i])
+        num_col <- num_col[round(nrow(num_col) *0.01, digits = 0):round(nrow(num_col)* (1-0.01) , digits = 0),]
+      }
+    }
+  } else{
+    num_col_norm <- as.data.frame(lapply(num_col, min_max_norm))
+    cat_col <- data %>% select_if_(negate(is.numeric))
+    cat_col$id <- seq.int(nrow(data))
+    combine_data <- left_join(num_col_norm, cat_col, by = 'id')
+    data <- combine_data %>% select_(-id)
   }
 }
 
-min_max_norm <- function(x){
-  (x-min(x)) / (max(x) - min(x))
-}
-num_col_norm <- as.data.frame(future_lapply(num_col, min_max_norm))
-
-cat_col <- mlm_CA_sub2 %>% select_if(negate(is.numeric))
-cat_col$id <- seq.int(nrow(mlm_CA_sub2))
-
-mlm_CA_sub2 <- left_join(num_col_norm, cat_col, by = 'id')
+xyz <- data
 
 #dummy variable 
 dmy <- dummyVars(" ~ . ", data=mlm_CA_sub2, fullRank = T)
@@ -81,3 +87,6 @@ summary_txt <- summary(mlm1)
 sink('second_summary.txt')
 summary_txt
 sink()
+
+# Model diagnoistic 
+
