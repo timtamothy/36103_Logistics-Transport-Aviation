@@ -1,0 +1,97 @@
+Columns chosen: Dep Deay, Org Airport, Dest Airport
+Interpretation:
+
+1. Dest airport doesn't have a high statistical significance in this model.
+
+
+Call:
+lm(formula = dep_delay ~ ., data = dat_transformed)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-43.363  -8.264  -5.218  -0.079  96.166 
+
+Coefficients:
+                         Estimate Std. Error t value Pr(>|t|)    
+(Intercept)               -5.6677     5.8157  -0.975  0.32978    
+origin_airport_code.KFAT  -1.4152     0.5515  -2.566  0.01028 *  
+origin_airport_code.KLAX   0.3753     0.4160   0.902  0.36699    
+origin_airport_code.KLGB  -0.3485     1.0840  -0.321  0.74785    
+origin_airport_code.KOAK  -3.4490     0.5582  -6.179 6.45e-10 ***
+origin_airport_code.KONT  -2.0046     0.4592  -4.366 1.27e-05 ***
+origin_airport_code.KPSP  -0.1265     0.4938  -0.256  0.79784    
+origin_airport_code.KSAN  -2.3369     0.4218  -5.540 3.02e-08 ***
+origin_airport_code.KSBA  -4.7974     0.9710  -4.941 7.78e-07 ***
+origin_airport_code.KSFO   0.4431     0.4182   1.060  0.28936    
+origin_airport_code.KSJC  -2.3492     0.4454  -5.274 1.34e-07 ***
+origin_airport_code.KSMF  -1.8606     0.4377  -4.251 2.13e-05 ***
+origin_airport_code.KSNA  -1.3846     0.4288  -3.229  0.00124 ** 
+dest_airport_code.KATL    10.0921     5.8024   1.739  0.08198 .  
+dest_airport_code.KAUS     7.8110     5.8066   1.345  0.17856    
+dest_airport_code.KBDL    10.2924     5.9070   1.742  0.08144 .  
+dest_airport_code.KBHM    18.6207    10.0477   1.853  0.06385 .  
+dest_airport_code.KBNA     9.5471     5.8115   1.643  0.10043    
+dest_airport_code.KBOI     5.1621     7.1046   0.727  0.46748    
+dest_airport_code.KBOS     8.8799     5.8042   1.530  0.12604    
+dest_airport_code.KBUR     6.6775     5.9040   1.131  0.25805    
+dest_airport_code.KBWI     7.4459     5.8307   1.277  0.20160    
+dest_airport_code.KBZN     7.4308     6.0240   1.234  0.21738    
+dest_airport_code.KCLE     6.5945     5.8180   1.133  0.25702    
+dest_airport_code.KCLT     8.2790     5.8034   1.427  0.15370    
+dest_airport_code.KCMH    10.2006     5.8245   1.751  0.07989 .  
+dest_airport_code.KCVG     7.0064     5.8216   1.204  0.22877    
+dest_airport_code.KDCA     8.0387     5.8152   1.382  0.16686    
+dest_airport_code.KDFW     9.1236     5.8017   1.573  0.11582    
+dest_airport_code.KDTW     9.0479     5.8051   1.559  0.11909    
+dest_airport_code.KEGE     9.5311     5.9488   1.602  0.10912    
+dest_airport_code.KEUG    10.5989     5.8613   1.808  0.07056 .  
+dest_airport_code.KEWR     8.4606     5.8029   1.458  0.14484    
+dest_airport_code.KFLL    10.3266     5.8557   1.764  0.07781 .  
+dest_airport_code.KGEG     7.5918     8.8609   0.857  0.39157    
+dest_airport_code.KGRB    -0.7754    17.4024  -0.045  0.96446    
+dest_airport_code.KGSP    11.7528    11.1083   1.058  0.29005    
+dest_airport_code.KIAD     6.8384     5.8035   1.178  0.23867    
+dest_airport_code.KIAH     6.6032     5.8025   1.138  0.25513    
+dest_airport_code.KIND    10.1939     5.8208   1.751  0.07990 .  
+dest_airport_code.KJAC    -1.7754    11.1077  -0.160  0.87301    
+dest_airport_code.KJFK     8.5878     5.8021   1.480  0.13885    
+dest_airport_code.KLAS     8.5102     5.8032   1.466  0.14253    
+dest_airport_code.KLAX     7.5337     5.8034   1.298  0.19423    
+dest_airport_code.KMCI    10.2904     5.8286   1.766  0.07748 .  
+dest_airport_code.KMCO     8.8985     5.8065   1.532  0.12540    
+dest_airport_code.KMEM     8.6265     5.8550   1.473  0.14065    
+dest_airport_code.KMFR     9.9380     5.9407   1.673  0.09435 .  
+dest_airport_code.KMIA     9.2412     5.8043   1.592  0.11135    
+dest_airport_code.KMSN     0.2754    10.0473   0.027  0.97813    
+dest_airport_code.KMSP     7.6326     5.8036   1.315  0.18846    
+dest_airport_code.KMSY     9.3928     5.8119   1.616  0.10607    
+dest_airport_code.KOMA    10.3101     5.9175   1.742  0.08146 .  
+dest_airport_code.KONT    13.7246     5.9342   2.313  0.02074 *  
+dest_airport_code.KORD     8.6633     5.8018   1.493  0.13538    
+dest_airport_code.KPDX     8.1270     5.8059   1.400  0.16158    
+dest_airport_code.KPHL     8.2110     5.8042   1.415  0.15716    
+dest_airport_code.KPHX     7.1194     5.8023   1.227  0.21983    
+dest_airport_code.KPIT     8.7858     5.8575   1.500  0.13363    
+dest_airport_code.KPSP     7.8758     5.8519   1.346  0.17835    
+dest_airport_code.KRDU    11.0605     5.8175   1.901  0.05727 .  
+dest_airport_code.KRNO    12.9798     5.8594   2.215  0.02675 *  
+dest_airport_code.KSAN     7.1812     5.8085   1.236  0.21634    
+dest_airport_code.KSAT     9.1701     5.8488   1.568  0.11691    
+dest_airport_code.KSBA     3.6488     6.4659   0.564  0.57254    
+dest_airport_code.KSBN     2.2924    17.4025   0.132  0.89520    
+dest_airport_code.KSDF    10.4740     5.8942   1.777  0.07557 .  
+dest_airport_code.KSEA     7.2384     5.8029   1.247  0.21226    
+dest_airport_code.KSFO     8.5563     5.8027   1.475  0.14034    
+dest_airport_code.KSJC    10.7310     6.1947   1.732  0.08322 .  
+dest_airport_code.KSLC     7.2096     5.8030   1.242  0.21409    
+dest_airport_code.KSMF    11.4368     5.8474   1.956  0.05048 .  
+dest_airport_code.KSNA     6.3037     5.8175   1.084  0.27856    
+dest_airport_code.KSTL    11.5680     5.8284   1.985  0.04717 *  
+dest_airport_code.KTPA    10.9644     5.8267   1.882  0.05987 .  
+---
+Signif. codes:  0 ?***? 0.001 ?**? 0.01 ?*? 0.05 ?.? 0.1 ? ? 1
+
+Residual standard error: 16.41 on 286107 degrees of freedom
+Multiple R-squared:  0.009388,	Adjusted R-squared:  0.009132 
+F-statistic: 36.64 on 74 and 286107 DF,  p-value: < 2.2e-16
+
