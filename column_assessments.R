@@ -10,7 +10,7 @@ library(future.apply)
 library(data.table)
 
 # Load data ----
-allmonths <- fread(here('num_transform.csv'))
+allmonths <- read_feather(here('mlm_dataset_3.feather'))
 
 # Overall status
 status(allmonths)

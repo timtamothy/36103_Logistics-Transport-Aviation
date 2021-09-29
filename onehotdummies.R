@@ -19,7 +19,7 @@ library(future)
 plan(multisession)
 # Load data
 hot <- read_feather(here('mlm_dataset_3.feather'))
-
+colnames(hot)
 plan(multisession)
 hot <- read_feather("C:/Users/tsetc/Downloads/mlm_dataset_3.feather")
 airports <- read_csv("https://raw.githubusercontent.com/timothywallaby/36103_Logistics-Transport-Aviation/main/top50.csv")
