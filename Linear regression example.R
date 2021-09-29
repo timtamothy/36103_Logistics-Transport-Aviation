@@ -13,6 +13,9 @@ library(caret)
 
 mlm_final <- read_feather(here('Dataset', 'mlm_dataset_3.feather' ))
 
+# sqrt transoformation 
+mlm_final$dep_delay <- sqrt(mlm_final$dep_delay)
+
 #filter variables/ subset it - Think of reasons why these subset variables 
 
 mlm_CA <- mlm_final %>% filter(origin_state_abr == 'CA')
@@ -74,10 +77,6 @@ if (TRUE %in% check_num){
 }
 
 xyz <- data
-
-#dummy variable 
-dmy <- dummyVars(" ~ . ", data=mlm_CA_sub2, fullRank = T)
-dat_transformed <- data.frame(predict(dmy, newdata = mlm_CA_sub2))
 
 #fit data 
 mlm1 <- lm(dep_delay ~ ., data = dat_transformed)
