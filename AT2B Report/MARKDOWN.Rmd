@@ -107,6 +107,30 @@ Conducted individual chi-square test, such as
 
 change 
 
+After doing a correlation plot on numerical variables of the first regression, we found some NA values among the values of origin airport, destination airport, model, and manufacturer in the result. Firstly, we thought that is due to collinearity; therefore, a Chi-square independence test was conducted as a justification to remove some categorical variables. 
+The followings are the steps the Chi-square test conducted and results:
+First, test the dependency between categorical variables origin_airport_code and origin_state_abr. 
+Null hypothesis: origin airport and origin state are independent of each other.
+Alternative hypothesis: origin airport and origin state are not independent of each other.
+
+> chisq.test(data_chi)
+          Pearson’s chi-squared test
+Data: data_chi
+x-squared = 27000, df = 1269, p-value < 2.2e-16
+
+The p-value < 2.2e-16, which is close to 0. Therefore, it’s statistically significant. Reject the null hypothesis: they are independent of each other, which means there is a correlation between them. These two variables are not independent, which means there is a strong association, which will weaken the statistical power of our regression model (Jim Frost, n.d.).Therefore we removed one of them, the variable origin_state. 
+
+Next, we examined predictor variables manufacturer and airline
+The test result: 
+> chisq.test(data_chi)
+          Pearson’s chi-squared test
+Data: data_chi
+x-squared = 1675.7, df = 6, p-value < 2.2e-16
+
+p-value is less than 2.2e-16, again like the previous result, it’s statistically significant. 
+This time the variable manufacturer is removed. 
+
+
 #### Point Biseral
 Point biserial correlation test is for when one variable is numerical, another is dichotomous. One of the assumptions for this test is the normality of the numerical variable. In our case, none of our numerical variables are normal. We also considered doing ANOVA test to get a better sense of how categorical and numerical variables are associated but it also has the assumotion 
 
@@ -205,6 +229,8 @@ section. New questions, future work, etc., can also be raised here.
 ## References
 
 Ball, M. (2010, November). Total Delay Impact Study A Comprehensive Assessment of the Costs and Impacts of Flight Delay in the United States. https://isr.umd.edu/NEXTOR/pubs/TDI_Report_Final_11_03_10.pdf
+
+Jim Frost,(n.d.). Multicollinearity in Regression Analysis: Problems, Detection,and Solutions. Statisctics By Jim. https://statisticsbyjim.com/regression/multicollinearity-in-regression-analysis/
 
 Kim, N. Y., & Park, J. W. (2016). A study on the impact of airline service delays on emotional reactions and customer behavior. Journal of Air Transport Management, 57, 19–25. https://doi.org/10.1016/j.jairtraman.2016.07.005
 
