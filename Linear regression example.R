@@ -9,6 +9,7 @@ library(RColorBrewer)
 library(scales)
 library(feather)
 library(caret)
+library(corrplot)
 
 
 mlm_final <- read_feather(here('Dataset', 'mlm_dataset_3.feather' ))
@@ -29,10 +30,27 @@ mlm_CA_sub2 <- droplevels(mlm_CA_sub2)
 
 str(mlm_CA_sub2)
 
+
+mlm_CA_sub3 <- mlm_CA_sub1 %>% select(dep_delay, origin_airport_code)
+mlm_CA_sub3 <- droplevels(mlm_CA_sub3)
+
+cor(mlm_CA_sub3$dep_delay,mlm_CA_sub3$origin_airport_code)
+
+
+
 cor(mlm_CA$dep_delay, mlm_CA$month)
 
 lm()
 
+# ========================
+# Correlation test
+
+mlm_num <- mlm_CA_sub1 %>% select(dep_delay, dep_time, arr_delay, air_time, air_time,taxi_out,taxi_in)
+pairs(mlm_num)
+uniquedep <- unique(mlm_num$dep_time)
+
+plot(uniquedep)  
+# =========================
 
 # Chi Square test
 data_chi <- data.frame(mlm_CA$manufacturer, mlm_CA$airline)
@@ -79,7 +97,16 @@ if (TRUE %in% check_num){
 xyz <- data
 
 #fit data 
-mlm1 <- lm(dep_delay ~ ., data = dat_transformed)
+mlm1 <- lm(dep_delay ~ ., data = mlm_CA_sub2)
+summary(mlm1)
+plot(mlm1)
+
+
+mlm2 <- lm(dep_delay~ ., data = mlm_CA_sub3)
+summary(mlm2)
+plot(mlm2)
+
+summary_test
 
 summary_txt <- summary(mlm1)
 
@@ -89,3 +116,5 @@ sink()
 
 # Model diagnoistic 
 
+pairs(mlm_CA)
+corrplot(cor(mlm_CA_sub3), method = "number")
