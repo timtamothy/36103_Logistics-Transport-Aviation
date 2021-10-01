@@ -125,8 +125,21 @@ End up doing data trimming on both ends of the distributions of numerical variab
 
 # Modeling
 
+## Min-max normalization
+Explain why we need min max normalization on data --> easier to interpret the result 
+
 ## Dummy variables
-we use dummy variables on categorical variables to discover some of the 
+we use dummy variables on categorical variables instead of label encoding it. 
+(Explain why one-hot encoding is better than label encoding - not ordinal variable)
+
+Thinking about n vs n-1 cateogories 
+
+For one hot encoding, make (n-1) new columns for n factors in categorical values
+Pal session → one hot encode all columns 
+https://towardsdatascience.com/one-hot-encoding-multicollinearity-and-the-dummy-variable-trap-b5840be3c41a
+
+(Use of reference) 
+
 
 ## Mutivariate Linear Model
 
