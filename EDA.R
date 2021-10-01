@@ -12,7 +12,7 @@ library(feather)
 
 delays <- read_feather(here("mlm_dataset_4time.feather"))
 
-delays <- delays %>% sample_n(500000)
+delays_reduced <- delays %>% sample_n(500000)
 
 # View columns
 
@@ -94,9 +94,20 @@ delays %>%
   geom_bar(aes(x = manufacturer, fill = airline)) +
   theme_minimal() +
   scale_color_viridis_d() +
+  scale_fill_viridis_d() +
   theme_minimal() + 
   labs(title = 'Aircraft Manufacturer Count',
        x = 'Manufacturer',
+       y = 'Number of flights')
+
+delays %>% 
+  ggplot() +
+  geom_bar(aes(x = model, fill = airline)) +
+  scale_color_viridis_d() +
+  scale_fill_viridis_d() +
+  theme_minimal() + 
+  labs(title = 'Aircraft Model Count',
+       x = 'Model',
        y = 'Number of flights')
 
   #remove embraer and mcdonnell as they represent very low values;
