@@ -43,10 +43,10 @@ num_transform <- fread(here('num_transform.csv'))
 num_col <- select_if(num_transform, is.numeric)
 num_col <- num_col %>% sample_n(10000)
 
-
 library(corrplot)
 corrplot(cor(num_col), method = 'number')
 corrplot(cor(num_col), method = 'ellipse')
+
 
 #Chi-square independence test to check for association
 trial <- num_transform %>% select_if(negate(is.numeric)) %>% sample_n(10000)
@@ -155,6 +155,8 @@ plot(mlm4)
 
 #Variable selection 
 Boruta(dep_delay ~ ., data=reg_fit, doTrace = 2)
+
+
 
 #chi-square independence test, dep_delay against other variables 
 library(broom)

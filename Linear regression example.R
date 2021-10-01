@@ -11,8 +11,26 @@ library(feather)
 library(caret)
 library(corrplot)
 
+raw_data <- read_feather(here('mlm_dataset_5.feather'))
 
-mlm_final <- read_feather(here('Dataset', 'mlm_dataset_3.feather' ))
+#Correlation plot 
+num_col <- select_if(num_transform, is.numeric)
+num_col <- num_col %>% sample_n(50000)
+
+library(corrplot)
+corrplot(cor(num_col), method = 'number')
+corrplot(cor(num_col), method = 'ellipse')
+
+#Chi-square independence test to check for association
+trial <- num_transform %>% select_if(negate(is.numeric)) %>% sample_n(10000)
+
+data_chi <- data.frame(trial$manufacturer, trial$airline)
+data_chi <- table(trial$manufacturer, trial$airline)
+print(data_chi)
+
+chisq.test(data_chi)
+
+small <- num_transform %>% sample_n(10000)
 
 # sqrt transoformation 
 mlm_final$dep_delay <- sqrt(mlm_final$dep_delay)
