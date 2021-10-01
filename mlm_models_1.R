@@ -112,6 +112,14 @@ mlm6 <- lm(arr_delay ~ month + day_of_week + dep_time +
 
 summary(mlm6)
 
+#improve upon mlm6 but added interaction varaible 
+mlm_7 <- lm(dep_delay ~ month + dep_time +
+              airline + age + month:age + 
+              airline:age + airline:dep_time
+            , data = mlm_all)
+
+summary(mlm_7)
+#interaction variable not significant --> no need to add interaction variable
 
 summary_test
 
