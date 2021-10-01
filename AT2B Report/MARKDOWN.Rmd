@@ -84,6 +84,20 @@ During the last couple of years around 30% of the domestic flights in the United
 
 #### Chi-square independence test 
 explain chi-square independence test 
+
+The Chi-square independence test is a statistical hypothesis test used to compare the size of discrepancies between the observed results and expected results (University of Southampton, n.d.).
+The purpose of it is to determine if there is a significant relationship between two categorical (especially nominal in nature) variables (Statisticssolutions, n.d.). Or the difference between observed results and expected results is just due to chance.
+A contingency table is commonly used to examine this relationship (Statisticssolutions, n.d.). 
+(do we need to add an example of contingency table to explain this test? Or use our data to explain would be more appropriate )
+The formula for Chi-Square is 
+
+(insert a pic/ I don’t know how to insert a formula into Rmarkdown)
+Where: c= Degrees of freedom
+O = Observed values, the actual collected data.
+E = Expected values.
+Sigma = added up a number of values in Chi-squared test.
+The null hypothesis: there is no significant difference between the observed and expected frequencies.
+
 https://www.statisticssolutions.com/free-resources/directory-of-statistical-analyses/chi-square/
 
 Conducted individual chi-square test, such as 
@@ -181,6 +195,9 @@ Ball, M. (2010, November). Total Delay Impact Study A Comprehensive Assessment o
 
 Kim, N. Y., & Park, J. W. (2016). A study on the impact of airline service delays on emotional reactions and customer behavior. Journal of Air Transport Management, 57, 19–25. https://doi.org/10.1016/j.jairtraman.2016.07.005
 
+Staticssolutions.(n.d.). Chi-Square Test of Independence. https://www.statisticssolutions.com/free-resources/directory-of-statistical-analyses/chi-square/?__cf_chl_jschl_tk__=pmd_JY1I6Untqs....RRSWJRpFhDJLifp7Aj06oAjnKFFfg-1633007460-0-gqNtZGzNAiWjcnBszQil
+
+University of Southampton. (n.d.). Chi Square. Is there a statistically significant relationship between a student’s Year 11 truancy and his or her enrolment in full time education after secondary school? https://www.southampton.ac.uk/passs/full_time_education/bivariate_analysis/chi_square.page
 
 ## Appendix
 
