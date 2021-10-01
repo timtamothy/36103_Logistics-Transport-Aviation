@@ -60,7 +60,11 @@ During the last couple of years around 30% of the domestic flights in the United
 
 # Exploratory Data Analysis (EDA)
 
+Since the problem deviates based on reports, we have to look at certain metrics based on delays as the end objective.
+
 ## Simple Exploratory Data Analysis 
+
+Thoughout the EDA, we found few items just based on the frequency 
 
 ### Metrics on data types
 
