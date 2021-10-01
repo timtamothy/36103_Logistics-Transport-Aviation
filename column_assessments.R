@@ -19,10 +19,10 @@ summary_all <- as.data.frame(summary_all)
 write_csv(summary_all, here('column_summary_statistics.csv'))
 
 # Categorical overall
-freq(allmonths, path_out = here('Column EDA', '.'))
+freq(allmonths, path_out = here('Column EDA 2', '.'))
 freq(allmonths)
 # Numerical Overall
-plot_num(allmonths, path_out = here('Column EDA', '.'))
+plot_num(allmonths, path_out = here('Column EDA 2', '.'))
 plot_num(allmonths)
 
 

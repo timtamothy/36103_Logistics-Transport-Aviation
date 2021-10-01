@@ -32,7 +32,7 @@ allmonths['year'] <- future_lapply(allmonths['year'], factor)
 allmonths['month'] <- future_lapply(allmonths['month'], factor)
 allmonths['day_of_week'] <- future_lapply(allmonths['day_of_week'], factor)
 
-
+# DEP TIME NEEDS TO BE CHANGED TO TIME!
 #x <- substr(as.POSIXct(sprintf("%04.0f", allmonths$dep_time), format = "%H%M"), 12, 16)
 
 allmonths$dep_time <- as.POSIXct(sprintf("%04.0f", allmonths$dep_time), format = "%H%M")
