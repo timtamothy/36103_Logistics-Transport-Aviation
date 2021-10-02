@@ -45,6 +45,11 @@ blm_bino.test <- dplyr::anti_join(blm_bino, blm_bino.train, by ='id')
 
 
 # 3. GLM model
+glm0 <- glm(delay_new ~ month + day_of_week + dest_state_abr + dep_time +
+              airline + taxi_out + origin_airport_code + dest_airport_code +
+              air_time + taxi_in + manufacturer + model + age +
+              emptotal, family = binomial(logit), data = mlm_bino.train)
+summary(glm0)
 
 glm1 <- glm(delay_new ~ month + dep_time +
               airline + taxi_out + 
@@ -63,7 +68,7 @@ blm_aa.test <- blm_bino.test %>%
 # 5. GLM model for AA
 
 blm2 <- glm(delay_new ~ month + dep_time +
-              taxi_out + model + age, 
+              model, 
               family = binomial(logit), data = blm_aa.train)
 summary(blm2)
 
@@ -76,19 +81,32 @@ blm_dl.train <- blm_bino.train %>%
 blm_dl.test <- blm_bino.test %>% 
   filter(airline == 'Delta Air Line Inc.')
 
+blm_ua.train <- blm_bino.train %>% 
+  filter(airline == 'United Air Lines Inc.')
+
+blm_ua.test <- blm_bino.test %>% 
+  filter(airline == 'United Air Line Inc.')
+
 
 # 7. GLM model for DL
 
 blm3 <- glm(delay_new ~ month + dep_time +
-              taxi_out + model + age, 
+              + model, 
             family = binomial(logit), data = blm_dl.train)
 summary(blm3)
+
+blm4 <- glm(delay_new ~ month + dep_time +
+              model, 
+            family = binomial(logit), data = blm_ua.train)
+summary(blm4)
 
 # 8. Look at VIF for models
 VIF(glm1)
 VIF(blm2)
 VIF(blm3)
+VIF(blm4)
 
+1/VIF(blm2)
 # 9 model validation
 
 probability_aa <- predict(blm2, newdata = blm_aa.test, type='response')

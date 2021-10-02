@@ -105,6 +105,7 @@ mlm5 <- lm(dep_delay ~ month + dep_time +
 summary(mlm5) # R-Squared .01202 p-value <2.2e-16
 
 
+
 mlm6 <- lm(arr_delay ~ month + day_of_week + dep_time +
              airline + taxi_out + dest_airport_code +
              air_time + taxi_in + manufacturer + age,
@@ -125,7 +126,8 @@ summary(mlm_7)
 mlm_final$dep_delay <- sqrt(mlm_final$dep_delay)
 
 #VIF 
-1/VIF(mlm1)
+VIF(mlm5)
+A1/VIF(mlm5)
 
 summary_test
 
@@ -139,3 +141,9 @@ sink()
 
 pairs(mlm_CA)
 corrplot(cor(mlm_CA_sub3), method = "number")
+
+
+
+# Residual Plot on MLM 5
+
+plot(mlm5)
