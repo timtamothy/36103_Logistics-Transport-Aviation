@@ -13,6 +13,7 @@ library(corrplot)
 library(Boruta)
 library(regclass)
 
+
 # 1. Load Data -----
 mlm_final <- read_feather(here('mlm_dataset_5.feather'))
 
@@ -95,3 +96,10 @@ prediction_aa <- ifelse(probability_aa > 0.5, 1, 0)
 confusion_aa <- table(blm_aa.test$delay_new, prediction_aa)
 
 confusion_aa
+
+
+# 10. Plots
+library(DHARMa)
+
+res <- simulateResiduals(blm2, plot = T)
+
