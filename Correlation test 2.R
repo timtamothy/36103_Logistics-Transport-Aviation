@@ -30,10 +30,22 @@ corr_matrix
 corrplot(corr_matrix, method = "ellipse")
 corrplot(corr_matrix, method = "pie")
 
+chart.Correlation(corr_matrix, histogram = TRUE, pch = 19)
+
+
 corr_matrix_r <- rcorr(corr_matrix, type = c("pearson","spearman"))
 corrplot(corr_matrix_r$r, type = "upper", order = "hclust", 
          p.mat = corr_matrix_r$P, sig.level = 0.01, insig = "blank")
 
+corr_matrix_r
+
 chart.Correlation(corr_matrix, histogram = TRUE, pch = 19)
+
+corr_matrix_r2 <- rcorr(corr_matrix, type = c("pearson"))
+corrplot(corr_matrix_r2$r, type = "upper", order = "hclust", 
+         p.mat = corr_matrix_r2$P, sig.level = 0.05, insig = "blank")
+
+
+corr_matrix_r2
 
 # =========================
