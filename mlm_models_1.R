@@ -121,6 +121,12 @@ mlm_7 <- lm(dep_delay ~ month + dep_time +
 summary(mlm_7)
 #interaction variable not significant --> no need to add interaction variable
 
+#sqrt transformation 
+mlm_final$dep_delay <- sqrt(mlm_final$dep_delay)
+
+#VIF 
+1/VIF(mlm1)
+
 summary_test
 
 summary_txt <- summary(mlm1)
