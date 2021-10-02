@@ -174,10 +174,10 @@ freq(delays %>% filter(year == '2020'))
 
 delays %>% 
   filter(manufacturer %in% c('boeing', 'airbus')) %>% 
-  #filter(dep_delay > -20) %>% 
+  filter(dep_delay > 0) %>% 
   filter(dest_state_abr == 'CA') %>% 
   #filter(year %in% c('2019')) %>% 
-  sample_n(50000) %>% 
+  #sample_n(50000) %>% 
   #count(month, dep_delay) %>% 
   ggplot(aes(x = dep_time, y = dep_delay)) +
   geom_hex() +
@@ -191,10 +191,10 @@ delays %>%
 
 delays %>% 
   filter(manufacturer %in% c('boeing', 'airbus')) %>% 
-  #filter(dep_delay > 0) %>% 
+  filter(dep_delay > 0) %>% 
   filter(dest_state_abr == 'TX') %>% 
   #filter(year %in% c('2019')) %>% 
-  sample_n(50000) %>% 
+  #sample_n(50000) %>% 
   #count(month, dep_delay) %>% 
   ggplot(aes(x = dep_time, y = dep_delay)) +
   geom_hex() +
@@ -205,6 +205,25 @@ delays %>%
   labs(title = 'Flight Delays by Time of Day in Texas',
        x = 'Time',
        y = 'Departure Delay (mins)')
+
+
+delays %>% 
+  filter(manufacturer %in% c('boeing', 'airbus')) %>% 
+  filter(dep_delay > 0) %>% 
+  filter(dest_state_abr == 'TX') %>% 
+  #filter(year %in% c('2019')) %>% 
+  #sample_n(50000) %>% 
+  #count(month, dep_delay) %>% 
+  ggplot(aes(x = dep_time, y = dep_delay)) +
+  geom_hex() +
+  #scale_fill_viridis_d() +
+  #geom_point(shape = 'o', col = 'blue', alpha = 0.1) +
+  facet_wrap(~airline) +
+  theme_minimal() +
+  labs(title = 'Flight Delays by Time of Day in Illinois',
+       x = 'Time',
+       y = 'Departure Delay (mins)')
+
 
 
 #delays %>% # plot count of distances, histogram?

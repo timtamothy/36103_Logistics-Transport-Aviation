@@ -22,6 +22,8 @@ subtitle: STDS - AT2
 ## install.packages("kableExtra")
 library(tidyverse)
 library(kableExtra)
+
+#read file 
 ```
 
 # Introduction
@@ -58,7 +60,7 @@ During the last couple of years around 30% of the domestic flights in the United
 
 (Include stack bar Domestic on time performance 3 airlines)
 
-# Exploratory Data Analysis (EDA)
+# Exploratory Data Analysis (EDA) Gerardo, Nathan , Mingpeng 
 
 Since the problem deviates based on reports, we have to look at certain metrics based on delays as the end objective.
 
@@ -74,17 +76,24 @@ Thoughout the EDA, we found few items just based on the frequency
 
 ## Advanced EDA
 
-### Sumarry Statistics
+### Sumarry Statistics (Devesh)
+
+```{r}
+summary(delay)
+status(delay)
+```
+
 
 ### Summarry Stat plots
 
 (Inclusion of distribution of variables)
 
+
 ### Correlation Matrix
 
 ### Nominal, ordinal and biserial tests
 
-#### Nominal
+#### Nominal - pearson correlation matrix (Devesh)
 
 #### Chi-square independence test 
 explain chi-square independence test 
