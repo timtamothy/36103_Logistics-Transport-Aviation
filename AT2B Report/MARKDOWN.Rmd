@@ -47,6 +47,11 @@ Herein, we propose an exploratory analysis and prediction model on airline delay
 When looking at the main causes of delays for American Airlines flights between 2019 and 2021 we can see that the main reason corresponds to a Late arriving aircraft, meaning that a previous flight with same aircraft arrived late, causing the present flight to depart late.  This is followed closely by the second reason, an Air carrier delay, in this case a delay or cancellation can be attributed to circumstances within the airline's control such as maintenance or crew problems, aircraft cleaning, baggage loading, fueling, among others. National Aviation system delays, Weather and security issues have a lower impact on the total amount of delays. If we go back to the first reason, which can be explained by the following four, we can assume that most of those delays were caused due to circumstance within the airline’s control as well. Meaning most of the delays can be attributed to the airlines operations and therefore we have a great opportunity to reduce costs and improve our results. 
 
 (Include graph reasons/delays in minutes)
+```{r add_picture1, echo=FALSE}
+
+knitr::include_graphics(here::here("All Charts", "Total minutes of delay for AA from 2019 to 2021.png"))
+
+```
 
 ## How is American Airlines on time performance compare to our two main competitors?
 
