@@ -323,7 +323,8 @@ For time series analysis which can be conducted in later stages, when modeling i
  
 ## Conclusion
   
-In conclusion, we found an association between different variables to departure delay. Our models provides a preliminary idea of what might have constituted departure delays in California. However, linear or logistics models conducted would not be advised to use as a prediction of departure delays in the future. As a result, other statistical modelling such as ARIMA should be supplemented in order to generate accurate and reliable insights and predictions for departure delays which can then be generalized as a prediction algorithm for other states.
+In conclusion, we have generated insights on how different variables influence departure delays . Our models provides a preliminary idea of what might have constituted departure delays in California. However, linear or logistics models conducted would not be advised to use as a prediction of departure delays in the future. As a result, other statistical modelling such as ARIMA should be supplemented in order to generate accurate and reliable insights and predictions for departure delays which can then be generalized as a prediction algorithm for other states.
+
 
 ## References
  
