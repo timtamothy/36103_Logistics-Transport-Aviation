@@ -236,6 +236,7 @@ When fitting in the regression models, R would automatically generate n-1 dummy 
 ## MV ln. model summary
 
 Initially, a multivariate linear regression model was chosen to investigate the relationships between airline on-time performance and each of the independent variables. From the exploratory analysis, several states are determined to house the most flights, and therefore, the greatest frequency of delays. California contains multiple primary airline hubs for each of the three mainline carriers. With this knowledge, a subset of data containing information from just California was used to potentially generalise flight delays across the country.
+
 The variables of the month, day of the week, destination state, departure time, airline, taxi in and out time, origin airport, destination airport, flight time, manufacturer, model, and age were initially modeled. By observing the statistical significance of the coefficients in several variables, some feature reduction was performed. In addition, the Boruta algorithm was run across variables to determine variable importance. 
 
 ```{r boruta_plot, echo=FALSE}
@@ -249,6 +250,7 @@ Through several iterations, a multivariate linear regression containing month, d
 ## Analysis of MLM
 
 Analysis of the model requires interpretation of the calculated statistics run on the resulting model. VIF values suggest a lower correlation between variables, which satisfies the assumptions for a linear model. The low p-value of the coefficients suggest that the model has statistical significance. However, the low R-Squared value describes a model that does not well encapsulate a large proportion of the variance in the dataset.
+
 The residual plots seen below elucidate a few findings regarding the dataset. In the Residual vs. Fitted plot, patterns are difficult to view as the number of individual flights is quite high, however, residuals do not appear to be spread equally. A larger portion of the dataset has values above the horizontal line.
 
 ```{r add_residual_plots, echo=FALSE}
