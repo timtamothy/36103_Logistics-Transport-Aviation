@@ -47,6 +47,7 @@ knitr::include_graphics(here::here("others", "mac.png"))
 ```{r add_pictureOntime, echo=FALSE}
 knitr::include_graphics(here::here("All Charts", "On Time Bar.png"))
 ```
+
 During the last couple of years around 30% of the domestic flights in the United States have presented some sort of delay. We can see that the 3 airlines present almost identical results, in terms of the proportion of delayed flights against the total number of flights. This shows us the big opportunity that the industry has. Especially taking into consideration that every minute of delay costs airlines around $74 dollars (Airlines for America, 2020). Just during 2020, American Airlines domestic flights reported over 4 million minutes in delays just in domestic flights, meaning an approximate $300 million dollars were lost for this reason. Even though our analysis focuses entirely on domestic flights, our results can be taken into consideration to improve on-time performance in International flights as well and have a greater impact on our financial results as well as our customer satisfaction indexes.
 
 # Research Questions
@@ -60,7 +61,7 @@ knitr::include_graphics(here::here("All Charts", "Total minutes of delay for AA 
 
 When looking at the main causes of delays for American Airlines flights between 2019 and 2021 we can see that the main reason corresponds to a late-arriving aircraft, meaning that a previous flight with the same aircraft presented an arrival delay causing the present flight to also depart late.  This is followed closely by the second reason, carrier delay. This delay can be attributed to circumstances within the airline's control such as maintenance or crew problems, aircraft cleaning, baggage loading, fueling, among others. National Aviation System (NAS) delays, weather, and security issues have a lower impact on the total amount of delays. Since the greatest proportion of aircraft delays, outside of a late incoming aircraft, are reasons within a carrier’s control, most delays may be attributed to the airline's operations and therefore we have a great opportunity to reduce costs and improve our results.
 
-## 2.2 How is American Airlines on-time performance compared to our two main competitors?
+## How is American Airlines on-time performance compared to our two main competitors?
 
 ```{r add_pictureQ1Airline, echo=FALSE}
 knitr::include_graphics(here::here("All Charts", "Q1 by airline.png"))
@@ -70,7 +71,7 @@ We found that all three airlines have improved their on-time performance from 20
 
 More details about both questions will be explored during our further EDA and Linear regression model.
 
-# 3.0 Our datasets
+# Our datasets
 
 BTS Dataset: Our main data set is a comprehensive one including 65 variables and over 12 million observations (January 2019 - March 2021). Each month was collected separately and merged together to form one large data set of 4GB. An API from the International Civil Aviation Organization (ICAO) was used to transmute airport codes to names and another look-up table to transmute airline codes to airlines.
 
@@ -78,7 +79,7 @@ Aircraft Dataset: Dataset built by scraping HTML data for each airline using the
 
 Employee Dataset: This dataset contains information about the number of employees per month by airline and is merged into our BTS dataset to determine any relations between the number of employees and delays.
 
-# 4.0 Exploratory Data Analysis (EDA).
+# Exploratory Data Analysis (EDA).
 
 Overall summary statistics were calculated and are included in the appendix. In addition, individual variables were explored with histograms for numeric variables, and relationships between some variables were explored with scatter plots.
 
@@ -162,6 +163,7 @@ knitr::include_graphics(here::here("All Charts", "Map EDA.jpeg"))
 ```
 
 Furthermore, as evidenced by the heat map of the USA, We noticed that most delays tend to be frequent in higher density states which include primary airline hubs. As evident in the previous figures, Texas tends to have the most delays.
+
 The main origins and destinations are states where these airlines have hubs, the top 16 states containing all the hubs from the 3 main airlines represent almost 89% of air traffic and therefore most of the delays occur within these busy airports. For that reason, we first decided to focus on the busiest airports and subset our model. Finally, we made the decision to subset our model exclusively to California, since it was the second busiest state, contains a higher average departure delay, and all three airlines have a primary hub located here. This model will then be used to generalise on-time performance across other hub states.
 
 ```{r add_picturecali, echo=FALSE}
@@ -171,14 +173,14 @@ knitr::include_graphics(here::here("EDA Plots", "flight_delay_by_daytime_califor
 One interesting phenomenon we can observe from the graph is that flight delays increase as the day progresses. This shows that previous departure delays do affect subsequent departure delays on other flights or following flights. 
 The gap between 00:00 and around 6:00 in the morning is due to airports’ curfew time, where airports normally don't have flights departing and arriving during that time period. 
 
-### 4.1.1 Metrics on data types
+### Metrics on data types
  
 
 
 When checking the fields for the database. We can see what are the most common values based on each field. This allows us to give an idea of what we can filter and what we propose to do further EDA analysis and build upon with regression models and other techniques. This also shows the frequency in which numbers appear. Based on this, we’re able to make decisions to derive on further analysis
 To emphasize this, most of the graphs that we see can be adjusted for modeling. Some variables such as employee full time and part time were excluded and the employee total was utilised to reduce features. Some variables were skewed, and required min-max transformations and/or removal of outliers to increase normality.
  
-### 4.2.3 Pearson Correlation Matrix
+### Pearson Correlation Matrix
 
 Correlation matrix shows how well two numeric variables are associated with each other. Correlation coefficient measures the extent of the above mentioned relationship. 
 The plot below shows Pearson's coefficient for the numeric variables in our dataset.
@@ -188,6 +190,7 @@ knitr::include_graphics(here::here("others", "pc.png"))
 ```
 
 Highlighted values show moderate to strong correlation. Note that high correlation between two variables does not imply that one causes the other.
+
             dep_delay month day_of_week dep_time arr_delay air_time taxi_out taxi_in   age
 dep_delay        1.00 -0.23       -0.21     0.17      0.90    -0.14     0.17   -0.11 -0.14
 month           -0.23  1.00       -0.11    -0.16     -0.27    -0.14    -0.24   -0.13 -0.14
@@ -199,7 +202,7 @@ taxi_out         0.17 -0.24       -0.21    -0.13      0.49     0.02     1.00   -
 taxi_in         -0.11 -0.13       -0.13    -0.31      0.08     0.07    -0.06    1.00 -0.29
 age             -0.14 -0.14       -0.10    -0.07     -0.20    -0.45    -0.20   -0.29  1.00
 
-#### 4.2.3.1 Interpretation
+#### Interpretation
 The plot and table above shows a strong correlation between dep_delay and arr_delay (0.90). There is moderate correlation between arr_delay and taxi_out (0.49).
  
 ## Multicollinearity problem 
@@ -226,36 +229,54 @@ Point biserial correlation test is used when one variable is numerical and anoth
 # Modeling
  
 ## Min-Max Normalization & Dummy variables 
+
 Min-max normalization transforms our numerical variables to a range between 0 to 1. Rescaling is essential to interpret the results of the regression models as all the numerical variables would have the same scale. 
 When fitting in the regression models, R would automatically generate n-1 dummy variables according to n factors in a categorical variable. Since the categorical variables in our data are not ordinal, dummy variables are more appropriate than label encoding (Sethi, 2020).
 
 ## MV ln. model summary
+
 Initially, a multivariate linear regression model was chosen to investigate the relationships between airline on-time performance and each of the independent variables. From the exploratory analysis, several states are determined to house the most flights, and therefore, the greatest frequency of delays. California contains multiple primary airline hubs for each of the three mainline carriers. With this knowledge, a subset of data containing information from just California was used to potentially generalise flight delays across the country.
 The variables of the month, day of the week, destination state, departure time, airline, taxi in and out time, origin airport, destination airport, flight time, manufacturer, model, and age were initially modeled. By observing the statistical significance of the coefficients in several variables, some feature reduction was performed. In addition, the Boruta algorithm was run across variables to determine variable importance. 
+
 ```{r boruta_plot, echo=FALSE}
 knitr::include_graphics(here::here("LM Plots", "boruta_significance.png"))
 ```
+
 One assumption we made was that the slope of the regression line fit for each category is equal as dummy variables could only impact the intercept of the linear regression model. Beyond looking at the result of the point-biserial correlation test conducted, we can fit a model that allows slope to differ. To capture the interaction between categorical and numerical variables, we included interaction variables on the variables that were determined to be the most important by the Boruta algorithm. The interaction variable terms were statistically insignificant, which coincided with the result of the point-biserial correlation test. Therefore, we won’t keep it as there is no significant difference between the slopes of different categories. 
+
 Through several iterations, a multivariate linear regression containing month, departure time, airline, and age were determined to be the most impactful variables. An R-Squared value of 0.02108 and p-value of less than 2.2e^-16 were calculated. VIF and residual plots were generated based on the iterated model. VIF for the initial model cannot be generated because there are coefficients that are highly correlated to each other. In further iterations, numerical variables with a VIF larger than 5 were taken out. In the final model , all the VIF values are smaller than 5, meaning there is no collinearity. 
- ## Analysis of MLM
+
+## Analysis of MLM
+
 Analysis of the model requires interpretation of the calculated statistics run on the resulting model. VIF values suggest a lower correlation between variables, which satisfies the assumptions for a linear model. The low p-value of the coefficients suggest that the model has statistical significance. However, the low R-Squared value describes a model that does not well encapsulate a large proportion of the variance in the dataset.
 The residual plots seen below elucidate a few findings regarding the dataset. In the Residual vs. Fitted plot, patterns are difficult to view as the number of individual flights is quite high, however, residuals do not appear to be spread equally. A larger portion of the dataset has values above the horizontal line.
+
 ```{r add_residual_plots, echo=FALSE}
 knitr::include_graphics(here::here("LM Plots", "normal_qq.png"))
 knitr::include_graphics(here::here("LM Plots", "residual_vfitted.png"))
 knitr::include_graphics(here::here("LM Plots", "scale_location.png"))
 knitr::include_graphics(here::here("LM Plots", "cooks_distance.png"))
 ``` 
+
 In the normal Q-Q plot, the residuals do not follow a linear line above around 1 theoretical quantile. This suggests that the residuals are not normally distributed. The scale-location plot contains very distinct patterns which suggest abnormal behaviour of the residuals with this linear model. Lastly, the residuals spread in the residual vs leverage plot suggest that all cases are within Cook’s distance lines and no individual flights are particularly influential to the model.
+
 This suggests that further transformation of the variables is necessary to better fit a linear model, or that a different type of model would perform better. However, it is important to note that the modeling showed that several variables are important and influence aircraft performance more than others. Of these, the US summer months between May and August, departure time later in the day, and older aircraft age contribute greatly to increasing aircraft departure delays.
+
 ## BINOMIAL ln model summary
+
 Analysis of the residuals in the multivariate linear model shows that this model may not be the best method to model departure delays. A summary of on-time performance shows that the median of flights depart 3 mins earlier than anticipated, and the distribution of on-time performance skews to the left with a right-hand tail. A summary of on-time performance shows that on delays that are 1 minute or greater, the median delay is 12 minutes long with a mean of 20 minutes. Since costs increase as delays increase, transformations may be useful to model the flights with greater delays.
+
 Therefore, on-time performance was then categorized into a binary category with flights without a meaningful delay (12 minutes or less) and flights with a longer delay (13 or more minutes). A binary, or logistic, regression model was then utilized to model the effect of variables and then compared to the earlier multivariate linear regression by observing the statistical significance of variables, and a simulated residual plot. The data were then randomly split into 75% testing and 25% training data for validation purposes. 
+
 The model was then also subset specifically for American Airlines to determine the effect of departure time, month, and aircraft model type. The results are several significant variables that include specific months and specific model types. An AIC value of 363,681 was calculated after 4 Fisher Scoring iterations, nearly halved from the AIC value using the original 14 variables. 
+
 Similarly, United and Delta airlines were modeled individually and AIC for each is calculated to be 125,161 and 226,094, respectively. With these models, comparisons between corresponding significant variables of each airline can explain strengths and weaknesses between American Airlines’ major competitors. Delta has negative coefficients across the board for all models of aircraft, United has half positive and half negative, but American has positive coefficients for all models of aircraft except for the Airbus A320.
+
 ## Analysis
+
 The relative reduction in AIC compared to the original model with most variables shows that the reduction to these three variables has improved the explanatory power of this model.
 American Airlines contained 266,599 observations in its training set. 88,936 observations were then used to validate the model and the resulting confusion matrix is shown here. 
+
 ```{r add_binomail_plot, echo=FALSE}
 
 library(knitr)
@@ -268,21 +289,33 @@ confusion_aa %>% regulartable() %>% autofit() %>%
 knitr::include_graphics(here::here("LM Plots", "binomial_residual_plot.png"))
 ```
 In order to view the models’ fit on residuals, a DHARMa function was used to create scaled residuals by simulating residuals from the models. In both the Q-Q plot and the residual vs. predicted plots, residuals appear to be handled well by the model.
+
 For each airline, the months of April through August had a positive coefficient and significant p-values suggesting that these months will see higher delays across the board. In our EDA, we note that these months do not necessarily have a higher flight number than other months, and therefore may not be attributed to an increase in flights due to the summer. However, these months certainly do coincide with the typical season for extreme weather events such as tornadoes and hurricanes. In all cases, the time of day also contributed to a longer delay, but only marginally. 
+
 However, utilizing the confusion matrix, we can calculate the overall accuracy of the model to be 54.2%, suggesting that further refinements can be made, or that more specific inferences surrounding the cause of delays are needed to better improve the model.
 
 # Limitations
  
 ## Dataset limitations
+
 The dataset we obtained was very rich, with around 12 million observations and approximately 65 variables, the size was around 8 GB. Challenges arise from dealing with a huge dataset such as ours, it gets complicated to run on R if we don’t subset the dataset. To overcome such challenges, the feather package from R was used to load and write data so we could read and write the data without our computer crashing.
+
 When the Aircraft dataset was merged with our main dataset (BTS) using the aircraft tail number, 18% of the tail numbers were missing from the BTS data set and were excluded from the analysis.
+
 At first, we tried to get Weather data using 2 different APIs, however, since our dataset contained millions of observations we had to find a different way to get this data since we had a limitation on the number of calls we could perform daily. API calls were also failing at times with “Access denied” errors for some airports. It could not be explained since it was working for other airports at the same time with the same API key.
+
 In the end, we downloaded CSV files for weather stations located in or around the top 50 airports in terms of domestic flight volume. This information was not taken into consideration for this model and will be reserved for future modeling.
+
 ## Model limitations
+
 In our analysis, more weight was put on correlation tests and EDA to verify the insights we obtained from regression as our confidence in the regression models are low.
+
 One limitation that should be taken into account is that the response variable is positively skewed which violates the normality assumption. To overcome the skewness of the distribution, one could consider sqrt transformation to departure delay and perform data trimming on the tails to remove outliers. Nevertheless, even if the normality assumption was satisfied, the violation of the assumption that observations are independent of each other cannot be solved. 
+
 Although bifurcation of the departure delay into a binomial variable helped in modeling through logistic regression, the model reduces the granularity and explainability of the data itself. Even with high accuracy, the model cannot discern the relationship between the variables and a delay of 15 minutes or a delay that may be 90 minutes long.
+
 Our data is of time-series nature, as shown in EDA, if a flight is delayed at 8:30 am, for example, it will affect the departure time of ongoing flights at a later time delay as well. From the residual plots, the residuals aren’t independently normally distributed(i.i.d) and it shows there is autocorrelation between residuals. The limitation of linear and binomial regression models could be overcome by other appropriate time series analysis models such as Seasonal ARIMA. Even though our confidence in these regression models is very low, linear regression gives us a rough idea of the relationship between variables. 
+
 For time series analysis which can be conducted in later stages, when modeling intervention models, a regression model is needed. For example, the time series before the interventions was modeled by the seasonal ARIMA (1,0,0) x (0,1,0)12, a regression model is needed to describe the relationship before and after the intervention. The existing regression models would be an asset/template for utilizing regression as a tool. 
 
  
@@ -291,21 +324,35 @@ For time series analysis which can be conducted in later stages, when modeling i
 ## References
  
 Jim Frost,(n.d.). Multicollinearity in Regression Analysis: Problems, Detection,and Solutions. Statisctics By Jim. https://statisticsbyjim.com/regression/multicollinearity-in-regression-analysis/
-Kim, N. Y., & Park, J. W. (2016). A study on the impact of airline service delays on emotional reactions and customer behavior. Journal of Air Transport Management, 57, 19–25. https://doi.org/10.1016/j.jairtraman.2016.07.005
-American Airlines Reports First-Quarter 2021 Financial Results. American Airlines News Room, 2021. https://news.aa.com/news/news-details/2021/American-Airlines-Reports-First-Quarter-2021-Financial-Results-CORP-FI-04/default.aspx
-Ghosh,I. (2020). This chart shows how airlines are being grounded by COVID-19. World Economic Forum. https://www.weforum.org/agenda/2020/03/this-chart-shows-how-airlines-are-being-grounded-by-covid-19/
-Maynard,M. (2015). How To Survive July, The Busiest Air Travel Month Of The Year. Forbes.com. https://www.forbes.com/sites/michelinemaynard/2015/07/06/how-to-survive-the-busiest-air-travel-month-of-the-year/?sh=7f98a7c23506
-Ball, M. (2010, November). Total Delay Impact Study A Comprehensive Assessment of the Costs and Impacts of Flight Delay in the United States. https://isr.umd.edu/NEXTOR/pubs/TDI_Report_Final_11_03_10.pdf
-U.S. Passenger Carrier Delay Costs. Airlines for America, 2020. https://www.airlines.org/dataset/u-s-passenger-carrier-delay-costs/. 
-The leading airlines worldwide in 2021, ranked by brand value. Statista 2021. https://www.statista.com/statistics/275944/brand-value-of-airlines/
-Market value of selected airlines worldwide as of April 2021. Statista 2021. https://www.statista.com/statistics/275948/market-capitalization-of-selected-airlines/
-Key figures of the four largest aircraft manufacturers worldwide in FY 2020. Statista 2020. https://www.statista.com/statistics/269920/key-figures-of-the-four-largest-aircraft-manufacturers/
-Radka, R. (2021). Airline Hub Guide: Which U.S. Cities Are Major Hubs and Why it Matters. https://www.airfarewatchdog.com/blog/50066526/airline-hub-guide-which-u-s-cities-are-major-hubs-and-why-it-matters/
-The Chi-square test of independence. (2013). PubMed Central (PMC). https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3900058/#:%7E:text=The%20Chi%2Dsquare%20test%20is,variables%20is%20nominal%20or%20ordinal.
-University of Southampton. (n.d.). Chi Square. Is there a statistically significant relationship between a student’s Year 11 truancy and his or her enrolment in full time education after secondary school? https://www.southampton.ac.uk/passs/full_time_education/bivariate_analysis/chi_square.page
-Statistics Solutions. (2021). ANOVA. https://www.statisticssolutions.com/free-resources/directory-of-statistical-analyses/anova/#:%7E:text=ANOVA%20assumes%20that%20the%20data,are%20independent%20of%20each%20other
-Sethi, A. (2020). Categorical Encoding | One Hot Encoding vs Label Encoding. Analytics Vidhya. https://www.analyticsvidhya.com/blog/2020/03/one-hot-encoding-vs-label-encoding-using-scikit-learn/
 
+Kim, N. Y., & Park, J. W. (2016). A study on the impact of airline service delays on emotional reactions and customer behavior. Journal of Air Transport Management, 57, 19–25. https://doi.org/10.1016/j.jairtraman.2016.07.005
+
+American Airlines Reports First-Quarter 2021 Financial Results. American Airlines News Room, 2021. https://news.aa.com/news/news-details/2021/American-Airlines-Reports-First-Quarter-2021-Financial-Results-CORP-FI-04/default.aspx
+
+Ghosh,I. (2020). This chart shows how airlines are being grounded by COVID-19. World Economic Forum. https://www.weforum.org/agenda/2020/03/this-chart-shows-how-airlines-are-being-grounded-by-covid-19/
+
+Maynard,M. (2015). How To Survive July, The Busiest Air Travel Month Of The Year. Forbes.com.
+https://www.forbes.com/sites/michelinemaynard/2015/07/06/how-to-survive-the-busiest-air-travel-month-of-the-year/?sh=7f98a7c23506
+
+Ball, M. (2010, November). Total Delay Impact Study A Comprehensive Assessment of the Costs and Impacts of Flight Delay in the United States. https://isr.umd.edu/NEXTOR/pubs/TDI_Report_Final_11_03_10.pdf
+
+U.S. Passenger Carrier Delay Costs. Airlines for America, 2020. https://www.airlines.org/dataset/u-s-passenger-carrier-delay-costs/. 
+
+The leading airlines worldwide in 2021, ranked by brand value. Statista 2021. https://www.statista.com/statistics/275944/brand-value-of-airlines/
+
+Market value of selected airlines worldwide as of April 2021. Statista 2021. https://www.statista.com/statistics/275948/market-capitalization-of-selected-airlines/
+
+Key figures of the four largest aircraft manufacturers worldwide in FY 2020. Statista 2020. https://www.statista.com/statistics/269920/key-figures-of-the-four-largest-aircraft-manufacturers/
+
+Radka, R. (2021). Airline Hub Guide: Which U.S. Cities Are Major Hubs and Why it Matters. https://www.airfarewatchdog.com/blog/50066526/airline-hub-guide-which-u-s-cities-are-major-hubs-and-why-it-matters/
+
+The Chi-square test of independence. (2013). PubMed Central (PMC). https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3900058/#:%7E:text=The%20Chi%2Dsquare%20test%20is,variables%20is%20nominal%20or%20ordinal.
+
+University of Southampton. (n.d.). Chi Square. Is there a statistically significant relationship between a student’s Year 11 truancy and his or her enrolment in full time education after secondary school? https://www.southampton.ac.uk/passs/full_time_education/bivariate_analysis/chi_square.page
+
+Statistics Solutions. (2021). ANOVA. https://www.statisticssolutions.com/free-resources/directory-of-statistical-analyses/anova/#:%7E:text=ANOVA%20assumes%20that%20the%20data,are%20independent%20of%20each%20other
+
+Sethi, A. (2020). Categorical Encoding | One Hot Encoding vs Label Encoding. Analytics Vidhya. https://www.analyticsvidhya.com/blog/2020/03/one-hot-encoding-vs-label-encoding-using-scikit-learn/
 
 
 ## Appendix
