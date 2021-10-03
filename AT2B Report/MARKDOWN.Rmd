@@ -94,8 +94,6 @@ knitr::include_graphics(here::here("EDA Plots", "Sheet 1.png"))
 ```
 One of the first insights we found was that around the second third of the month, most predominantly between days 10 and 13 are the most popular days to travel, while the beginning and end of the month are less popular, the first 5 and last 5 days of the month are all located at the bottom while days 10 to 20 (second third) are all at the top.
 
-
-```{r add_picture1, echo=FALSE}
 When analyzing days of the week we found that flights are pretty evenly distributed with all days except for Saturday taking between 14.22% and 14.92% of the flights. The most popular days for flights are Mondays, followed by Fridays and Thursdays. This makes perfect sense taking into consideration there are many weekend trips departing either Thursday or Friday and returning on Monday and those are also the most common days for business travel.
 
 ```{r add_picture1, echo=FALSE}
