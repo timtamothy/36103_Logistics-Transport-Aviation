@@ -28,9 +28,12 @@ library(kableExtra)
 
 # Introduction
 
-Aircraft delays have serious economic impacts that represent a logistical headache for airlines, airports, airline crew, and passengers alike. In a 2010 study by the National Center of Excellence For Aviation Operations Research, an estimated 31.2 billion US dollars was lost due to direct and indirect costs of airline delays in the United States for 2007. These expenses included maintenance costs, extra paid hours for flight crew, the extra use of fuel, and airport fees. As an example, airlines have dedicated time slots at airport gates and unexpected delays exceeding the expected time slot can cost thousands of dollars by the minute. 
+Aircraft delays have serious economic impacts that represent a logistical headache for airlines, airports, airline crew, and passengers alike. In a 2010 study by the National Center of Excellence For Aviation Operations Research, an estimated 31.2 billion US dollars was lost due to direct and indirect costs of airline delays in the United States for 2007. These expenses included maintenance costs, extra paid hours for flight crew, the extra use of fuel, and airport fees. As an example, airlines have dedicated time slots at airport gates and unexpected delays exceeding the expected time slot can cost thousands of dollars by the minute.(Airlines for America 2014).
+
 Many factors can contribute to aircraft delays. These may include unavoidable reasons such as inclement weather, unforeseen aircraft mechanical breakdowns, or a multitude of passenger-related incidents. Airline delays then create complicated scenarios for airline schedulers as a delay for one aircraft may impact the flight schedule for all consecutive flights using that aircraft. Passengers with connecting flights may need to be ticketed on other flights, the reserve flight crew may need to be called if the current flight crew exceeds their flight hours, or delays may continue to have a snowball effect on later flights causing them to also be delayed (Ball, 2010).
+
 Thus, understanding the impact of these variables on aircraft on-time performance can help elucidate ways and methods to mitigate these airline delays. By doing so, steps can be made to reduce airline costs associated with these delays, benefiting the airlines' stakeholders. 
+
 The airline industry has presented losses in the amount of billions of dollars per quarter since the COVID pandemic impacted the world. According to American Airlines newsroom (2021), this Airline had a $1.3B operating loss during the first quarter of 2021 alone, major competitors such as Delta Airlines and United Airlines had similar results.
 
 ```{r add_pictureQ1, echo=FALSE}
@@ -89,7 +92,9 @@ Domestic flights in the United States started to substantially decrease in 2020,
 ```{r add_pictureFlightFrequency, echo=FALSE}
 knitr::include_graphics(here::here("All Charts", "Basic EDA" , "Rplot.png"))
 ```
+
 2019
+
 ```{r add_pictureFlightFrequency2, echo=FALSE}
 knitr::include_graphics(here::here("EDA Plots", "2019_monthly_flights.png"))
 ```
@@ -97,6 +102,7 @@ knitr::include_graphics(here::here("EDA Plots", "2019_monthly_flights.png"))
 When we look at the flight frequency of each month during 2019, we can see that October had the highest flight frequency at 154,486 followed by August at 154,390. The first two months of January and February have the lowest flight frequency at 140,109 (7.96%) and 128,239 (7.29%) respectively of the whole year. Overall, the frequency throughout the 2019 pre-Covid19 pandemic was relatively evenly distributed around 8% each month. 
 
 2020
+
 ```{r add_picture2020monthly, echo=FALSE}
 knitr::include_graphics(here::here("EDA Plots", "2020_monthly_flights.png"))
 ```
@@ -271,7 +277,7 @@ Similarly, United and Delta airlines were modeled individually and AIC for each 
 The relative reduction in AIC compared to the original model with most variables shows that the reduction to these three variables has improved the explanatory power of this model.
 American Airlines contained 266,599 observations in its training set. 88,936 observations were then used to validate the model and the resulting confusion matrix is shown here. 
 
-```{r add_binomail_plot, echo=FALSE, warning=F}
+```{r add_binomail_plot, echo=FALSE, warning=F, message=FALSE}
 
 library(knitr)
 library(flextable)
@@ -319,9 +325,9 @@ In conclusion, we found an association between different variables to departure 
 
 ## References
  
-Jim Frost,(n.d.). Multicollinearity in Regression Analysis: Problems, Detection,and Solutions. Statisctics By Jim. https://statisticsbyjim.com/regression/multicollinearity-in-regression-analysis/
-
 Kim, N. Y., & Park, J. W. (2016). A study on the impact of airline service delays on emotional reactions and customer behavior. Journal of Air Transport Management, 57, 19–25. https://doi.org/10.1016/j.jairtraman.2016.07.005
+
+Annual U.S. Impact of Flight Delays, NEXTOR report (2014). Airlines for America. https://www.airlines.org/data/annual-u-s-impact-of-flight-delays-nextor-report/
 
 American Airlines Reports First-Quarter 2021 Financial Results. American Airlines News Room, 2021. https://news.aa.com/news/news-details/2021/American-Airlines-Reports-First-Quarter-2021-Financial-Results-CORP-FI-04/default.aspx
 
@@ -343,8 +349,6 @@ Key figures of the four largest aircraft manufacturers worldwide in FY 2020. Sta
 Radka, R. (2021). Airline Hub Guide: Which U.S. Cities Are Major Hubs and Why it Matters. https://www.airfarewatchdog.com/blog/50066526/airline-hub-guide-which-u-s-cities-are-major-hubs-and-why-it-matters/
 
 The Chi-square test of independence. (2013). PubMed Central (PMC). https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3900058/#:%7E:text=The%20Chi%2Dsquare%20test%20is,variables%20is%20nominal%20or%20ordinal.
-
-University of Southampton. (n.d.). Chi Square. Is there a statistically significant relationship between a student’s Year 11 truancy and his or her enrolment in full time education after secondary school? https://www.southampton.ac.uk/passs/full_time_education/bivariate_analysis/chi_square.page
 
 Statistics Solutions. (2021). ANOVA. https://www.statisticssolutions.com/free-resources/directory-of-statistical-analyses/anova/#:%7E:text=ANOVA%20assumes%20that%20the%20data,are%20independent%20of%20each%20other
 
