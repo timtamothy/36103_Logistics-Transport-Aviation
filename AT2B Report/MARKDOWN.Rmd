@@ -3,17 +3,17 @@ title: "Airline Delay Prediction Report for American Airlines"
 author: "Logistics Transport Aviation"
 date: "03/10/2021"
 output:
-  word_document:
-    toc: yes
-    toc_depth: '3'
-  pdf_document:
-    toc: yes
-    toc_depth: '3'
   html_document:
     toc: yes
     toc_float: yes
     toc_depth: 3
     fig_caption: yes
+  pdf_document:
+    toc: yes
+    toc_depth: '3'
+  word_document:
+    toc: yes
+    toc_depth: '3'
 subtitle: STDS - AT2
 ---
   
@@ -54,7 +54,7 @@ During the last couple of years around 30% of the domestic flights in the United
 
 The question we want to answer with our linear regression model is a variation of this question: Which factors are most correlated to, and influence greatly, on-time aircraft performance?
  
-```{r add_picture1, echo=FALSE}
+```{r add_pictureTotalDelayAA, echo=FALSE}
 knitr::include_graphics(here::here("All Charts", "Total minutes of delay for AA from 2019 to 2021.png"))
 ```
 
@@ -62,7 +62,7 @@ When looking at the main causes of delays for American Airlines flights between 
 
 ## 2.2 How is American Airlines on-time performance compared to our two main competitors?
 
-```{r add_picture1, echo=FALSE}
+```{r add_pictureQ1Airline, echo=FALSE}
 knitr::include_graphics(here::here("All Charts", "Q1 by airline.png"))
 ```
 
@@ -81,21 +81,22 @@ Employee Dataset: This dataset contains information about the number of employee
 # 4.0 Exploratory Data Analysis (EDA).
 
 Overall summary statistics were calculated and are included in the appendix. In addition, individual variables were explored with histograms for numeric variables, and relationships between some variables were explored with scatter plots.
+
 Domestic flights in the United States started to substantially decrease in 2020, this can be explained due to the major worldwide outbreak of the COVID pandemic all around the world which shut down travel overall, and this impacted air travel, even though some parts of the world were affected since 2019 it was not until March 2020 that most countries, including the United States, started closing their borders and limiting interstate traveling. 
 
 
-```{r add_picture1, echo=FALSE}
+```{r add_pictureFlightFrequency, echo=FALSE}
 knitr::include_graphics(here::here("All Charts", "Basic EDA" , "Rplot.png"))
 ```
 2019
-```{r add_picture1, echo=FALSE}
+```{r add_pictureFlightFrequency2, echo=FALSE}
 knitr::include_graphics(here::here("EDA Plots", "2019_monthly_flights.png"))
 ```
 
 When we look at the flight frequency of each month during 2019, we can see that October had the highest flight frequency at 154,486 followed by August at 154,390. The first two months of January and February have the lowest flight frequency at 140,109 (7.96%) and 128,239 (7.29%) respectively of the whole year. Overall, the frequency throughout the 2019 pre-Covid19 pandemic was relatively evenly distributed around 8% each month. 
 
 2020
-```{r add_picture1, echo=FALSE}
+```{r add_picture2020monthly, echo=FALSE}
 knitr::include_graphics(here::here("EDA Plots", "2020_monthly_flights.png"))
 ```
 
@@ -103,67 +104,67 @@ knitr::include_graphics(here::here("EDA Plots", "2020_monthly_flights.png"))
 
 While we already started exploring and analyzing our data, a further EDA is needed to find existing and non-existing correlations between variables and select those that are independent and use them in our prediction model. It is also important to understand what our data looks like, what it is telling us and what value and insights we can find in our variables.
 
-```{r add_picture1, echo=FALSE}
+```{r add_pictureDayofMonth, echo=FALSE}
 knitr::include_graphics(here::here("Column EDA", "DAY_OF_MONTH.jpeg"))
 ```
 One of the first insights we found was that around the second third of the month, most predominantly between days 10 and 13 are the most popular days to travel, while the beginning and end of the month are less popular, the first 5 and last 5 days of the month are all located at the bottom while days 10 to 20 (second third) are all at the top.
 
-```{r add_picture1, echo=FALSE}
+```{r add_pictureDayofWeek, echo=FALSE}
 knitr::include_graphics(here::here("Column EDA", "DAY_OF_WEEK.jpeg"))
 ```
 
 When analyzing days of the week we found that flights are pretty evenly distributed with all days except for Saturday taking between 14.22% and 14.92% of the flights. The most popular days for flights are Mondays, followed by Fridays and Thursdays. This makes perfect sense taking into consideration there are many weekend trips departing either Thursday or Friday and returning on Monday and those are also the most common days for business travel.
 
-```{r add_picture1, echo=FALSE}
+```{r add_pictureAircraftcount, echo=FALSE}
 knitr::include_graphics(here::here("EDA Plots", "aircraft_count.png"))
 ```
 
 When looking at the aircraft manufacturers we found that American Airlines’ fleet is mostly composed of Airbus planes followed by Boeings which are the top 2 manufacturers worldwide (Statista, 2020), on the other hand, both Delta and United prefer to use Boeing aircraft. In general Boeing aircraft perform 54.12% of the domestic flights while Airbus aircraft account for 38.37%. McDonnell Douglas aircraft have been excluded from our analysis as they are predominantly flown by Delta and have since been retired from their fleet. Embraer craft have also been excluded as they represent a tiny fraction of overall flights and are predominantly operated by regional carriers such as Republic or SkyWest.
 
-```{r add_picture1, echo=FALSE}
+```{r add_pictureAirplanemodel, echo=FALSE}
 knitr::include_graphics(here::here("EDA Plots", "aircraft_model.png"))
 ```
 
 The Airbus A320 series (319, 320, 321) was the most used model to perform domestic flights accounting for almost 39% between the three carriers followed by the Boeing 737 at around 37%. The ERJ, MD-80, and MD-90 series have been excluded per the manufacturer reasons stated above.
 
-```{r add_picture1, echo=FALSE}
+```{r add_pictureage, echo=FALSE}
 knitr::include_graphics(here::here("Column EDA", "AGE.jpeg"))
 ```
 When looking at the aircraft age, the most popular ages lie between 20 and 22 years, followed by newer aircraft between 5 and 8 years of age. Aircraft over 30 years old are rarely used.
 
-```{r add_picture1, echo=FALSE}
+```{r add_picturemodel, echo=FALSE}
 knitr::include_graphics(here::here("EDA Plots", "model_age.png"))
 ```
 
 
-```{r add_picture1, echo=FALSE}
+```{r add_picturedelay, echo=FALSE}
 knitr::include_graphics(here::here("EDA Plots", "delay_by_age.png"))
 ```
 
 However American airlines tend to have delays around 6 years of age while compared to the competitors which have fewer clusters around younger aircraft. This may indicate differences in delay based on aircraft age. American Airlines tends to have a greater amount of younger aircraft that have delays.
 
-```{r add_picture1, echo=FALSE}
+```{r add_pictureflight, echo=FALSE}
 knitr::include_graphics(here::here("EDA Plots", "flight_time_by_age.png"))
 ```
 
 With all airlines, we see that most delays occur with flight time sub-200 minutes. This may indicate that longer flights have a greater opportunity to make up for delay time in the air, or that delays are compounded with multiple short flights and opportunities to be delayed in or around airport traffic.
 
-```{r add_picture1, echo=FALSE}
+```{r add_pictureoriginabr, echo=FALSE}
 knitr::include_graphics(here::here("Column EDA", "ORIGIN_STATE_ABR.jpeg"))
 ```
-```{r add_picture1, echo=FALSE}
+```{r add_picturedestabr, echo=FALSE}
 knitr::include_graphics(here::here("Column EDA", "DEST_STATE_ABR.jpeg"))
 ```
 
 
-```{r add_pictureMap, echo=FALSE}
+```{r add_pictureMapeda, echo=FALSE}
 knitr::include_graphics(here::here("All Charts", "Map EDA.jpeg"))
 ```
 
 Furthermore, as evidenced by the heat map of the USA, We noticed that most delays tend to be frequent in higher density states which include primary airline hubs. As evident in the previous figures, Texas tends to have the most delays.
 The main origins and destinations are states where these airlines have hubs, the top 16 states containing all the hubs from the 3 main airlines represent almost 89% of air traffic and therefore most of the delays occur within these busy airports. For that reason, we first decided to focus on the busiest airports and subset our model. Finally, we made the decision to subset our model exclusively to California, since it was the second busiest state, contains a higher average departure delay, and all three airlines have a primary hub located here. This model will then be used to generalise on-time performance across other hub states.
 
-```{r add_picture1, echo=FALSE}
+```{r add_picturecali, echo=FALSE}
 knitr::include_graphics(here::here("EDA Plots", "flight_delay_by_daytime_california.png"))
 ```
 
@@ -173,11 +174,11 @@ The gap between 00:00 and around 6:00 in the morning is due to airports’ curfe
 ### 4.1.1 Metrics on data types
  
 
-```{r add_picture1, echo=FALSE}
+```{r add_picturehisto, echo=FALSE}
 knitr::include_graphics(here::here("Column EDA", "histograms.png"))
 ```
 
-```{r add_picture1, echo=FALSE}
+```{r add_picturehisto2, echo=FALSE}
 knitr::include_graphics(here::here("Column EDA 2", "histograms.png"))
 ```
 
