@@ -327,8 +327,6 @@ In conclusion, we have generated insights on how different variables influence d
 
 
 ## References
- 
-## References
 
 Airlines for America. (2014, August 22). *Annual U.S. Impact of Flight Delays (NEXTOR report).* https://www.airlines.org/data/annual-u-s-impact-of-flight-delays-nextor-report/
 
