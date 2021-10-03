@@ -271,16 +271,17 @@ Similarly, United and Delta airlines were modeled individually and AIC for each 
 The relative reduction in AIC compared to the original model with most variables shows that the reduction to these three variables has improved the explanatory power of this model.
 American Airlines contained 266,599 observations in its training set. 88,936 observations were then used to validate the model and the resulting confusion matrix is shown here. 
 
-```{r add_binomail_plot, echo=FALSE}
+```{r add_binomail_plot, echo=FALSE, warning=F}
 
 library(knitr)
 library(flextable)
 confusion_aa <- read.table('confusion_aa.txt')
 confusion_aa %>% regulartable() %>% autofit() %>% 
-  width(j=~X0, width = 5) %>% width(j=~X1, width=5)
+  width(j=~X0, width = 2) %>% width(j=~X1, width=2)
 
 knitr::include_graphics(here::here("LM Plots", "binomial_residual_plot.png"))
 ```
+
 In order to view the models’ fit on residuals, a DHARMa function was used to create scaled residuals by simulating residuals from the models. In both the Q-Q plot and the residual vs. predicted plots, residuals appear to be handled well by the model.
 
 For each airline, the months of April through August had a positive coefficient and significant p-values suggesting that these months will see higher delays across the board. In our EDA, we note that these months do not necessarily have a higher flight number than other months, and therefore may not be attributed to an increase in flights due to the summer. However, these months certainly do coincide with the typical season for extreme weather events such as tornadoes and hurricanes. In all cases, the time of day also contributed to a longer delay, but only marginally. 
@@ -314,6 +315,8 @@ For time series analysis which can be conducted in later stages, when modeling i
  
 ## Conclusion
   
+In conclusion, we found an association between different variables to departure delay. Our models provides a preliminary idea of what might have constituted departure delays in California. However, linear or logistics models conducted would not be advised to use as a prediction of departure delays in the future. As a result, other statistical modelling such as ARIMA should be supplemented in order to generate accurate and reliable insights and predictions for departure delays which can then be generalized as a prediction algorithm for other states.
+
 ## References
  
 Jim Frost,(n.d.). Multicollinearity in Regression Analysis: Problems, Detection,and Solutions. Statisctics By Jim. https://statisticsbyjim.com/regression/multicollinearity-in-regression-analysis/
