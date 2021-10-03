@@ -224,7 +224,11 @@ delays %>%
        x = 'Time',
        y = 'Departure Delay (mins)')
 
-
+library(funModeling)
+library(Hmisc)
+library(DataExplorer)
+status(delays)
+summary(delays)
 
 #delays %>% # plot count of distances, histogram?
   #filter(ARR_DELAY < 300) %>% 
