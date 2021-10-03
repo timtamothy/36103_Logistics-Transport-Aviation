@@ -1,6 +1,5 @@
 library(tidyverse)
 library(here)
-
 library(httr)
 library(jsonlite)
 library(dplyr)
@@ -10,7 +9,9 @@ library(feather)
 
 # Load data ----
 
-delays <- read_feather(here("mlm_dataset_4time.feather"))
+delays <- read_feather(here("USE MLM 5 mlm_dataset_3.feather"))
+delays_full <- read_feather(here("clean_allairlines_allmonths.feather"))
+
 
 delays_reduced <- delays %>% sample_n(500000)
 
@@ -18,35 +19,39 @@ delays_reduced <- delays %>% sample_n(500000)
 
 names(delays)
 
-# Plot histogram of delays
+# delays less than 30
 
 delays %>% 
-  filter(dep_delay < 300) %>% 
+  filter(dep_delay < 300, dep_delay > 15) %>%
   ggplot(aes(x=dep_delay)) +
   geom_histogram()
 
-# Plot some relationships
+# delays between 15 and 90
 
-delays %>% # delay as a function of flight time
-  #filter(arr_delay > 0) %>% 
-  #filter(arr_delay < 60) %>% 
+delays %>% 
+  filter(dep_delay < 90, dep_delay > 15) %>%
+  ggplot(aes(x=dep_delay)) +
+  geom_histogram()
+
+# delays vs flight time
+
+delays %>% 
   sample_n(50000) %>% 
   ggplot(aes(y=arr_delay, x=air_time, col = airline)) +
   geom_point(alpha=0.1, show.legend = F) +
-  #geom_smooth(method='lm', show.legend = F) +
   facet_wrap(~airline) +
   scale_color_viridis_d() +
   theme_minimal() +
-  ylim(0, 150) +
-  labs(title = 'Arrival Delay by Flight Time',
-       x = 'Flight Time (mins)',
-       y = 'Arrival Delay (mins)')
+  ylim(0, 60) +
+  labs(title = 'Arrival Delay vs Flight Time',
+       x = 'Flight Time in minutes',
+       y = 'Arrival Delay in minutes')
 
-slm <- lm(arr_delay ~ taxi_out, data = delays)
-coef(slm)
-summary(slm)
+##slm <- lm(arr_delay ~ taxi_out, data = delays3)
+##coef(slm)
+##summary(slm)
 
-plot(slm)
+##plot(slm)
 
 delays %>% # delay as a function of taxi_out
   #filter(arr_delay > 0) %>% 
@@ -89,15 +94,17 @@ delays %>%
   scale_color_viridis_d() +
   theme_minimal()
 
-delays %>% 
+
+delays_full %>% # me experiment
+  filter(year == '2019' | year == '2020') %>%
   ggplot() +
-  geom_bar(aes(x = manufacturer, fill = airline)) +
+  geom_bar(aes(x = month, fill = year)) +
   theme_minimal() +
   scale_color_viridis_d() +
   scale_fill_viridis_d() +
   theme_minimal() + 
-  labs(title = 'Aircraft Manufacturer Count',
-       x = 'Manufacturer',
+  labs(title = 'Flight Frequency per month and year',
+       x = 'Months',
        y = 'Number of flights')
 
 delays %>% 
@@ -110,142 +117,30 @@ delays %>%
        x = 'Model',
        y = 'Number of flights')
 
-  #remove embraer and mcdonnell as they represent very low values;
-  #mcdonnell no longer in service
+
+## American Airlines Hubs
 
 delays %>% 
-  filter(manufacturer %in% c('boeing', 'airbus')) %>% 
-  count(age, model) %>% 
-  ggplot(aes(x = age, y = model)) +
-  geom_tile(aes(fill = n))
-  # 2 groups of ages appear. 
-  # A320 proedominantly older craft
-  # A321 predominatly younger craft
-  # feature engineer buckets < 15, > 15
-  
-delays %>% # delay as a function of age
-  filter(manufacturer %in% c('boeing', 'airbus')) %>%
-  filter(model != '717') %>% 
-  sample_n(50000) %>% 
-  ggplot(aes(y=arr_delay, x=age, col = airline)) +
-  geom_point(alpha=0.1, show.legend = F) +
-  geom_smooth(method='lm', show.legend = F) +
-  facet_wrap(~airline) +
+  filter(origin_airport_code == 'KDFW',
+         origin_airport_code == 'KCLT',
+         origin_airport_code == 'KORD',
+         origin_airport_code == 'KLAX',
+         origin_airport_code == 'KMIA',
+         origin_airport_code == 'KJFK',
+         origin_airport_code == 'KLGA',
+         origin_airport_code == 'KPHL',
+         origin_airport_code == 'KPHX',
+         origin_airport_code == 'KDCA') %>% 
+  ggplot() +
+  geom_bar(aes(x = origin_airport_code)) +
+  theme_minimal() +
   scale_color_viridis_d() +
-  theme_minimal() +
-  ylim(0, 150) +
-  labs(title = 'Arrival Delay by Aircraft Age',
-       x = 'Age (years)',
-       y = 'Arrival Delay (mins)')
-
-delays %>% # delay as a function of age
-  filter(manufacturer %in% c('boeing', 'airbus')) %>%
-  filter(model != '717') %>% 
-  sample_n(50000) %>% 
-  ggplot(aes(y=air_time, x=age, col = airline)) +
-  geom_point(alpha=0.1, show.legend = F) +
-  #geom_smooth(method='lm', show.legend = F) +
-  facet_wrap(~airline) +
-  scale_color_viridis_d() +
-  theme_minimal() +
-  ylim(0, 150) +
-  labs(title = 'Flight time by Aircraft Age',
-       x = 'Aircraft Age (years)',
-       y = 'Flight Time (mins)')
-
-
-delays %>% 
-  filter(manufacturer %in% c('boeing', 'airbus')) %>% 
-  filter(dep_delay > 0) %>% 
-  filter(year %in% c('2019')) %>% 
-  count(month, dep_delay) %>% 
-  ggplot(aes(x = month, y = dep_delay)) +
-  geom_tile(aes(fill = n)) +
-  labs(title = 'Flight Delays by Month',
-       x = 'Month',
-       y = 'Departure Delay (mins)')
-
-library(funModeling)
-library(Hmisc)
-library(DataExplorer)
-
-freq(delays %>% filter(year == '2019'))
-freq(delays %>% filter(year == '2020'))
-
-delays %>% 
-  filter(manufacturer %in% c('boeing', 'airbus')) %>% 
-  filter(dep_delay > 0) %>% 
-  filter(dest_state_abr == 'CA') %>% 
-  #filter(year %in% c('2019')) %>% 
-  #sample_n(50000) %>% 
-  #count(month, dep_delay) %>% 
-  ggplot(aes(x = dep_time, y = dep_delay)) +
-  geom_hex() +
-  #scale_fill_viridis_d() +
-  #geom_point(shape = 'o', col = 'blue', alpha = 0.1) +
-  facet_wrap(~airline) +
-  theme_minimal() +
-  labs(title = 'Flight Delays by Time of Day in California',
-       x = 'Time',
-       y = 'Departure Delay (mins)')
-
-delays %>% 
-  filter(manufacturer %in% c('boeing', 'airbus')) %>% 
-  filter(dep_delay > 0) %>% 
-  filter(dest_state_abr == 'TX') %>% 
-  #filter(year %in% c('2019')) %>% 
-  #sample_n(50000) %>% 
-  #count(month, dep_delay) %>% 
-  ggplot(aes(x = dep_time, y = dep_delay)) +
-  geom_hex() +
-  #scale_fill_viridis_d() +
-  #geom_point(shape = 'o', col = 'blue', alpha = 0.1) +
-  facet_wrap(~airline) +
-  theme_minimal() +
-  labs(title = 'Flight Delays by Time of Day in Texas',
-       x = 'Time',
-       y = 'Departure Delay (mins)')
-
-
-delays %>% 
-  filter(manufacturer %in% c('boeing', 'airbus')) %>% 
-  filter(dep_delay > 0) %>% 
-  filter(dest_state_abr == 'TX') %>% 
-  #filter(year %in% c('2019')) %>% 
-  #sample_n(50000) %>% 
-  #count(month, dep_delay) %>% 
-  ggplot(aes(x = dep_time, y = dep_delay)) +
-  geom_hex() +
-  #scale_fill_viridis_d() +
-  #geom_point(shape = 'o', col = 'blue', alpha = 0.1) +
-  facet_wrap(~airline) +
-  theme_minimal() +
-  labs(title = 'Flight Delays by Time of Day in Illinois',
-       x = 'Time',
-       y = 'Departure Delay (mins)')
+  scale_fill_viridis_d() +
+  theme_minimal() 
 
 
 
-#delays %>% # plot count of distances, histogram?
-  #filter(ARR_DELAY < 300) %>% 
-  #ggplot(aes(x="air_time")) +
-      #need to change distance to continuous variable
-  #geom_bar()
 
-#delays %>% # histogram of elapsed flight times
- # filter(arr_delay < 300) %>% 
-  #ggplot(aes(x=ACTUAL_ELAPSED_TIME)) +
-  #geom_histogram()
 
-#delays %>% # delay as a function of flight time
-  #filter(ARR_DELAY < 300) %>% 
-  #ggplot(aes(y=ARR_DELAY, x=ACTUAL_ELAPSED_TIME)) +
-  #geom_point() 
-
-#delays %>% # may have collinearity
-  #filter(ARR_DELAY < 300) %>% 
-  #ggplot(aes(y=ACTUAL_ELAPSED_TIME, x=DISTANCE)) +
-  #geom_point() 
-    #appears to have pretty strong collinearity?
 
 
