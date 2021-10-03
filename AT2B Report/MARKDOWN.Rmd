@@ -170,7 +170,7 @@ knitr::include_graphics(here::here("All Charts", "Map EDA.jpeg"))
 
 Furthermore, as evidenced by the heat map of the USA, We noticed that most delays tend to be frequent in higher density states which include primary airline hubs. As evident in the previous figures, Texas tends to have the most delays.
 
-The main origins and destinations are states where these airlines have hubs, the top 16 states containing all the hubs from the 3 main airlines represent almost 89% of air traffic and therefore most of the delays occur within these busy airports. For that reason, we first decided to focus on the busiest airports and subset our model. Finally, we made the decision to subset our model exclusively to California, since it was the second busiest state, contains a higher average departure delay, and all three airlines have a primary hub located here. This model will then be used to generalise on-time performance across other hub states.
+The main origins and destinations are states where these airlines have hubs, the top 16 states containing all the hubs from the 3 main airlines represent almost 89% of air traffic and therefore most of the delays occur within these busy airports (Radka, 2021). For that reason, we first decided to focus on the busiest airports and subset our model. Finally, we made the decision to subset our model exclusively to California, since it was the second busiest state, contains a higher average departure delay, and all three airlines have a primary hub located here. This model will then be used to generalise on-time performance across other hub states.
 
 ```{r add_picturecali, echo=FALSE}
 knitr::include_graphics(here::here("EDA Plots", "flight_delay_by_daytime_california.png"))
@@ -211,7 +211,7 @@ When there is multicollinearity present in our variables, it would impede our in
 multicollinearity among numerical variables. 
 
 ### Chi-square independence test 
-Chi-square test is a statistical hypothesis test which is non-parametric, meaning that it does not assume any underlying distribution, for example, linearity (The Chi-Square Test of Independence, 2013). 
+Chi-square test is a statistical hypothesis test which is non-parametric, meaning that it does not assume any underlying distribution, for example, linearity (McHugh, 2013).
  
 H0: Independent 
 HA: Dependent 
