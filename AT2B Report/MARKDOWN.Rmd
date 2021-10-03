@@ -170,7 +170,7 @@ knitr::include_graphics(here::here("All Charts", "Map EDA.jpeg"))
 
 Furthermore, as evidenced by the heat map of the USA, We noticed that most delays tend to be frequent in higher density states which include primary airline hubs. As evident in the previous figures, Texas tends to have the most delays.
 
-The main origins and destinations are states where these airlines have hubs, the top 16 states containing all the hubs from the 3 main airlines represent almost 89% of air traffic and therefore most of the delays occur within these busy airports. For that reason, we first decided to focus on the busiest airports and subset our model. Finally, we made the decision to subset our model exclusively to California, since it was the second busiest state, contains a higher average departure delay, and all three airlines have a primary hub located here. This model will then be used to generalise on-time performance across other hub states.
+The main origins and destinations are states where these airlines have hubs, the top 16 states containing all the hubs from the 3 main airlines represent almost 89% of air traffic and therefore most of the delays occur within these busy airports (Radka, 2021). For that reason, we first decided to focus on the busiest airports and subset our model. Finally, we made the decision to subset our model exclusively to California, since it was the second busiest state, contains a higher average departure delay, and all three airlines have a primary hub located here. This model will then be used to generalise on-time performance across other hub states.
 
 ```{r add_picturecali, echo=FALSE}
 knitr::include_graphics(here::here("EDA Plots", "flight_delay_by_daytime_california.png"))
@@ -211,7 +211,7 @@ When there is multicollinearity present in our variables, it would impede our in
 multicollinearity among numerical variables. 
 
 ### Chi-square independence test 
-Chi-square test is a statistical hypothesis test which is non-parametric, meaning that it does not assume any underlying distribution, for example, linearity (The Chi-Square Test of Independence, 2013). 
+Chi-square test is a statistical hypothesis test which is non-parametric, meaning that it does not assume any underlying distribution, for example, linearity (McHugh, 2013).
  
 H0: Independent 
 HA: Dependent 
@@ -327,35 +327,34 @@ In conclusion, we have generated insights on how different variables influence d
 
 
 ## References
+
+Airlines for America. (2014, August 22). *Annual U.S. Impact of Flight Delays (NEXTOR report).* https://www.airlines.org/data/annual-u-s-impact-of-flight-delays-nextor-report/
+
+Airlines for America. (2020, May 8).*U.S. Passenger Carrier Delay Costs.* https://www.airlines.org/dataset/u-s-passenger-carrier-delay-costs/. 
+
+American Airlines.(2021, April 22). *American Airlines Reports First-Quarter 2021 Financial Results.* American Airlines News Room, 2021. https://news.aa.com/news/news-details/2021/American-Airlines-Reports-First-Quarter-2021-Financial-Results-CORP-FI-04/default.aspx
  
-Kim, N. Y., & Park, J. W. (2016). A study on the impact of airline service delays on emotional reactions and customer behavior. Journal of Air Transport Management, 57, 19–25. https://doi.org/10.1016/j.jairtraman.2016.07.005
+Ball, M. (2010, November). *Total Delay Impact Study A Comprehensive Assessment of the Costs and Impacts of Flight Delay in the United States.* https://isr.umd.edu/NEXTOR/pubs/TDI_Report_Final_11_03_10.pdf 
 
-Annual U.S. Impact of Flight Delays, NEXTOR report (2014). Airlines for America. https://www.airlines.org/data/annual-u-s-impact-of-flight-delays-nextor-report/
+Ghosh,I.(2020, March 21). *This chart shows how airlines are being grounded by COVID-19. World Economic Forum.* World Economic Forum https://www.weforum.org/agenda/2020/03/this-chart-shows-how-airlines-are-being-grounded-by-covid-19/
 
-American Airlines Reports First-Quarter 2021 Financial Results. American Airlines News Room, 2021. https://news.aa.com/news/news-details/2021/American-Airlines-Reports-First-Quarter-2021-Financial-Results-CORP-FI-04/default.aspx
+Maynard,M. (2015, July 6). *How To Survive July, The Busiest Air Travel Month Of The Year.* Forbes.com. https://www.forbes.com/sites/michelinemaynard/2015/07/06/how-to-survive-the-busiest-air-travel-month-of-the-year/?sh=7f98a7c23506
 
-Ghosh,I. (2020). This chart shows how airlines are being grounded by COVID-19. World Economic Forum. https://www.weforum.org/agenda/2020/03/this-chart-shows-how-airlines-are-being-grounded-by-covid-19/
+McHugh,M. L.(2013).The chi-square test of independence. *Biochemia medica*, 23(2), 143–149.https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3900058/#:%7E:text=The%20Chi%2Dsquare%20test%20is,variables%20is%20nominal%20or%20ordinal
 
-Maynard,M. (2015). How To Survive July, The Busiest Air Travel Month Of The Year. Forbes.com.
-https://www.forbes.com/sites/michelinemaynard/2015/07/06/how-to-survive-the-busiest-air-travel-month-of-the-year/?sh=7f98a7c23506
+Radka,R.(2021, March 8). *Airline Hub Guide: Which U.S. Cities Are Major Hubs and Why it Matters.* airfarewatchdog. https://www.airfarewatchdog.com/blog/50066526/airline-hub-guide-which-u-s-cities-are-major-hubs-and-why-it-matters/
 
-Ball, M. (2010, November). Total Delay Impact Study A Comprehensive Assessment of the Costs and Impacts of Flight Delay in the United States. https://isr.umd.edu/NEXTOR/pubs/TDI_Report_Final_11_03_10.pdf
+Sethi,A.(2020, March 6).*Categorical Encoding | One Hot Encoding vs Label Encoding using Scikit-Learn*. Analytics Vidhya. https://www.analyticsvidhya.com/blog/2020/03/one-hot-encoding-vs-label-encoding-using-scikit-learn/
 
-U.S. Passenger Carrier Delay Costs. Airlines for America, 2020. https://www.airlines.org/dataset/u-s-passenger-carrier-delay-costs/. 
+Statista. (2021, July). *The leading airlines worldwide in 2021, ranked by brand value.* https://www.statista.com/statistics/275944/brand-value-of-airlines/
 
-The leading airlines worldwide in 2021, ranked by brand value. Statista 2021. https://www.statista.com/statistics/275944/brand-value-of-airlines/
+Statista.(2021, May). *Market value of selected airlines worldwide as of April 2021.*  https://www.statista.com/statistics/275948/market-capitalization-of-selected-airlines/
 
-Market value of selected airlines worldwide as of April 2021. Statista 2021. https://www.statista.com/statistics/275948/market-capitalization-of-selected-airlines/
+Statista.(2021). *Key figures of the four largest aircraft manufacturers worldwide in FY 2020.*  https://www.statista.com/statistics/269920/key-figures-of-the-four-largest-aircraft-manufacturers/
 
-Key figures of the four largest aircraft manufacturers worldwide in FY 2020. Statista 2020. https://www.statista.com/statistics/269920/key-figures-of-the-four-largest-aircraft-manufacturers/
+Statistics Solutions.(2021). *ANOVA (Analysis of Variance)*. https://www.statisticssolutions.com/free-resources/directory-of-statistical-analyses/anova/#:%7E:text=ANOVA%20assumes%20that%20the%20data,are%20independent%20of%20each%20other
+ 
 
-Radka, R. (2021). Airline Hub Guide: Which U.S. Cities Are Major Hubs and Why it Matters. https://www.airfarewatchdog.com/blog/50066526/airline-hub-guide-which-u-s-cities-are-major-hubs-and-why-it-matters/
-
-The Chi-square test of independence. (2013). PubMed Central (PMC). https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3900058/#:%7E:text=The%20Chi%2Dsquare%20test%20is,variables%20is%20nominal%20or%20ordinal.
-
-Statistics Solutions. (2021). ANOVA. https://www.statisticssolutions.com/free-resources/directory-of-statistical-analyses/anova/#:%7E:text=ANOVA%20assumes%20that%20the%20data,are%20independent%20of%20each%20other
-
-Sethi, A. (2020). Categorical Encoding | One Hot Encoding vs Label Encoding. Analytics Vidhya. https://www.analyticsvidhya.com/blog/2020/03/one-hot-encoding-vs-label-encoding-using-scikit-learn/
 
 
 ## Appendix
