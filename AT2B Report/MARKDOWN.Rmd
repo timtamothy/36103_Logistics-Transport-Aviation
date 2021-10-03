@@ -386,7 +386,7 @@ API_data <- fromJSON(response)
 API_data <- API_data %>% select(airportCode, airportName)
 ```
  
-Scrapping AIrfleet data from web
+Scrapping Airfleet data from web
 ```{r scape, message=FALSE, warning=FALSE, eval=FALSE, echo = TRUE}
 # Explicit URL
 url <- 'https://www.planemapper.com/airlines/AAL'
@@ -1489,7 +1489,10 @@ summary(delay)
 status(delay)
 ```
  
-#### 4.2.1.1 Interpretation
+```{r summaryplot, echo=FALSE}
+knitr::include_graphics(here::here("others", "summary.jpg"))
+``` 
+
 Departure Delay: Mean is 2.054 while the Median is -3.0 indicates there is a higher frequency of negative values in dep_delay. Range is quite large 179 (95+84) which indicates that the standard deviation would have very long tails. Density plot indicates that the departure delay is right skewed.
 
 
