@@ -328,34 +328,35 @@ In conclusion, we have generated insights on how different variables influence d
 
 ## References
  
-Kim, N. Y., & Park, J. W. (2016). A study on the impact of airline service delays on emotional reactions and customer behavior. Journal of Air Transport Management, 57, 19–25. https://doi.org/10.1016/j.jairtraman.2016.07.005
+## References
 
-Annual U.S. Impact of Flight Delays, NEXTOR report (2014). Airlines for America. https://www.airlines.org/data/annual-u-s-impact-of-flight-delays-nextor-report/
+Airlines for America. (2014, August 22). *Annual U.S. Impact of Flight Delays (NEXTOR report).* https://www.airlines.org/data/annual-u-s-impact-of-flight-delays-nextor-report/
 
-American Airlines Reports First-Quarter 2021 Financial Results. American Airlines News Room, 2021. https://news.aa.com/news/news-details/2021/American-Airlines-Reports-First-Quarter-2021-Financial-Results-CORP-FI-04/default.aspx
+Airlines for America. (2020, May 8).*U.S. Passenger Carrier Delay Costs.* https://www.airlines.org/dataset/u-s-passenger-carrier-delay-costs/. 
 
-Ghosh,I. (2020). This chart shows how airlines are being grounded by COVID-19. World Economic Forum. https://www.weforum.org/agenda/2020/03/this-chart-shows-how-airlines-are-being-grounded-by-covid-19/
+American Airlines.(2021, April 22). *American Airlines Reports First-Quarter 2021 Financial Results.* American Airlines News Room, 2021. https://news.aa.com/news/news-details/2021/American-Airlines-Reports-First-Quarter-2021-Financial-Results-CORP-FI-04/default.aspx
+ 
+Ball, M. (2010, November). *Total Delay Impact Study A Comprehensive Assessment of the Costs and Impacts of Flight Delay in the United States.* https://isr.umd.edu/NEXTOR/pubs/TDI_Report_Final_11_03_10.pdf 
 
-Maynard,M. (2015). How To Survive July, The Busiest Air Travel Month Of The Year. Forbes.com.
-https://www.forbes.com/sites/michelinemaynard/2015/07/06/how-to-survive-the-busiest-air-travel-month-of-the-year/?sh=7f98a7c23506
+Ghosh,I.(2020, March 21). *This chart shows how airlines are being grounded by COVID-19. World Economic Forum.* World Economic Forum https://www.weforum.org/agenda/2020/03/this-chart-shows-how-airlines-are-being-grounded-by-covid-19/
 
-Ball, M. (2010, November). Total Delay Impact Study A Comprehensive Assessment of the Costs and Impacts of Flight Delay in the United States. https://isr.umd.edu/NEXTOR/pubs/TDI_Report_Final_11_03_10.pdf
+Maynard,M. (2015, July 6). *How To Survive July, The Busiest Air Travel Month Of The Year.* Forbes.com. https://www.forbes.com/sites/michelinemaynard/2015/07/06/how-to-survive-the-busiest-air-travel-month-of-the-year/?sh=7f98a7c23506
 
-U.S. Passenger Carrier Delay Costs. Airlines for America, 2020. https://www.airlines.org/dataset/u-s-passenger-carrier-delay-costs/. 
+McHugh,M. L.(2013).The chi-square test of independence. *Biochemia medica*, 23(2), 143–149.https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3900058/#:%7E:text=The%20Chi%2Dsquare%20test%20is,variables%20is%20nominal%20or%20ordinal
 
-The leading airlines worldwide in 2021, ranked by brand value. Statista 2021. https://www.statista.com/statistics/275944/brand-value-of-airlines/
+Radka,R.(2021, March 8). *Airline Hub Guide: Which U.S. Cities Are Major Hubs and Why it Matters.* airfarewatchdog. https://www.airfarewatchdog.com/blog/50066526/airline-hub-guide-which-u-s-cities-are-major-hubs-and-why-it-matters/
 
-Market value of selected airlines worldwide as of April 2021. Statista 2021. https://www.statista.com/statistics/275948/market-capitalization-of-selected-airlines/
+Sethi,A.(2020, March 6).*Categorical Encoding | One Hot Encoding vs Label Encoding using Scikit-Learn*. Analytics Vidhya. https://www.analyticsvidhya.com/blog/2020/03/one-hot-encoding-vs-label-encoding-using-scikit-learn/
 
-Key figures of the four largest aircraft manufacturers worldwide in FY 2020. Statista 2020. https://www.statista.com/statistics/269920/key-figures-of-the-four-largest-aircraft-manufacturers/
+Statista. (2021, July). *The leading airlines worldwide in 2021, ranked by brand value.* https://www.statista.com/statistics/275944/brand-value-of-airlines/
 
-Radka, R. (2021). Airline Hub Guide: Which U.S. Cities Are Major Hubs and Why it Matters. https://www.airfarewatchdog.com/blog/50066526/airline-hub-guide-which-u-s-cities-are-major-hubs-and-why-it-matters/
+Statista.(2021, May). *Market value of selected airlines worldwide as of April 2021.*  https://www.statista.com/statistics/275948/market-capitalization-of-selected-airlines/
 
-The Chi-square test of independence. (2013). PubMed Central (PMC). https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3900058/#:%7E:text=The%20Chi%2Dsquare%20test%20is,variables%20is%20nominal%20or%20ordinal.
+Statista.(2021). *Key figures of the four largest aircraft manufacturers worldwide in FY 2020.*  https://www.statista.com/statistics/269920/key-figures-of-the-four-largest-aircraft-manufacturers/
 
-Statistics Solutions. (2021). ANOVA. https://www.statisticssolutions.com/free-resources/directory-of-statistical-analyses/anova/#:%7E:text=ANOVA%20assumes%20that%20the%20data,are%20independent%20of%20each%20other
+Statistics Solutions.(2021). *ANOVA (Analysis of Variance)*. https://www.statisticssolutions.com/free-resources/directory-of-statistical-analyses/anova/#:%7E:text=ANOVA%20assumes%20that%20the%20data,are%20independent%20of%20each%20other
+ 
 
-Sethi, A. (2020). Categorical Encoding | One Hot Encoding vs Label Encoding. Analytics Vidhya. https://www.analyticsvidhya.com/blog/2020/03/one-hot-encoding-vs-label-encoding-using-scikit-learn/
 
 
 ## Appendix
