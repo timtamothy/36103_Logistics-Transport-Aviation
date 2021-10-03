@@ -257,14 +257,13 @@ Similarly, United and Delta airlines were modeled individually and AIC for each 
 The relative reduction in AIC compared to the original model with most variables shows that the reduction to these three variables has improved the explanatory power of this model.
 American Airlines contained 266,599 observations in its training set. 88,936 observations were then used to validate the model and the resulting confusion matrix is shown here. 
 ```{r add_binomail_plot, echo=FALSE}
-<<<<<<< HEAD
+
 library(knitr)
-=======
+
 library(flextable)
-confusion_aa <- read.table(here('confusion_aa.txt'))
+confusion_aa <- read.table('confusion_aa.txt')
 confusion_aa %>% regulartable() %>% autofit() %>% 
   width(j=~X0, width = 1) %>% width(j=~X1, width=1)
->>>>>>> a10909e936400fb756ee168cd712b504cdb653eb
 
 knitr::include_graphics(here::here("LM Plots", "binomial_residual_plot.png"))
 ```
@@ -1432,7 +1431,7 @@ Looking at taxi out time we found a higher relationship with arrival delays than
 
 ### Summary Statistics
  
-```{r}
+```{r summary, message=FALSE, warning=FALSE, eval=FALSE, echo = TRUE}
 library(funModeling)
 library(Hmisc)
 library(DataExplorer)
