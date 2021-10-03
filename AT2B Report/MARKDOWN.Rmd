@@ -237,6 +237,9 @@ Similarly, United and Delta airlines were modeled individually and AIC for each 
 The relative reduction in AIC compared to the original model with most variables shows that the reduction to these three variables has improved the explanatory power of this model.
 American Airlines contained 266,599 observations in its training set. 88,936 observations were then used to validate the model and the resulting confusion matrix is shown here. 
 ```{r add_binomail_plot, echo=FALSE}
+library(knitr)
+kable(confusion_aa, caption = "Confusion Matrix")
+
 knitr::include_graphics(here::here("LM Plots", "binomial_residual_plot.png"))
 ```
 In order to view the models’ fit on residuals, a DHARMa function was used to create scaled residuals by simulating residuals from the models. In both the Q-Q plot and the residual vs. predicted plots, residuals appear to be handled well by the model.
