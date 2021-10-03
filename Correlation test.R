@@ -1,14 +1,44 @@
-library(corrplot)
-library(feather)
+library(tidyverse)
+library(here)
 library(readr)
+library(future.apply)
+library(dplyr)
+library(httr)
+library(jsonlite)
+library(RColorBrewer)
+library(scales)
+library(feather)
+library(caret)
+library(corrplot)
+library(PerformanceAnalytics)
+library(Hmisc)
+# ========================
+# Correlation test 
 
-#dummy variable
-dmy <- dummyVars(" ~ . ", data= small, fullRank = T)
-point_bis <- data.frame(predict(dmy, newdata = small))
 
-result <- cor(point_bis)
+mlm_corr <- read_feather(here('Dataset', 'USE MLM 5 mlm_dataset_3.feather' ))
 
-result.csv <- data.frame(result)
+# get a random sample of 50,000 observations
+mlm_corr_n <- mlm_corr %>% sample_n(50000)
+mlm_corr_n <- mlm_corr_n %>% select(dep_delay,month,day_of_week, dep_time, arr_delay, air_time, air_time,taxi_out,taxi_in,age)
 
-write_csv(result.csv, 'correlation_test.csv')
 
+corr_matrix <- cor(mlm_corr_n, method = "pearson", use = "complete.obs")
+
+corr_matrix <-round(corr_matrix,3)
+corr_matrix
+
+corrplot(corr_matrix, method = "ellipse")
+
+corrplot(corr_matrix, method = "pie")
+
+corr_matrix_r <- rcorr(corr_matrix, type = c("pearson","spearman"))
+
+corrplot(corr_matrix_r$r, type = "upper", order = "hclust", 
+         p.mat = corr_matrix_r$P, sig.level = 0.01, insig = "blank")
+
+
+
+chart.Correlation(corr_matrix, histogram = TRUE, pch = 19)
+
+# =========================
