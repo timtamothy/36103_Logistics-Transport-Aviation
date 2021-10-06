@@ -16,9 +16,8 @@ library(Boruta)
 mlm_final <- read_feather(here('mlm_dataset_5.feather'))
 
 # sqrt transoformation 
-mlm_final$dep_delay <- sqrt(mlm_final$dep_delay)
-  # NaNs produced and I don't know why
-  # It is because of negative dep_delay
+#mlm_final$dep_delay <- sqrt(mlm_final$dep_delay)
+
 
 # Select California only as Subset
 
